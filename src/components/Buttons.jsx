@@ -13,3 +13,11 @@ export const BorderWhiteBtn = styled(Button)`
     color: #FFFFFF;
 	padding: ${({ padding }) => (padding ? padding : "10px 20px")};
 `;
+export const RoundBtn=styled(Button)`
+	background-color: #2A3143;
+	padding: ${({ padding }) => (padding ? padding : "15px 45px")};
+	border-radius: 50px;
+	font-size: 16px;
+	color: #FFFFFF;
+	text-align: center;
+`
