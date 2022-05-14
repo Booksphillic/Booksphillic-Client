@@ -82,7 +82,7 @@ const Home = () => {
 export default Home;
 
 const HomeContainer=styled(Container)`
-  background-image: url('../img/background_home.jpg');
+  background-image: url('../img/background/background_home.jpg');
   background-attachment: local;
   //background-size: cover;//반응형 성공!
   background-size: 100% 4119px;

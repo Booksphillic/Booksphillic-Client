@@ -43,7 +43,7 @@ const ApplyPickup_1 = () => {
 
 export default ApplyPickup_1
 const Background=styled(Container)`
-     background-image: url('../img/background_apply.png');
+     background-image: url('../img/background/background_apply.png');
      background-attachment: local;
      background-size: 100% 1024px;
 `
