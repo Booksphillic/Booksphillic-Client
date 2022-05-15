@@ -21,3 +21,7 @@ export const CenterContainer=styled(Flex)`
 	justify-content: center;
 	margin: 0px 40px;
 `
+export const ApplyContentContainer=styled(ColContainer)`
+	margin-left: 38px;
+	width: 50vw;
+`

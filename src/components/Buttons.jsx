@@ -21,3 +21,11 @@ export const RoundBtn=styled(Button)`
 	color: #FFFFFF;
 	text-align: center;
 `
+export const BlackBtn=styled(Button)`
+	background-color: #2A3143;
+	align-items: center;
+	padding: ${({ padding }) => (padding ? padding : "12px 36px")};
+	font-weight: 500;
+	font-size: 20px;
+	color: #FFFFFF;
+`

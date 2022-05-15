@@ -1,39 +1,50 @@
 import React from 'react'
-import { ColContainer, RowContainer,Container } from '../components/Container'
+import { ColContainer, RowContainer,Container, ApplyContentContainer } from '../../components/Container'
 import styled from "styled-components";
 import Chip from '@mui/material/Chip';
-import Card from '../components/apply/Card';
-import Flex from '../components/Flex';
-
+import Card from '../../components/apply/Card';
+import Flex from '../../components/Flex';
+import { Link } from 'react-router-dom';
+import {Background} from '../../components/apply/Background';
 var dataLists=["#송파", "#독립출판", "#전시"]
 var products=["card1", "card2", "card3", "card4"];
 const ApplyPickup_1 = () => {
   return (
       <Background>
         <ApplyContainer>
-        <Col1>
+        <ColContainer>
             <TitleWrapper>
                 <Num>04</Num>
                 <Title>책방 선택</Title>
             </TitleWrapper>
-            <Subtitle>원하는 책방을 선택하세요</Subtitle>
-            <Chips>
-                {dataLists.map((list) => (
-                        <Chip label={list} size="medium" variant="outlined" ></Chip>
-                ))}
-            </Chips>
-            <SubText>
-                <div>10개의 추천 책방이 있습니다.</div>
-            </SubText>
-            <Stores>
+            <ApplyContentContainer>
+                <Subtitle>원하는 책방을 선택하세요</Subtitle>
+                <Chips>
+                    {dataLists.map((list) => (
+                            <Chip label={list} size="medium" variant="outlined" ></Chip>
+                    ))}
+                </Chips>
+                <SubText>
+                    <div>10개의 추천 책방이 있습니다.</div>
+                </SubText>
+                <StoreContainer>
+                <Stores>
                 {products.map((data)=>{
                     return(
                         <Card title={data}></Card>
                 )})}
-            </Stores>
-        </Col1>
+                   
+                </Stores>
+                </StoreContainer>
+               
+            </ApplyContentContainer>
+           
+        </ColContainer>
         <Col2>
-            <img src='../img/arrow2.png' style={{position:'absolute', bottom: '0px', right:'0px'}}></img>
+        <Link to="/apply3">
+        <img src='../img/arrow2.png' style={{position:'absolute', bottom: '0px', right:'0px'}}></img>
+        </Link>
+            
         </Col2>
         </ApplyContainer>
       </Background>
@@ -42,19 +53,12 @@ const ApplyPickup_1 = () => {
 }
 
 export default ApplyPickup_1
-const Background=styled(Container)`
-     background-image: url('../img/background/background_apply.png');
-     background-attachment: local;
-     background-size: 100% 1024px;
-`
+
 const ApplyContainer=styled(RowContainer)`
     margin-top: 29px;
     padding: 82px 40px 82px 99px;
     display: grid;
     grid-template-columns: 3fr 2fr;
-`
-const Col1=styled(ColContainer)`
-
 `
 const SubText=styled(Flex)`
     margin-top: 30px;
@@ -62,11 +66,21 @@ const SubText=styled(Flex)`
     justify-content: flex-end;
 `
 const Stores=styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    height: 500px;
+    //display: grid;
+    //grid-template-columns: 1fr 1fr 1fr;
+    //grid-template-rows: 1fr 1fr 1fr;
+    
+    //grid-auto-flow: dense; /* [2] */
+    //grid-template-columns: repeat(auto-fit, 30%); /* [1] */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    //width: 90%;
+    min-width: 500px;
+    border:1px dotted #FF00FF;
+    //height: 500px;
     gap: 21px 21px;
+   
 `
 const TitleWrapper=styled(RowContainer)`
     gap: 0px 20px;
@@ -93,11 +107,9 @@ const Subtitle=styled.div`
     font-size: 20px;
     line-height: 35px;
     color: #616161;
-    margin-left: 38px;
 `
 
 const Chips=styled(RowContainer)`
-    margin-left: 38px;
     gap: 17px 12px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -105,4 +117,8 @@ const Chips=styled(RowContainer)`
 const Col2=styled.div`
     position: relative;
     height: 100%;
+`
+const StoreContainer=styled.div`
+    width: 100%;
+    height: 490px;
 `
