@@ -11,6 +11,8 @@ import Content from './pages/Content';
 import AllList from './pages/Collections/AllList';
 import { Accordion } from 'react-bootstrap';
 import ContentsList from './pages/Collections/ContentsList';
+import UserMyPage from './pages/UserMyPage/UserMyPage';
+import Apply from './pages/UserMyPage/Apply';
 
 const Router = () => {
   return (
@@ -26,7 +28,9 @@ const Router = () => {
             <Route path="/content" element={<Content/>}/>
             <Route path="/collection" element={<ContentsList/>}></Route>
             <Route path="/allCollection" element={<AllList/>}/>
+            <Route path="/userPage" element={<UserMyPage/>}></Route>
             <Route path='/misteryInfo' element={<MisteryInfo/>}></Route>
+            
     </Routes>
             
        

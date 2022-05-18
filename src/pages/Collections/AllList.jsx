@@ -4,7 +4,7 @@ import { CenterContainer, Container, RowContainer } from '../../components/Conta
 import Header from '../../components/Header';
 import BookstoreCard from './BookstoreCard';
 import Footer from '../../components/Footer';
-import Pagination from './Pagination';
+import Pagination from '../../components/Pagination';
 
 const dummy=["1","1","1","1","1","1","1","1","1","1"];
 const dummy2=["2","2","2","2","2","2","2","2","2","2"];

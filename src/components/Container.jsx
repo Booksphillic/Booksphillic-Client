@@ -25,3 +25,11 @@ export const ApplyContentContainer=styled(ColContainer)`
 	margin-left: 38px;
 	width: 50vw;
 `
+export const MyPageContainer=styled(ColContainer)`
+	margin: 47px 27% 151px 27%;
+	justify-content: center;
+`
+export const MyPageContentContainer=styled(ColContainer)`
+	margin: 44px 7% 44px 7%;
+	justify-content: center;
+`

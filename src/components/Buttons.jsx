@@ -29,3 +29,11 @@ export const BlackBtn=styled(Button)`
 	font-size: 20px;
 	color: #FFFFFF;
 `
+export const BorderGrayBtn=styled(Button)`
+	padding: 5px 20px;
+	align-items: center;
+//width: 101px;
+height: 35px;
+background: #FFFFFF;
+border: 1px solid #9E9E9E;
+`
