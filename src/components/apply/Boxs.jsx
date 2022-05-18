@@ -23,5 +23,4 @@ font-style: normal;
 font-weight: 700;
 font-size: 30px;
 color: #222222;
-
 `

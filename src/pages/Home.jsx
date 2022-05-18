@@ -89,7 +89,7 @@ const HomeContainer=styled(Container)`
  
 `
 const HomeCenterContainer=styled(CenterContainer)`
-  margin: 0 3%; //양 옆 띄우기
+   // margin: 0 3%; //양 옆 띄우기
 `
 const TopWrapper=styled(RowContainer)`
   width: 100%;

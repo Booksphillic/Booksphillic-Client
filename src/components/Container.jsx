@@ -19,7 +19,7 @@ export const CenterContainer=styled(Flex)`
 	//align-items: center;
 	//min-height: 100vh;
 	justify-content: center;
-	margin: 0px 40px;
+	margin: 0px 3%;
 `
 export const ApplyContentContainer=styled(ColContainer)`
 	margin-left: 38px;

@@ -6,11 +6,11 @@ import GlobalStyle from './styles/GlobalStyle';
 import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './App.css'
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyle></GlobalStyle>
+  <GlobalStyle></GlobalStyle>
     <App />
   </React.StrictMode>
  

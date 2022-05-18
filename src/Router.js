@@ -7,6 +7,11 @@ import ApplyPickup3 from './pages/Apply/ApplyPickup_3';
 import ApplyPickup4 from './pages/Apply/ApplyPickup_4';
 import ApplyPickup5 from './pages/Apply/ApplyPickup_5';
 import MisteryInfo from './pages/MisteryInfo';
+import Content from './pages/Content';
+import AllList from './pages/Collections/AllList';
+import { Accordion } from 'react-bootstrap';
+import ContentsList from './pages/Collections/ContentsList';
+
 const Router = () => {
   return (
     
@@ -18,6 +23,9 @@ const Router = () => {
             <Route path="/apply3" element={<ApplyPickup3/>}></Route> 
             <Route path="/apply4" element={<ApplyPickup4/>}></Route> 
             <Route path="/apply5" element={<ApplyPickup5/>}></Route> 
+            <Route path="/content" element={<Content/>}/>
+            <Route path="/collection" element={<ContentsList/>}></Route>
+            <Route path="/allCollection" element={<AllList/>}/>
             <Route path='/misteryInfo' element={<MisteryInfo/>}></Route>
     </Routes>
             
