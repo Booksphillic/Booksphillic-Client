@@ -12,7 +12,6 @@ const UserMyPage = () => {
     const handleContent=()=>{
         switch (tab) {
             case 1:
-               
                return <Apply/>
              case 2:
                 return <EditProfile/>
