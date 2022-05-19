@@ -7,13 +7,14 @@ import { RoundBtn } from '../components/Buttons';
 import Accordion from '../components/content/SimpleAccordion';
 import Footer from '../components/Footer';
 const Content = () => {
+    //url에서 id 받아와서 get하기(useLocation())
   return (
     <>
     <Background>
         <Header/>
         <CenterContainer>
             <Top>
-                <TopTitle  style={{width: "67%"}}> 작지만 다채로운 공간 &lt;무엇보다 책방&gt; </TopTitle>
+                <TopTitle style={{width: "67%"}}> 작지만 다채로운 공간 &lt;무엇보다 책방&gt; </TopTitle>
                 <EditorWrapper>
                 <Editor>
                     <img src='../img/scrap.png'></img>

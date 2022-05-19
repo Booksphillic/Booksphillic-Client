@@ -7,7 +7,33 @@ import { Box } from '../../components/apply/Boxs';
 import BookstoreCard from './BookstoreCard';
 import Event from './Event';
 import { Link } from 'react-router-dom';
-const collections=[0,1,2,3,4,5];
+const collections=[
+  {
+    title:"제목0",
+    id: 0
+  },
+  {
+    title:"제목1",
+    id: 1
+  },
+  {
+    title:"제목2",
+    id: 2
+  },
+  {
+    title:"제목3",
+    id: 3
+  },
+  {
+    title:"제목4",
+    id: 4
+  },
+  {
+    title:"제목5",
+    id: 5
+  },
+];
+
 const ContentsList = () => {
   
   return (
@@ -21,7 +47,7 @@ const ContentsList = () => {
             </Blocks>
             <Collection>
            {collections.map((collection)=>(
-             <BookstoreCard/>
+             <BookstoreCard title={collection.title} id={collection.id}/>
            ))}
             </Collection>
             <MoreContents>+전체 콘텐츠보기</MoreContents>
@@ -31,7 +57,7 @@ const ContentsList = () => {
             </Blocks>
             <Collection>
            {collections.map((collection)=>(
-             <BookstoreCard/>
+             <BookstoreCard title={collection.title} id={collection.id}/>
            ))}
             </Collection>
             <Link to='/allCollection'>

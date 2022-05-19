@@ -25,11 +25,12 @@ const Router = () => {
             <Route path="/apply3" element={<ApplyPickup3/>}></Route> 
             <Route path="/apply4" element={<ApplyPickup4/>}></Route> 
             <Route path="/apply5" element={<ApplyPickup5/>}></Route> 
-            <Route path="/content" element={<Content/>}/>
+            <Route path="/content/:id" element={<Content/>}/>
             <Route path="/collection" element={<ContentsList/>}></Route>
             <Route path="/allCollection" element={<AllList/>}/>
             <Route path="/userPage" element={<UserMyPage/>}></Route>
             <Route path="/profile" element={<Profile></Profile>}/>
+            <Route path="/profileC"></Route>
             <Route path='/misteryInfo' element={<MisteryInfo/>}></Route>
             
     </Routes>
