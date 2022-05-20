@@ -14,6 +14,7 @@ import ContentsList from './pages/Collections/ContentsList';
 import UserMyPage from './pages/UserMyPage/UserMyPage';
 import Profile from './pages/BookstoreProfile/Profile';
 import ProfileContent from './pages/BookstoreProfile/ProfileContent';
+import Search from './pages/Search/Search';
 
 const Router = () => {
   return (
@@ -33,7 +34,7 @@ const Router = () => {
             <Route path="/profile" element={<Profile></Profile>}/>
             <Route path="/profileContent/:id" element={<ProfileContent/>}></Route>
             <Route path='/misteryInfo' element={<MisteryInfo/>}></Route>
-            
+            <Route path="/search" element={<Search/>}></Route>
     </Routes>
             
        

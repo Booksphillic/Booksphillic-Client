@@ -5,7 +5,7 @@ import { RowContainer } from "../Container";
 const Input = ({placeholder}) => {
   return (
     <InputWrapper>
-      <input type="text" placeholder={placeholder} ></input>
+      <input type="text" placeholder={placeholder} styled={{backgroundImage: '../'}}></input>
     </InputWrapper>
   )
 }
