@@ -13,6 +13,7 @@ import { Accordion } from 'react-bootstrap';
 import ContentsList from './pages/Collections/ContentsList';
 import UserMyPage from './pages/UserMyPage/UserMyPage';
 import Profile from './pages/BookstoreProfile/Profile';
+import ProfileContent from './pages/BookstoreProfile/ProfileContent';
 
 const Router = () => {
   return (
@@ -30,7 +31,7 @@ const Router = () => {
             <Route path="/allCollection" element={<AllList/>}/>
             <Route path="/userPage" element={<UserMyPage/>}></Route>
             <Route path="/profile" element={<Profile></Profile>}/>
-            <Route path="/profileC"></Route>
+            <Route path="/profileContent/:id" element={<ProfileContent/>}></Route>
             <Route path='/misteryInfo' element={<MisteryInfo/>}></Route>
             
     </Routes>

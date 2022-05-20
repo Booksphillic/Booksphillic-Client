@@ -2,9 +2,10 @@ import { BottomNavigation } from '@mui/material';
 import React from 'react'
 import styled from "styled-components";
 import { ColContainer, RowContainer } from '../../components/Container';
-
-const Card = ({title}) => {
+import { Link } from 'react-router-dom';
+const Card = ({title, id}) => {
   return (
+    <Link to={`/profileContent/${id}`} >
     <CardContainer>
       <Img src='../img/bookstore1.png'></Img>
       <ContentContainer>
@@ -25,6 +26,7 @@ const Card = ({title}) => {
       </ContentContainer>
       
     </CardContainer>
+    </Link>
   )
 }
 

@@ -6,26 +6,16 @@ import Flex from '../components/Flex';
 import { RoundBtn } from '../components/Buttons';
 import Accordion from '../components/content/SimpleAccordion';
 import Footer from '../components/Footer';
+import TopSection from '../components/TopSection';
 const Content = () => {
+    const tags=["#태그1", "#태그2"]
     //url에서 id 받아와서 get하기(useLocation())
   return (
     <>
     <Background>
         <Header/>
         <CenterContainer>
-            <Top>
-                <TopTitle style={{width: "67%"}}> 작지만 다채로운 공간 &lt;무엇보다 책방&gt; </TopTitle>
-                <EditorWrapper>
-                <Editor>
-                    <img src='../img/scrap.png'></img>
-                    <div>에디터 신경미</div>
-                    <div>2022.05.06</div>
-                </Editor>
-                </EditorWrapper>
-                <Tags>
-                    <div>#무엇보다 책방 #파동이 닿는 곳, 송파 #송리단길 #아담한 #조용한 #편안한 #독립출판 #전시 #좌석</div>
-                </Tags>
-            </Top>
+           <TopSection title="제목" editor="신경미" date="2022.05.20" tags={tags}/>
             <ContentWrapper>
                 <ContentContainer>
                     <img src='../img/bookstore1.png' width="49%" height="690px" ></img>
@@ -102,29 +92,11 @@ const Background=styled(Container)`
     background-attachment: local;
     background-size: 100% 4665px;
 `
-const Top=styled(RowContainer)`
-    height: 150px;
-`
 const TopTitle=styled(Flex)`
    
     font-weight: 700;
     font-size: 36px;
     justify-content: center;
-`
-const EditorWrapper=styled(Flex)`
-    width: 11%;
-    display: flex; 
-    justify-content: center;
-   
-`
-const Editor=styled(ColContainer)`
-    font-size: 16px;
-    color: #616161;
-`
-const Tags=styled(Flex)`
-    width: 22%;
-    justify-content: center;
-    padding: 0px 20px 0px 20px;
 `
 const ContentWrapper=styled(ColContainer)`
     margin: 0px 6% 107px 6%;
