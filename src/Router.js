@@ -16,6 +16,7 @@ import Profile from './pages/BookstoreProfile/Profile';
 import ProfileContent from './pages/BookstoreProfile/ProfileContent';
 import Search from './pages/Search/Search';
 import SearchContent from './pages/Search/SearchContent';
+import OwnerPage from './pages/OwnerPage/OwnerPage';
 const Router = () => {
   return (
     
@@ -36,6 +37,7 @@ const Router = () => {
             <Route path='/misteryInfo' element={<MisteryInfo/>}></Route>
             <Route path="/search" element={<Search/>}></Route>
             <Route path="/searchContent/:value" element={<SearchContent/>}></Route>
+            <Route path='/ownerPage' element={<OwnerPage/>}/>
     </Routes>
             
        
