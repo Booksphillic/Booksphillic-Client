@@ -1,16 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { Link } from 'react-router-dom'
 import styled from"styled-components"
 import { ColContainer } from '../../components/Container'
-const Input = () => {
+const Input = ({value}) => {
+  const [search, setSearch]=useState('');
+  const onChangeSearch=(e)=>{
+    e.preventDefault();
+    setSearch(e.target.value);
+  }
+  const onKeyPress=(e)=>{
+    if (e.key==='Enter'){
+      window.location.href=`/searchContent/${search}`;
+     // document.location.href('');
+      console.log("enter")
+    }
+  }
   return (
       <ColContainer>
-      
-    <InputWrapper placeholder='어떤 책방을 찾고 계신가요?'>
+    <InputWrapper placeholder='어떤 책방을 찾고 계신가요?'
+      onChange={onChangeSearch}
+      onKeyPress={onKeyPress}
+      value={value}
+    >
     </InputWrapper>   
-    
-    <Img src='../../img/search_gray.png'></Img>
-   
-    
+      <Img src='../../img/search_gray.png'></Img>
       </ColContainer>
    
 
