@@ -5,11 +5,33 @@ import Header from '../../components/Header';
 import BookstoreCard from './BookstoreCard';
 import Footer from '../../components/Footer';
 import Pagination from '../../components/Pagination';
-
-const dummy=["1","1","1","1","1","1","1","1","1","1"];
+import axios from 'axios';
+//const dummy=["1","1","1","1","1","1","1","1","1","1"];
 const dummy2=["2","2","2","2","2","2","2","2","2","2"];
 
 const AllList = () => {
+  const [dummy, setDummy]=useState([{}]);
+  /*var axios = require('axios');
+  var config = {
+      method: 'get',
+      url: 'http://localhost:8080/api/board',
+      headers: { }
+  };
+  
+  axios(config)
+  .then(function (response) {
+      console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+      console.log(error);
+  });*/
+
+  axios.get('http://localhost:8080/api/board')
+  .then((res)=>{
+    console.log(res.data);
+    setDummy(res.data);
+    console.log(dummy);
+  })
     const [limit, setLimit]=useState(9);
     const [page, setPage]=useState(1);
     const offset=(page-1)*limit;
@@ -51,7 +73,7 @@ const AllList = () => {
                 ?
                 <Collection>
                 {dummy.slice(offset, offset+limit).map((dum)=>(
-                  <BookstoreCard title={dum}/>
+                  <BookstoreCard dum={dum}/>
                 ))}
                  </Collection>
                 :
@@ -62,7 +84,7 @@ const AllList = () => {
                   <BookstoreCard title={dum}/>
                 ))}
                  </Collection>
-                 </>
+                </>
             }
            <Pagination
               total={
