@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import styled from "styled-components";
 import { CenterContainer, Container, RowContainer } from '../../components/Container';
 import Header from '../../components/Header';
@@ -6,32 +6,32 @@ import BookstoreCard from './BookstoreCard';
 import Footer from '../../components/Footer';
 import Pagination from '../../components/Pagination';
 import axios from 'axios';
-//const dummy=["1","1","1","1","1","1","1","1","1","1"];
-const dummy2=["2","2","2","2","2","2","2","2","2","2"];
+import { useParams } from 'react-router-dom';
+import { ContentPasteSearchOutlined } from '@mui/icons-material';
+
 
 const AllList = () => {
-  const [dummy, setDummy]=useState([{}]);
-  /*var axios = require('axios');
-  var config = {
-      method: 'get',
-      url: 'http://localhost:8080/api/board',
-      headers: { }
-  };
-  
-  axios(config)
-  .then(function (response) {
-      console.log(JSON.stringify(response.data));
-  })
-  .catch(function (error) {
-      console.log(error);
-  });*/
-
-  axios.get('http://localhost:8080/api/board')
+  const [dummy, setDummy]=useState([]);
+  const [dummy2, setDummy2]=useState([]);
+  //페이지도 백에서 구현함, 2번 페이지 누르면 page=2를 쿼리로 보내면 됨, size=9는 최대 아홉개 보내준다는 뜻
+  useEffect(()=>{
+    axios.get('/api/board?size=9')
+    .then((res)=>{
+      console.log(res.data.data);
+      setDummy(res.data.data);
+      console.log(dummy);
+    })
+  }, [useParams()])
+ 
+/*useEffect(()=>{
+  axios.get('../dummy.json')
   .then((res)=>{
     console.log(res.data);
     setDummy(res.data);
     console.log(dummy);
   })
+},[])
+*/
     const [limit, setLimit]=useState(9);
     const [page, setPage]=useState(1);
     const offset=(page-1)*limit;
@@ -72,7 +72,7 @@ const AllList = () => {
                 category==="1"                
                 ?
                 <Collection>
-                {dummy.slice(offset, offset+limit).map((dum)=>(
+                { dummy.map((dum)=>(
                   <BookstoreCard dum={dum}/>
                 ))}
                  </Collection>
@@ -81,7 +81,7 @@ const AllList = () => {
                 <Title>#파동이 닿는 곳, 송파</Title>
                 <Collection>
                 {dummy2.slice(offset, offset+limit).map((dum)=>(
-                  <BookstoreCard title={dum}/>
+                  <BookstoreCard dum={dum}/>
                 ))}
                  </Collection>
                 </>
