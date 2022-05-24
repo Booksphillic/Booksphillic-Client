@@ -12,7 +12,7 @@ const TopSection = ({title, editor, editorImage, date,id, tags, scraped}) => {
         }
     }
     
-  return (
+  return ( 
     <Top>
         <TopTitle style={{width: "67%"}}> {title}</TopTitle>
             <EditorWrapper>

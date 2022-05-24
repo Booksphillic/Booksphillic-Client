@@ -62,7 +62,7 @@ const Profile = () => {
               : <WeeklyImg src='../img/profile/sample3.png'></WeeklyImg>
             )
           }
-          
+           
         </Weekly>
         <Content>
         <DropDown handelChange={handleChange}/>

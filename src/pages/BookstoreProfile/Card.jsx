@@ -30,7 +30,7 @@ const Card = ({title, id,subtitle, img, scraped }) => {
     </CardContainer>
     </Link>
   )
-}
+} 
 
 export default Card
 const CardContainer=styled(ColContainer)`

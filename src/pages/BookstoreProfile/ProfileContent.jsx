@@ -23,7 +23,7 @@ const ProfileContent = () => {
         })
     },[useParams()])
 
-  return (
+  return ( 
     <Background>
       <Header/>
       <TopSection name={content.name} scraped={content.scraped} tags={content.tags}/>
