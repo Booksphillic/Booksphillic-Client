@@ -73,7 +73,7 @@ const ProfileContent = () => {
       </CenterContainer>
 
        <AccordionContainer>
-            <Accordion/>
+            <Accordion id={id}/>
       </AccordionContainer>
       <BtnContainer>
         <div style={{fontSize:"36px", fontWeight:"700"}}>책방지기에게 도서 큐레이션을 받고 싶다면?</div>

@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import WriteReview from './WriteReview';
 import { borderBottom } from '@mui/system';
-export default function SimpleAccordion() {
+export default function SimpleAccordion({id}) {
   return (
     <div>
       <Accordion square={true} style={{padding:"0 10% 0 10%"}} disableGutters={true} >
@@ -20,7 +20,7 @@ export default function SimpleAccordion() {
           <Typography style={{fontSize:"30px", fontWeight:"700" }}>리뷰 남기기</Typography>
         </AccordionSummary>
         <AccordionDetails style={{padding: "20px 0"}}>
-          <WriteReview/>
+          <WriteReview id={id}/>
         </AccordionDetails>
       </Accordion>
 
