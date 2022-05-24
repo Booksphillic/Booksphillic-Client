@@ -8,6 +8,9 @@ import styledEngine from '@mui/styled-engine';
 import IntroMistery from '../components/main/IntroMistery';
 import Footer from '../components/Footer';
 const Home = () => {
+  const Scrap=(e)=>{
+    console.log(e.target);
+  }
   return (
   <>
    <Header/>
@@ -49,6 +52,7 @@ const Home = () => {
             <img src='../img/next.png'></img>
             </RowContainer>
           </ProfileTop>
+          
           <ProfileContent>
             <ProfileCard>
               <div style={{height:"490px"}}>이미지 자리</div>
@@ -57,13 +61,28 @@ const Home = () => {
                   <div>동네책방 주책</div>
                   <div>주소</div>
                 </Bottom1>
-                <Bottom2>
+                <Bottom2 onClick={Scrap}>
+                  <img src='../img/scrap.png' height="48px" width="60%" style={{marginLeft: "15%"}}></img>
+                  <div>스크랩하기</div>
+                </Bottom2>
+              </ProfileBottom>
+            </ProfileCard>
+            <ProfileCard>
+              <div style={{height:"490px"}}>이미지 자리</div>
+              <ProfileBottom>
+                <Bottom1>
+                  <div>동네책방 주책</div>
+                  <div>주소</div>
+                </Bottom1>
+                <Bottom2 onClick={Scrap}>
                   <img src='../img/scrap.png' height="48px" width="60%" style={{marginLeft: "15%"}}></img>
                   <div>스크랩하기</div>
                 </Bottom2>
               </ProfileBottom>
             </ProfileCard>
           </ProfileContent>
+         
+      
           <ProfileEnd>
             <img src='../img/moreBookstore.png'></img>
           </ProfileEnd>

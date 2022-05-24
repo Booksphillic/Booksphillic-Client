@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 import { ColContainer, RowContainer } from '../../components/Container'
 import { BorderGrayBtn, RoundBtn } from '../../components/Buttons'
 import { Avatar, Chip } from '@mui/material'
-const WriteReview = () => {
+const WriteReview = ({id}) => {
     const emoji=[
         {src:"../img/emoji/happy.png",
         name:"추천해요"},
@@ -15,6 +15,9 @@ const WriteReview = () => {
         {src:"../img/emoji/wink.png",
         name:"짱이에요"},
         ]
+        
+    const [clickEmoji, setClickEmoji]=useState("");
+    console.log(clickEmoji);
     const[click, setClick]=useState(Array(4).fill(false));
     const handleClick=(id)=>{
         setClick(click.map((element, index)=>{
@@ -25,6 +28,7 @@ const WriteReview = () => {
             : element
         }))
     }
+    
     const [img, setImg]=useState([]);
     const [previewImg, setPreviewImg]=useState([]);
     const imageInput = useRef();
@@ -95,12 +99,14 @@ const WriteReview = () => {
                         }
                         onClick={()=>{
                             handleClick(index)
+                            setClickEmoji(emoji[index].name);
                         }}
                         >
                     </Chip>
                 ))}
         </RowContainer>
-      <Textarea placeholder='여러분은 이 책방에 어떤 점이 끌리셨나요? 여러분의 후기를 남겨주세요'
+      <Textarea 
+      placeholder='여러분은 이 책방에 어떤 점이 끌리셨나요? 여러분의 후기를 남겨주세요'
         maxLength={100}>
       </Textarea>
       <BtnContainer>
