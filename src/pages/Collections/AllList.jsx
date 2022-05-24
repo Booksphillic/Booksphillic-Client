@@ -10,6 +10,10 @@ import { useParams } from 'react-router-dom';
 import { ContentPasteSearchOutlined } from '@mui/icons-material';
 import Keywords from './Keywords';
 import { keywordList } from '../../components/keywordList';
+import {HeaderTitle} from '../Collections/HeaderTitle';
+import { Box } from '../../components/apply/Boxs';
+
+
 const AllList = () => {
   
   const [all, setAll]=useState([]);
@@ -26,7 +30,7 @@ const AllList = () => {
   }
   const clickAll=()=>{
     //모든 동네 모아보기
-    axios.get('/api/board?size=9')
+    axios.get(`/api/board?size=${limit}`)
     .then((res)=>{
       console.log(res.data);
       console.log(res.data.data); 
@@ -39,7 +43,7 @@ const AllList = () => {
     {
       radio ==="1"
       ?
-      axios.get('/api/board?size=9')
+      axios.get(`/api/board?size=${limit}`)
       .then((res)=>{
         console.log(res.data.data);
         setAll(res.data.data);
@@ -57,7 +61,7 @@ const AllList = () => {
     
   }, [useParams()])
  
-    const [limit, setLimit]=useState(9);
+    const [limit, setLimit]=useState(6);
     const [page, setPage]=useState(1);
     const offset=(page-1)*limit;
     const [category, setCategory]=useState("1");
@@ -69,7 +73,11 @@ const AllList = () => {
   return (
     <Background>
         <Header/>
-        <CenterContainer style={{marginBottom:'30px'}}>
+        <HeaderTitle/>
+        <CenterContainer style={{marginBottom:'30px', width: 'min-content', margin:"0 auto"}}>
+          <Blocks style={{marginTop: '168px'}}>
+            <TitleBox style={{background:"#FFFFFF", alignItems:'center'}}>동네 컬렉션</TitleBox>
+          </Blocks>
             <RadioBtnWrapper>
                 <RadioBtn
                     id="radio1"
@@ -95,25 +103,26 @@ const AllList = () => {
                     이 주의 동네만 모아보기
                   </Label>
             </RadioBtnWrapper>
-            
-            {
-                category==="1"                
-                ?
-                <Collection>
-                { all.map((all)=>(
-                  <BookstoreCard dum={all}/>
-                ))}
-                 </Collection>
-                :
-                <>
-                <Title>#파동이 닿는 곳, 송파</Title>
-                <Collection>
-                {week.slice(offset, offset+limit).map((week)=>(
-                  <BookstoreCard dum={week}/>
-                ))}
-                 </Collection>
-                </>
-            }
+            <div style={{height: '1190px'}}>
+              {
+                  category==="1"                
+                  ?
+                  <Collection>
+                  { all.map((all)=>(
+                    <BookstoreCard dum={all}/>
+                  ))}
+                  </Collection>
+                  :
+                  <>
+                  <Title>#파동이 닿는 곳, 송파</Title>
+                  <Collection>
+                  {week.slice(offset, offset+limit).map((week)=>(
+                    <BookstoreCard dum={week}/>
+                  ))}
+                  </Collection>
+                  </>
+              }
+            </div>
            <Pagination
               total={
                 (category === "1" ? all.length: week.length)
@@ -123,6 +132,9 @@ const AllList = () => {
               setPage={setPage}
            />
         </CenterContainer>
+        <Blocks>
+            <TitleBox style={{background:"#FFFFFF", alignItems:'center'}}>키워드로 보는 동네 컬렉션</TitleBox>
+          </Blocks>
         <Keywords/>
         <Footer/>
     </Background>
@@ -131,12 +143,28 @@ const AllList = () => {
 
 export default AllList
 const Background=styled(Container)`
-background-image: url('../img/background/background_collection.jpg');
+background-image: url('../img/background/background_list.jpg');
 background-attachment: local;
-background-size: 100% 4001px;
+background-size: 100% 6544px;
 `
+
+const Blocks=styled(RowContainer)`
+  margin-left:2%;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+`
+const TitleBox=styled(Box)`
+  padding: 14px 4% 14px 4%;
+  border: 1px solid #616161;
+`
+
 const RadioBtnWrapper=styled(RowContainer)`
-   margin: 743px 0 47px 9%;
+   margin: 90px 0 17px 0;
 `
 const RadioBtn=styled.input`
       width: 20px;
@@ -159,15 +187,15 @@ const Label=styled.label`
 `
 const Collection=styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap:107px 5%;
-    margin:30px 9%;
+    width: min-content;
+    grid-template-columns: repeat(3, 340px);
+    grid-template-rows: 540px 540px;
+    gap:80px 30px;
+    margin:30px auto;
 `
 const Title=styled.div`
 font-weight: 700;
 font-size: 30px;
-margin-left: 9%;
 margin-bottom: 20px;
 color: #BDBDBD;
 

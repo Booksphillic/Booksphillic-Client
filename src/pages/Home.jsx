@@ -8,6 +8,9 @@ import styledEngine from '@mui/styled-engine';
 import IntroMistery from '../components/main/IntroMistery';
 import Footer from '../components/Footer';
 import {scrap} from '../services/ApiService';
+import { EditNotifications } from '@mui/icons-material';
+
+
 const Home = () => {
 
   // 스크랩 아이콘 색깔 바꿔주기!!!!!!!
@@ -24,6 +27,32 @@ const Home = () => {
     }
   }
 
+  const PostType = (type) => 
+    <div style={{
+      fontFamily: 'Frutiger',
+      fontWeight: 700,
+      fontSize: '20px',
+      lineHeight: '35px',
+      color: '#222222'
+    }}>{type}</div>
+
+  const PostContent = (content) => 
+    <div style={{
+      height: '100%', marginTop: '128px',
+      fontSize: '20px', fontFamily: 'Noto Sans KR',
+      lineHeight: '35px', width: '308px'
+    }}>{content}</div>
+
+  const Hr = () => 
+    <div style={{
+      width: '25px',
+      height: '0px',
+      border: '2px solid #222222'
+    }}></div>
+
+
+  
+
   return (
   <>
    <Header/>
@@ -31,23 +60,43 @@ const Home = () => {
         <HomeCenterContainer>
           <TopWrapper>
             <img src='../img/house.png'></img>
-            <div>파동이 닿는 곳, 송파</div>
+            <div style={{
+              marginLeft: '13px',
+              fontFamily: 'NIXGONFONTS',
+              fontWeight: 400,
+              fontSize: '40px'
+            }}>파동이 닿는 곳, 송파</div>
           </TopWrapper>
           <ContentWrapper>
           <BookstoreContent>
-            <div>hiiiiiiiiiiiㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ</div>
-            <div>hi</div>
-            <div>hi</div>
-            <div>hi</div>
-            <div>hi</div>
-            <div>hi</div>
-            <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+            {PostType('Bookstore')}
+            <Hr/>
+            <div style={{
+              fontFamily: 'Noto Sans KR',
+              fontWeight: 700,
+              fontSize: '36px'
+            }}>
+              작지만 다채로운 공간<br/>
+              &lt;무엇보다 책방&gt;
+            </div>
+            {PostContent('작은 공간임에도 편안하고 기분좋은 책들이 가득하다. 송리단길의 작은 서점이 우리를 맞이한다.')}
           </BookstoreContent>
           <img src='../img/bookstore1.png' width="62.4%" height="100%" ></img>
           </ContentWrapper>
           <ContentWrapper>
           <img src='../img/bookstore1.png' width="37.6%" height="100%" ></img>
-            <BookstoreContent>ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</BookstoreContent>
+            <BookstoreContent>
+              {PostType('Event')}
+              <Hr/>
+              <div style={{
+                fontFamily: 'Noto Sans KR',
+                fontWeight: 700,
+                fontSize: '36px'
+              }}>
+                책 향기를 가득 머금은 <br/> 책방에서
+              </div>
+              {PostContent('컨텐츠 경쟁시대에 이르렀다. 컨텐츠의 원조, 책에 진심인 사람들과 책으로 둘러쌓인 공간에서 오감으로 책을 느껴보는 시간을 가져보자.')}
+            </BookstoreContent>
           <MoreBtn>
             <div>더 많은 컨텐츠 <br/>보러가기</div>
             <img src='../img/arrow.png'></img>
@@ -57,8 +106,10 @@ const Home = () => {
           <BookStoreProfile>
           <ProfileTop>
             <RowContainer>
-            <img src='../img/bookstore.png'></img>
-            <div>송파의 책방 프로필</div>
+              <img src='../img/bookstore.png'></img>
+              <div style={{fontFamily: 'Noto Sans KR', fontWeight: 700, fontSize: '36px', marginLeft: '10px'}}>
+                송파의 책방 프로필
+              </div>
             </RowContainer>
             <RowContainer>
             <img src='../img/previous.png'></img>
@@ -67,15 +118,35 @@ const Home = () => {
           </ProfileTop>
           <ProfileContent>
             <ProfileCard>
-              <div style={{height:"490px"}}>이미지 자리</div>
+              <div style={{height:"490px"}}>
+                <div style={profileStyle}>동네책방 주책
+: 주택가에 위치한 작은 책방. 조용하게 커피 한 잔 마시며 독립출간물을 접할 수 있는 공간입니다.</div>  
+              </div>
               <ProfileBottom>
                 <Bottom1>
-                  <div>동네책방 주책</div> {/* 3 번 서점 */}
-                  <div>주소</div>
+                  <div style={boldStyle}>동네책방 주책</div> {/* 3 번 서점 */}
+                  <div style={addressStyle}>책과 술, 문화모임이 있는 쉼의 공간</div>
                 </Bottom1>
                 <Bottom2 onClick={() => onClickScrap(3)}>
-                  <img src='../img/scrap.png' height="48px" width="60%" style={{marginLeft: "15%"}}></img>
-                  <div>스크랩하기</div>
+                  <img src='../img/scrap.png' height="48px" width="60%" style={{margin: "auto"}}></img>
+                  <div style={{textAlign: 'center', lineHeight: '30px', fontWeight: 400, fonSize: '16px'}}>스크랩</div>
+                </Bottom2>
+              </ProfileBottom>
+            </ProfileCard>
+            <ProfileCard>
+              <div style={{height:"490px"}}> 
+                <div style={profileStyle}>하우스북스
+  : 스페셜 티, 커피와 서점, 갤러리를 즐길 수 있는 복합문화공간에 자리잡은 책방입니다.</div>
+              </div>
+              
+              <ProfileBottom>
+                <Bottom1>
+                  <div style={boldStyle}>하우스북스</div> {/* 4 번 서점 */}
+                  <div style={addressStyle}>HOWS 발견의 공간</div>
+                </Bottom1>
+                <Bottom2 onClick={() => onClickScrap(4)}>
+                  <img src='../img/scrap.png' height="48px" width="60%" style={{margin: "auto"}}></img>
+                  <div style={{textAlign: 'center', lineHeight: '30px', fontWeight: 400, fonSize: '16px'}}>스크랩</div>
                 </Bottom2>
               </ProfileBottom>
             </ProfileCard>
@@ -96,6 +167,26 @@ const Home = () => {
 }
 
 export default Home;
+
+const boldStyle = {
+  fontFamily: 'Noto Sans KR',
+  fontWeight: 700,
+  fontSize: '30px'
+};
+
+const addressStyle = {
+  fontFamily: 'Noto Sans KR',
+  fontWeight: 400,
+  fontSize: '16px',
+  color: '#616161'
+}
+
+const profileStyle = {
+  marginTop: '255px', marginLeft: '380px', marginRight: '70px',
+  fontWeight: 500,
+  fontSize: '20px',
+  lineHeight: '35px'
+}
 
 const HomeContainer=styled(Container)`
   background-image: url('../img/background/background_home.jpg');
@@ -121,7 +212,7 @@ const ContentWrapper=styled(RowContainer)`
 `
 const BookstoreContent=styled(ColContainer)`
   height: 100%;
-  padding: 5%;
+  padding: 27px;
   width: 37.6%;
 `
 const MoreBtn=styled(RowContainer)`

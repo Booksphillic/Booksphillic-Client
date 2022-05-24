@@ -15,7 +15,7 @@ const BookstoreCard = ({dum}) => {
         ?dum.content
         :dum.content.slice(0, 80)+"..."
       }</Content>
-        <hr/>
+        <hr style={{margin: '10px 0'}} />
         <BottomWrapper>
         <Bottom>파동이 닿는 곳, 송파</Bottom>
         <Bottom>ㅣ</Bottom>
@@ -29,30 +29,30 @@ const BookstoreCard = ({dum}) => {
 
 export default BookstoreCard
 const CardContainer=styled(ColContainer)`
-  height: 524px;
+  height: 500px;
   max-width: 348px;
 `
 const Img=styled.img`
   max-width: 348px;
-  height: 261px;
+  height: 240px;
   object-fit: cover;
   margin-bottom: 25px;
 `
 const Title=styled.div`
   font-weight: 700;
-  font-size: 30px;
-  line-height: 45px;
+  font-size: 24px;
+  line-height: 26px;
   color: #222222;
   max-width: 348px;
+  height: 60px;
   display: -webkit-box;
-  -webkit-line-clamp:1;
-  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2;
   overflow: hidden;
   text-overflow: ellipsis;
 `
 const Content=styled.div`
   margin-top:10px;
-  margin-bottom: 5px;
+  height: 200px;
   font-weight: 400;
   font-size: 16px;
   line-height: 25px;
