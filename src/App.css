@@ -1,11 +1,16 @@
 
 .App {
   text-align: center;
- 
+  font-family: 'Noto Sans KR';
 }
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+@font-face {
+  font-family: "NIXGONFONTS";
+  src: url("../public/font/NIXGONFONTS _M_2.0.otf");
 }
 
 @media (prefers-reduced-motion: no-preference) {

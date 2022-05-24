@@ -33,8 +33,9 @@ const CardContainer=styled(ColContainer)`
   height: 524px;
 `
 const Img=styled.img`
-  width:100%;
-  height: 50%;
+  max-width: 348px;
+  height: 261px;
+  object-fit: cover;
   margin-bottom: 25px;
 `
 const Title=styled.div`
