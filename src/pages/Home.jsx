@@ -7,7 +7,23 @@ import { Col } from 'react-bootstrap';
 import styledEngine from '@mui/styled-engine';
 import IntroMistery from '../components/main/IntroMistery';
 import Footer from '../components/Footer';
+import {scrap} from '../services/ApiService';
 const Home = () => {
+
+  // 스크랩 아이콘 색깔 바꿔주기!!!!!!!
+  const onClickScrap = async (storeId) => {
+    console.log(storeId);
+    const res = await scrap(storeId);
+    // 성공
+    if(res.code === 1000) {
+      
+    }
+    // 실패
+    else {
+
+    }
+  }
+
   return (
   <>
    <Header/>
@@ -54,10 +70,10 @@ const Home = () => {
               <div style={{height:"490px"}}>이미지 자리</div>
               <ProfileBottom>
                 <Bottom1>
-                  <div>동네책방 주책</div>
+                  <div>동네책방 주책</div> {/* 3 번 서점 */}
                   <div>주소</div>
                 </Bottom1>
-                <Bottom2>
+                <Bottom2 onClick={() => onClickScrap(3)}>
                   <img src='../img/scrap.png' height="48px" width="60%" style={{marginLeft: "15%"}}></img>
                   <div>스크랩하기</div>
                 </Bottom2>
