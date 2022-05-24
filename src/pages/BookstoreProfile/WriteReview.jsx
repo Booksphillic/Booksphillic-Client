@@ -4,6 +4,9 @@ import { useRef, useState } from 'react'
 import { ColContainer, RowContainer } from '../../components/Container'
 import { BorderGrayBtn, RoundBtn } from '../../components/Buttons'
 import { Avatar, Chip } from '@mui/material'
+
+var files = new FormData();
+
 const WriteReview = ({id}) => {
     const emoji=[
         {src:"../img/emoji/happy.png",
@@ -19,6 +22,7 @@ const WriteReview = ({id}) => {
     const [clickEmoji, setClickEmoji]=useState("");
     console.log(clickEmoji);
     const[click, setClick]=useState(Array(4).fill(false));
+    const [clickEmoji, setClickEmoji] = useState("");
     const handleClick=(id)=>{
         setClick(click.map((element, index)=>{
             return index===id 
@@ -28,9 +32,12 @@ const WriteReview = ({id}) => {
             : element
         }))
     }
-    
+
     const [img, setImg]=useState([]);
     const [previewImg, setPreviewImg]=useState([]);
+
+    const [content, setContent] = useState("");
+
     const imageInput = useRef();
    const insertImg=(e)=>{
        let reader=new FileReader();
@@ -38,6 +45,7 @@ const WriteReview = ({id}) => {
        if (e.target.files[0]){
            reader.readAsDataURL(e.target.files[0]);
            setImg([...img, e.target.files[0]]);
+        files.append('files',e.target.files[0])
        }
 
        reader.onloadend=()=>{
@@ -78,7 +86,7 @@ const WriteReview = ({id}) => {
             
         <input 
                 type="file"
-                id="file"
+                id="files"
                 ref={imageInput}
                 style={{ display: 'none' }}
                 accept='image/jpg, image/jpeg, image/png'
@@ -105,12 +113,40 @@ const WriteReview = ({id}) => {
                     </Chip>
                 ))}
         </RowContainer>
-      <Textarea 
-      placeholder='여러분은 이 책방에 어떤 점이 끌리셨나요? 여러분의 후기를 남겨주세요'
-        maxLength={100}>
+      <Textarea placeholder='여러분은 이 책방에 어떤 점이 끌리셨나요? 여러분의 후기를 남겨주세요'
+        maxLength={100} onChange={(event)=>setContent(event.target.value)}>
       </Textarea>
       <BtnContainer>
-      <BorderGrayBtn>
+      <BorderGrayBtn
+            onClick={ () => {
+                console.log("files", files);
+                fetch('/api/bookstore/reviewImages', {
+                    method : 'POST',
+                    body : files
+                }).then((res) => {
+                    res.json().then((json) => {
+                        // console.log(json.data)
+                        // console.log("이모지", clickEmoji)
+                        fetch(`/api/bookstore/${id}/review`, {
+                            method : 'POST',
+                            headers: new Headers({
+                                'Content-Type': 'application/json',
+                            }),
+                            body : JSON.stringify({
+                                userId : 3, 
+                                content : content,
+                                urls : json.data,
+                                emoticon : clickEmoji
+                            })
+                        }).then((res) => {
+                            res.json().then((json)=> {
+                                console.log(json.data);
+                            })
+                        })
+                    })
+                })
+            }}
+            >
           <img src='../img/icons/pencil.png' style={{height:"20px", marginRight:"10px"}}></img>
           <span>리뷰 남기기</span>
         </BorderGrayBtn>

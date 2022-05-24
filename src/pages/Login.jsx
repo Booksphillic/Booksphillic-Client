@@ -1,40 +1,77 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {  BlackBtn, BorderGrayBtn } from '../components/Buttons'
 import { RowContainer, ColContainer } from '../components/Container'
 import Header from '../components/Header'
 import styled from 'styled-components'
 import KaKaoLogin from 'react-kakao-login'
+import {signin} from '../services/ApiService'
+import { useHref } from 'react-router-dom'
+
+
 const Login = () => {
-  return (
-    <>
-        <Header/>
-        <RowContainer style={{margin: "150px 10%" }}>
-            <Col1>
-            <Title>동네 책방의 모든 이야기를 담다</Title>
-            <Subtitle>북스필릭에서 나만의 동네 책방을 찾아보세요</Subtitle>
-            </Col1>
-            <Col2>
-                <Title style={{marginBottom:"35px"}}>로그인</Title>
-                <Inputs>
-                <Input placeholder="이메일(아이디)" style={{marginBottom:"20px"}}></Input>
-                    <Input placeholder="비밀번호"></Input>
-                </Inputs>
-                
-                <input type="radio"></input>
-                <BlackBtn padding={0} style={{textAlign:"center", marginTop:"35px"}}>로그인</BlackBtn>
-                <RowContainer style={{margin:"20px 0", gap:"4%", width:"100%"}}>
-                    <BorderGrayBtn style={{width:"41%", textAlign:"center"}}>일반회원으로 가입하기</BorderGrayBtn>
-                    <BorderGrayBtn style={{width:"41%" , textAlign:"center"}}>사장님으로 가입하기</BorderGrayBtn>
-                </RowContainer>
-                <BorderGrayBtn style={{marginBottom:"35px", textAlign:"center", padding:"15px 0"}}>아이디/비밀번호 찾기</BorderGrayBtn>
-                <hr/>
-                <RowContainer>
+    
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+
+    const onChangeEmail = (e) => {
+        setEmail(e.target.value);
+    }
+
+    const onChangePassword = (e) => {
+        setPassword(e.target.value);
+    }
+
+    const onClickLogin = async () => {
+        const res = await signin(email, password);
+
+        // 요청 성공
+        if(res.code === 1000){
+            // 로컬 스토리지에 토큰 저장
+            localStorage.setItem('ACCESS_TOKEN', res.data.accessToken);
+            localStorage.setItem('userId', res.data.userId);
+            alert('로그인 성공!');
+            window.location.href = '/';
+        }
+        // 로그인 실패
+        else {
+            alert(res.message);
+            window.location.reload();
+        }
+    }
+
+    return (
+        <>
+            <Header/>
+            <RowContainer style={{margin: "150px 10%" }}>
+                <Col1>
+                <Title>동네 책방의 모든 이야기를 담다</Title>
+                <Subtitle>북스필릭에서 나만의 동네 책방을 찾아보세요</Subtitle>
+                </Col1>
+                <Col2>
+                    <Title style={{marginBottom:"35px"}}>로그인</Title>
+                    <Inputs>
+                        <Input placeholder="이메일(아이디)" style={{marginBottom:"20px"}} onChange={onChangeEmail}></Input>
+                        <Input type="password" placeholder="비밀번호" onChange={onChangePassword}></Input>
+                    </Inputs>
                     
-                </RowContainer>
-            </Col2>
-        </RowContainer>
-    </>
-  )
+                    <input type="radio"></input>
+                    <BlackBtn padding={0} style={{textAlign:"center", marginTop:"35px"}}
+                        onClick={onClickLogin}
+                    >로그인</BlackBtn>
+                    <RowContainer style={{margin:"20px 0", gap:"4%", width:"100%"}}>
+                        <BorderGrayBtn style={{width:"41%", textAlign:"center"}}>일반회원으로 가입하기</BorderGrayBtn>
+                        <BorderGrayBtn style={{width:"41%" , textAlign:"center"}}>사장님으로 가입하기</BorderGrayBtn>
+                    </RowContainer>
+                    <BorderGrayBtn style={{marginBottom:"35px", textAlign:"center", padding:"15px 0"}}>아이디/비밀번호 찾기</BorderGrayBtn>
+                    <hr/>
+                    <RowContainer>
+                        
+                    </RowContainer>
+                </Col2>
+            </RowContainer>
+        </>
+    )
 }
 
 export default Login
