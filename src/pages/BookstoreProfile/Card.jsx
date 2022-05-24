@@ -3,7 +3,7 @@ import React from 'react'
 import styled from "styled-components";
 import { ColContainer, RowContainer } from '../../components/Container';
 import { Link } from 'react-router-dom';
-const Card = ({title, id,subtitle, img}) => {
+const Card = ({title, id,subtitle, img, scraped }) => {
   return (
     <Link to={`/profileContent/${id}`} >
     <CardContainer>
@@ -18,8 +18,10 @@ const Card = ({title, id,subtitle, img}) => {
             </RowContainer>
         </Left>
         <Right>
-            <ColContainer>
-            <img src='../img/scrap.png'></img>
+            <ColContainer> 
+            {
+              scraped===true ? <img src='../img/scraped.png'></img> : <img src='../img/unscraped.png'></img>
+            }
             <ScrapTitle>스크랩</ScrapTitle>
             </ColContainer>
         </Right>
