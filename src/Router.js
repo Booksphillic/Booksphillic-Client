@@ -18,6 +18,7 @@ import Search from './pages/Search/Search';
 import SearchContent from './pages/Search/SearchContent';
 import OwnerPage from './pages/OwnerPage/OwnerPage';
 import Login from './pages/Login';
+import Editor from './pages/Editor/Editor';
 const Router = () => {
   return (
     
@@ -41,6 +42,7 @@ const Router = () => {
             <Route path="/searchContent/:value" element={<SearchContent/>}></Route>
             <Route path='/ownerPage' element={<OwnerPage/>}/>
             <Route path='/login' element={<Login/>}></Route>
+            <Route path='/editor' element={<Editor/>}></Route>
     </Routes>
             
        

@@ -5,7 +5,6 @@ import { ColContainer, RowContainer } from '../../components/Container'
 import { BorderGrayBtn, RoundBtn } from '../../components/Buttons'
 import { Avatar, Chip } from '@mui/material'
 
-
 var files = new FormData();
 
 const WriteReview = ({id}) => {
@@ -19,6 +18,9 @@ const WriteReview = ({id}) => {
         {src:"../img/emoji/wink.png",
         name:"짱이에요"},
         ]
+        
+    const [clickEmoji, setClickEmoji]=useState("");
+    console.log(clickEmoji);
     const[click, setClick]=useState(Array(4).fill(false));
     const [clickEmoji, setClickEmoji] = useState("");
     const handleClick=(id)=>{
@@ -105,7 +107,7 @@ const WriteReview = ({id}) => {
                         }
                         onClick={()=>{
                             handleClick(index)
-                            setClickEmoji(emoji[index].name)
+                            setClickEmoji(emoji[index].name);
                         }}
                         >
                     </Chip>

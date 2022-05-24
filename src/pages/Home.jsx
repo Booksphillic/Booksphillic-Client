@@ -65,6 +65,7 @@ const Home = () => {
             <img src='../img/next.png'></img>
             </RowContainer>
           </ProfileTop>
+          
           <ProfileContent>
             <ProfileCard>
               <div style={{height:"490px"}}>이미지 자리</div>
@@ -80,6 +81,8 @@ const Home = () => {
               </ProfileBottom>
             </ProfileCard>
           </ProfileContent>
+         
+      
           <ProfileEnd>
             <img src='../img/moreBookstore.png'></img>
           </ProfileEnd>
