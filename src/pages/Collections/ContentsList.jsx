@@ -27,11 +27,19 @@ const ContentsList = () => {
   return (
     <Background>
         <Header/>
-        <TitleImg src='../img/collection/collection_title.png'></TitleImg>
+        <HeaderTitle>
+          <div style={{fontFamily: "NIXGONFONTS", width: '333px', height: '52px', fontSize: '65px', marginBottom: '40px'}}>
+            동네 컬렉션
+          </div>
+          <div style={{fontFamily: "NIXGONFONTS", fontSize: '35px'}}>
+            동네 책방의 이야기에 끌리다
+          </div>
+        </HeaderTitle>
+
         <CenterContainer>
             <Blocks>
-              <TitleBox style={{background:"#FFFFFF"}}>이주의 동네</TitleBox>
-              <TitleBox style={{background:"#FFFA88"}}>파동이 닿는 곳, 송파</TitleBox>
+              <TitleBox style={{background:"#FFFFFF", alignItems:'center'}}>이주의 동네</TitleBox>
+              <TitleBox style={{background:"#FFFA88", alignItems:'center'}}>파동이 닿는 곳, 송파</TitleBox>
             </Blocks>
             <Collection>
            {week.map((week)=>(
@@ -42,7 +50,6 @@ const ContentsList = () => {
             <MoreContents>+전체 콘텐츠보기</MoreContents> 
             </Link>
            
-            
             <Blocks>
               <TitleBox style={{background:"#FFFFFF"}}>다른 동네 컬렉션</TitleBox>
             </Blocks>
@@ -71,15 +78,24 @@ background-image: url('../img/background/background_list.jpg');
 background-attachment: local;
 background-size: 100% 6544px;
 `
-const TitleImg=styled.img`
-  width: 20%;
+const HeaderTitle=styled.div`
   height: 144px;
   margin: 144px 0 113px 10%;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 52px;
 `
 const Blocks=styled(RowContainer)`
   margin-left:2%;
   margin-top: 168px;
   gap:10px;
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
 `
 const TitleBox=styled(Box)`
   padding: 14px 4% 14px 4%;
