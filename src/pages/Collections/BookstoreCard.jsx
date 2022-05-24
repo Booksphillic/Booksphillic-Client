@@ -29,8 +29,8 @@ const BookstoreCard = ({dum}) => {
 
 export default BookstoreCard
 const CardContainer=styled(ColContainer)`
-  
   height: 524px;
+  max-width: 348px;
 `
 const Img=styled.img`
   max-width: 348px;
@@ -43,9 +43,12 @@ const Title=styled.div`
   font-size: 30px;
   line-height: 45px;
   color: #222222;
-  &.long{
-    font-size: 25px;
-  }
+  max-width: 348px;
+  display: -webkit-box;
+  -webkit-line-clamp:1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 const Content=styled.div`
   margin-top:10px;
@@ -53,6 +56,7 @@ const Content=styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 25px;
+  max-width: 348px;
   color: #9E9E9E;
 `
 const BottomWrapper=styled(RowContainer) `
