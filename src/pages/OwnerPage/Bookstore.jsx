@@ -8,7 +8,7 @@ const Bookstore = () => {
     useEffect(() => {
       axios.get('/api/owner/profile', {params: {userId:1}})//userId는 로그인부터 해야 받아올 수 있을 듯..
         .then((res)=>{
-            console.log(res.data.data);
+            console.log(res.data);
         })
       
     }, [])

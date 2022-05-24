@@ -18,14 +18,17 @@ const WriteReview = () => {
     const[click, setClick]=useState(Array(4).fill(false));
     const handleClick=(id)=>{
         setClick(click.map((element, index)=>{
-            return index===id ? !element : element;
+            return index===id 
+            ? !element 
+            : element===true
+            ?!element
+            : element
         }))
     }
     const [img, setImg]=useState([]);
     const [previewImg, setPreviewImg]=useState([]);
     const imageInput = useRef();
    const insertImg=(e)=>{
-       //console.log(e.target.files[0]);
        let reader=new FileReader();
 
        if (e.target.files[0]){
@@ -35,7 +38,6 @@ const WriteReview = () => {
 
        reader.onloadend=()=>{
            const previewImgUrl=reader.result;
-           //console.log(previewImgUrl);
            if (previewImgUrl){
                setPreviewImg([...previewImg,previewImgUrl]);
            }
