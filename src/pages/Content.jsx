@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import styled from "styled-components";
 import { CenterContainer, ColContainer, RowContainer,Container } from '../components/Container';
 import Header from '../components/Header';
@@ -7,33 +7,54 @@ import { RoundBtn } from '../components/Buttons';
 import Accordion from '../components/content/SimpleAccordion';
 import Footer from '../components/Footer';
 import TopSection from '../components/TopSection';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import moment from 'moment';
+
 const Content = () => {
-    const tags=["#태그1", "#태그2"]
-    //url에서 id 받아와서 get하기(useLocation())
+    const [content, setContent]=useState([]);
+
+    let {id}=useParams();
+    useEffect(() => {
+      axios.get(`/api/board/${id}`)
+      .then((res)=>{
+          console.log(res.data.data);
+          setContent(res.data.data);
+          console.log(content.title);
+      })
+    }, [])
+    
   return (
     <>
     <Background>
         <Header/>
+     
         <CenterContainer>
-           <TopSection title="제목" editor="신경미" date="2022.05.20" tags={tags}/>
-            <ContentWrapper>
+           <TopSection title={content.title} editor={content.editorName} editorImage={content.editorImage} date={moment(content.createdAt).format('YYYY.MM.DD')} tags={Array.isArray(content.tagList) && content.tagList.length &&content.tagList}/>
+               {Array.isArray(content.contentImages) &&
+                <ContentWrapper>
                 <ContentContainer>
-                    <img src='../img/bookstore1.png' width="49%" height="690px" ></img>
+                   <img src={content.contentImages[0]} width="49%" height="690px" ></img>
+                    
                     <Paragraph>
                         <ParagraphTiTle>송리단길의 <br/>작은서점</ParagraphTiTle>
-                        <ParagraphContent>잠실 송리단길에는 작은 서점이 있다. 바로 &lt;무엇보다 책방&gt;. 이런 곳에 책방이 있나? 라고 생각이 들었던 이곳. 엘리베이터가 없는 건물의 3층으로 올라오면 무엇보다 책방이  나를 맞이하고 있다. 생각보다 작고, 다채로운 공간이지만 다양한 무언가를 담고 있다. 각각의 독립서적 부터 작가와 책방지기가 추천하는 책 등 다양한 도서 뿐만 아니라, 메모지나 엽서 등 문구제품도 있다.
-                        </ParagraphContent>
+                       <ParagraphContent>{content.content[0]} </ParagraphContent>
+                        
+                       
                     </Paragraph>
                 </ContentContainer>
                 <ContentContainer>
                     <Paragraph2>
                         
-                        <ParagraphContent>잠실 송리단길에는 작은 서점이 있다. 바로 &lt;무엇보다 책방&gt;. 이런 곳에 책방이 있나? 라고 생각이 들었던 이곳. 엘리베이터가 없는 건물의 3층으로 올라오면 무엇보다 책방이  나를 맞이하고 있다. 생각보다 작고, 다채로운 공간이지만 다양한 무언가를 담고 있다. 각각의 독립서적 부터 작가와 책방지기가 추천하는 책 등 다양한 도서 뿐만 아니라, 메모지나 엽서 등 문구제품도 있다.
-                        </ParagraphContent>
+                  <ParagraphContent>{content.content[1]} </ParagraphContent>
+                        
                     </Paragraph2>
-                    <img src='../img/bookstore1.png' width="40%" height="558px" ></img>
+                 <img src={content.contentImages[1]} width="40%" height="558px" ></img>
+                    
+                    
                 </ContentContainer>
             </ContentWrapper>
+}
             <ImgContainer>
                 <ImgHeader>
                     <TopTitle>책방의 공간들</TopTitle>
@@ -42,13 +63,19 @@ const Content = () => {
                         <img src='../img/next.png'></img> 
                     </div>
                 </ImgHeader>
+                {
+                   Array.isArray(content.bookstoreImages) &&
                 <ImgWrapper>
-                <div></div>
-                <img src='../img/bookstore1.png' width="32%" height="470px"></img>
-                <img src='../img/bookstore1.png' width="32%" height="470px"></img>
-                <img src='../img/bookstore1.png' width="32%" height="470px"></img>
+               <div></div>
+               
+              
+                    <img src={content.bookstoreImages[0]} width="32%" height="470px"></img>
+                        <img src={content.bookstoreImages[1]} width="32%" height="470px"></img>
+                        <img src={content.bookstoreImages[2]} width="32%" height="470px"></img>
                 </ImgWrapper>
+}
             </ImgContainer>
+           
             <Recommend>
                 <Col1>
                 <TopTitle>책방지기의 <br/>추천도서</TopTitle>
@@ -73,15 +100,16 @@ const Content = () => {
                 </Col3>
             </Recommend>
             <AccordionContainer>
-            <Accordion/>
+                <Accordion></Accordion>
             </AccordionContainer>
            <MoreContent>
                 <TopTitle>더 많은 책방의 이야기가 궁금하다면?</TopTitle>
                 <RoundBtn>콘텐츠 보러가기</RoundBtn>
            </MoreContent>
         </CenterContainer>
+
         <Footer></Footer>
-    </Background>
+  </Background>
     </>
   )
 }
@@ -92,6 +120,10 @@ const Background=styled(Container)`
     background-attachment: local;
     background-size: 100% 4665px;
 `
+const ContentContainer=styled(RowContainer)`
+    margin-top: 107px;
+    margin-bottom: 25px;
+`
 const TopTitle=styled(Flex)`
    
     font-weight: 700;
@@ -101,10 +133,7 @@ const TopTitle=styled(Flex)`
 const ContentWrapper=styled(ColContainer)`
     margin: 0px 6% 107px 6%;
 `
-const ContentContainer=styled(RowContainer)`
-    margin-top: 107px;
-    margin-bottom: 25px;
-`
+
 const Paragraph=styled(ColContainer)`
     width: 41%;
     height: 690px;

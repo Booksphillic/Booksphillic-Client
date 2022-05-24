@@ -17,6 +17,7 @@ import ProfileContent from './pages/BookstoreProfile/ProfileContent';
 import Search from './pages/Search/Search';
 import SearchContent from './pages/Search/SearchContent';
 import OwnerPage from './pages/OwnerPage/OwnerPage';
+import Login from './pages/Login';
 const Router = () => {
   return (
     
@@ -31,6 +32,7 @@ const Router = () => {
             <Route path="/content/:id" element={<Content/>}/>
             <Route path="/collection" element={<ContentsList/>}></Route>
             <Route path="/allCollection" element={<AllList/>}/>
+            <Route path="/allCollection/:week" element={<AllList/>}/>
             <Route path="/userPage" element={<UserMyPage/>}></Route>
             <Route path="/profile" element={<Profile></Profile>}/>
             <Route path="/profileContent/:id" element={<ProfileContent/>}></Route>
@@ -38,6 +40,7 @@ const Router = () => {
             <Route path="/search" element={<Search/>}></Route>
             <Route path="/searchContent/:value" element={<SearchContent/>}></Route>
             <Route path='/ownerPage' element={<OwnerPage/>}/>
+            <Route path='/login' element={<Login/>}></Route>
     </Routes>
             
        

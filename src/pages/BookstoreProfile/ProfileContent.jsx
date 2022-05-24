@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from "styled-components";
 import { CenterContainer, ColContainer, Container, RowContainer } from '../../components/Container';
 import Header from '../../components/Header';
@@ -9,15 +9,26 @@ import Review from './Review';
 import Accordion from './Accordion';
 import { RoundBtn } from '../../components/Buttons';
 import Footer from '../../components/Footer';
-const tags=["#태그1", "#태그2"];
+import axios from 'axios'
+import { useParams } from 'react-router-dom';
+import Img from './Img';
 const ProfileContent = () => {
-    //url 속 id로 axios get
+    const [content, setContent]=useState([]);
+    let {id}=useParams();
+    useEffect(()=>{
+        axios.get('/api/bookstore',{params: {storeId:id}} )
+        .then((res)=>{
+            console.log(res.data.data)
+            setContent(res.data.data)
+        })
+    },[useParams()])
+
   return (
     <Background>
       <Header/>
-      <TopSection title="title" tags={tags}/>
+      <TopSection id={content.storeId}/>
       <ImgContainer>
-      
+      <Img title={content.name} content={content.description} imgs={Array.isArray(content.internalImgUrls) && content.internalImgUrls} img={content.profileImgUrl}></Img>
       </ImgContainer>
       <CenterContainer>
           <InfoContainer>
@@ -25,30 +36,40 @@ const ProfileContent = () => {
             <Location/>
            </Map>
            <Info>
-                <Title>동네책방 주책</Title>
-                <RowContainer>
+                <Title>{content.name}</Title>
+                <RowContainer style={{gap:"5%", marginBottom:"25px"}}>
                     <Icon src='../img/icons/location.png'></Icon>
-                    <InfoText>주소</InfoText>
+                    <InfoText>{content.address}</InfoText>
                 </RowContainer>
-                <RowContainer>
+                <RowContainer style={{gap:"5%" , marginBottom:"25px"}}>
                     <Icon src='../img/icons/call.png'></Icon>
-                    <InfoText>이메일</InfoText>
+                    <InfoText>{content.website}</InfoText>
                 </RowContainer>
-                <RowContainer>
+                <RowContainer style={{gap:"5%" , marginBottom:"25px"}}>
                     <Icon src='../img/icons/link.png'></Icon>
                     <InfoText>인스타 링크</InfoText>
                 </RowContainer>
-                <RowContainer>
+                <RowContainer style={{gap:"5%" , marginBottom:"25px",alignItems:"flex-start"}}>
                     <Icon src='../img/icons/time.png'></Icon>
-                    <InfoText>운영시간</InfoText>
+                    {content.hours && 
+                    <ColContainer>
+                    <InfoText><div>월</div> {content.hours.mon} </InfoText>  
+                    <InfoText><div>화</div> {content.hours.tue} </InfoText>
+                    <InfoText><div>수</div> {content.hours.wed} </InfoText>
+                    <InfoText><div>목</div> {content.hours.thu} </InfoText>
+                    <InfoText><div>금</div> {content.hours.fri} </InfoText>
+                    <InfoText><div>토</div> {content.hours.sat} </InfoText>
+                    <InfoText><div>일</div> {content.hours.sun} </InfoText> 
+                    </ColContainer>
+                    }
                 </RowContainer>
-                <RowContainer>
+                <RowContainer style={{gap:"5%" , marginBottom:"25px"}}>
                     <Icon src='../img/icons/notice.png'></Icon>
                     <InfoText>공지사항</InfoText>
                 </RowContainer>
            </Info>
           </InfoContainer>
-          <Review/>
+          <Review id={content.storeId}/>
       </CenterContainer>
 
        <AccordionContainer>
@@ -93,18 +114,20 @@ const Info=styled(ColContainer)`
    margin-left: 5%;
 `
 const Icon=styled.img`
-
+    height: 25px;
+    display: flex;
+   
 `
 const Title=styled.div`
     font-weight: 700;
 font-size: 30px;
-margin: 80px 0 75px 0;
+margin: 20px 0 30px 0;
 `
-const InfoText=styled.div`
+const InfoText=styled(RowContainer)`
     font-weight: 500;
 font-size: 20px;
 color: #222222;
-gap:15px;
+gap:20px;
 `
 const AccordionContainer=styled.div`
     margin-top: 151px;

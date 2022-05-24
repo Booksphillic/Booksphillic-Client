@@ -3,18 +3,18 @@ import React from 'react'
 import styled from "styled-components";
 import { ColContainer, RowContainer } from '../../components/Container';
 import { Link } from 'react-router-dom';
-const Card = ({title, id}) => {
+const Card = ({title, id,subtitle, img}) => {
   return (
     <Link to={`/profileContent/${id}`} >
     <CardContainer>
-      <Img src='../img/bookstore1.png'></Img>
+      <Img src={img}></Img>
       <ContentContainer>
         <Left>
             <Title>{title}</Title>
             <RowContainer>
                 <Bottom>송파</Bottom>
                 <Bottom>ㅣ</Bottom>
-                <Bottom>책과 숲, 문화모임이 있는 쉼의 공간</Bottom>
+                <Bottom>{subtitle}</Bottom>
             </RowContainer>
         </Left>
         <Right>
@@ -36,7 +36,7 @@ const CardContainer=styled(ColContainer)`
 `
 const Img=styled.img`
   width:100%;
-  height: 50%;
+  height: 64%;
   margin-bottom: 25px;
 `
 const ContentContainer=styled(RowContainer)`

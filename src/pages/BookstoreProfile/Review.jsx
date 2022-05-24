@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from "styled-components";
 import { RowContainer } from '../../components/Container';
 import ReviewCard from './ReviewCard';
 import Pagination from '../../components/Pagination';
 import { DonutLarge } from '@mui/icons-material';
+import axios from 'axios';
 const collections=[
     {
       title:"제목0",
@@ -26,10 +27,16 @@ const collections=[
       id: 4
     },
   ];
-const Review = () => {
+const Review = ({id}) => {
     const [limit, setLimit]=useState(2);
   const [page, setPage]=useState(1);
   const offset=(page-1)*limit;
+  useEffect(()=>{
+    axios.get(`/api/bookstore/${id}/reviewList`)
+    .then((res)=>{
+      console.log(res.data.data);
+  })
+  },[])
   return (
       <>
         <ReviewContainer>

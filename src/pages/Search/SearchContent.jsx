@@ -54,9 +54,6 @@ const SearchContent = () => {
 
 export default SearchContent
 const Background=styled.div`
-  //background-image: url('../img/background/background_searchContent.jpg');
-  //background-attachment: local;
-  //background-size: 100% 3351px;
 `
 const Top=styled.div`
     background: #FFFA88;

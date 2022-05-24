@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useParams, useState} from 'react'
 import Header from '../../components/Header';
 import styled from "styled-components";
 import { CenterContainer , Container} from '../../components/Container';
@@ -7,35 +7,23 @@ import { Box } from '../../components/apply/Boxs';
 import BookstoreCard from './BookstoreCard';
 import Event from './Event';
 import { Link } from 'react-router-dom';
-const collections=[
-  {
-    title:"제목0",
-    id: 0
-  },
-  {
-    title:"제목1",
-    id: 1
-  },
-  {
-    title:"제목2",
-    id: 2
-  },
-  {
-    title:"제목3",
-    id: 3
-  },
-  {
-    title:"제목4",
-    id: 4
-  },
-  {
-    title:"제목5",
-    id: 5
-  },
-];
-
+import axios from 'axios';
 const ContentsList = () => {
-  
+  const [week, setWeek]=useState([]);
+  const [other, setOther]=useState([]);
+  useEffect(()=>{
+    //이주의 동네를 송파로 가정
+    axios.get('/api/board?include=SONGPA&size=6')
+    .then((res)=>{
+      console.log(res.data.data);
+      setWeek(res.data.data);
+    })
+    axios.get('/api/board?exclude=SONGPA&size=6')
+    .then((res)=>{
+      console.log(res.data);
+      setOther(res.data.data);
+    })
+  }, [])
   return (
     <Background>
         <Header/>
@@ -46,21 +34,24 @@ const ContentsList = () => {
               <TitleBox style={{background:"#FFFA88"}}>파동이 닿는 곳, 송파</TitleBox>
             </Blocks>
             <Collection>
-           {collections.map((collection)=>(
-             <BookstoreCard title={collection.title} id={collection.id}/>
+           {week.map((week)=>(
+             <BookstoreCard dum={week}/>
            ))}
             </Collection>
-            <MoreContents>+전체 콘텐츠보기</MoreContents>
+            <Link to="/allCollection/2">
+            <MoreContents>+전체 콘텐츠보기</MoreContents> 
+            </Link>
+           
             
             <Blocks>
               <TitleBox style={{background:"#FFFFFF"}}>다른 동네 컬렉션</TitleBox>
             </Blocks>
             <Collection>
-           {collections.map((collection)=>(
-             <BookstoreCard title={collection.title} id={collection.id}/>
+           {other.map((other)=>(
+             <BookstoreCard dum={other}/>
            ))}
             </Collection>
-            <Link to='/allCollection'>
+            <Link to='/allCollection/1'>
             <MoreContents>+전체 콘텐츠보기</MoreContents> 
             </Link>
            

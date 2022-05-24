@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import styled from "styled-components";
 import { CenterContainer, ColContainer, Container,RowContainer } from '../../components/Container';
 import Header from '../../components/Header';
@@ -7,36 +7,33 @@ import { Category } from '@mui/icons-material';
 import DropDown from '../../components/DropDown';
 import Card from './Card';
 import Pagination from '../../components/Pagination';
-const dummy=[ {
-  title:"제목0",
-  id: 0
-},
-{
-  title:"제목1",
-  id: 1
-},
-{
-  title:"제목2",
-  id: 2
-},
-{
-  title:"제목3",
-  id: 3
-},
-{
-  title:"제목4",
-  id: 4
-},
-{
-  title:"제목5",
-  id: 5
-},];//pagination 구현은 했는데 더미 만들기 힘드니까 일단 여섯개만 하겠음. 
-
+import Select from '../../components/Select'
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 const Profile = () => {
   const [limit, setLimit]=useState(9);
   const [page, setPage]=useState(1);
+  const [dummy, setDummy]=useState([]);
   const offset=(page-1)*limit;
   const [category, setCategory]=useState(1);
+  useEffect(()=>{
+    axios.get('api/bookstore/list')
+    .then((res)=>{
+      console.log(res.data.data)
+      setDummy(res.data.data)
+    })
+  }, [useParams()])
+
+  const handleChange=(e)=>{
+    console.log(e.target.value);
+    axios.get('api/bookstore/list', {params: {district:e.target.value}})
+    .then(
+      (res)=>{
+        console.log(res.data.data)
+        setDummy(res.data.data)
+      }
+    )
+  }
   return (
     <Background>
       <Header/>
@@ -64,15 +61,15 @@ const Profile = () => {
               ? <WeeklyImg src='../img/profile/sample2.png'></WeeklyImg>
               : <WeeklyImg src='../img/profile/sample3.png'></WeeklyImg>
             )
-
           }
           
         </Weekly>
         <Content>
-        <DropDown/>
+        <DropDown handelChange={handleChange}/>
+        
         <Collection>
           {dummy.slice(offset, offset+limit).map((dum)=>(
-            <Card title={dum.title} id={dum.id}/>
+            <Card title={dum.name} id={dum.storeId} subtitle={dum.subtitle} img={dum.profileImgUrl}/>
           ))}
         </Collection>
         <Pagination

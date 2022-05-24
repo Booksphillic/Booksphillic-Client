@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { RowContainer, ColContainer } from './Container';
 import Flex from './Flex';
 
-const TopSection = ({title, editor,date, tags}) => {
+const TopSection = ({title, editor, editorImage, date,id, tags}) => {
     const location=useLocation();
     const handleLocation=()=>{
         if (location.pathname.includes("profile")){
@@ -17,7 +17,9 @@ const TopSection = ({title, editor,date, tags}) => {
         <TopTitle style={{width: "67%"}}> {title}</TopTitle>
             <EditorWrapper>
             <Editor>
-                <img src='../img/scrap.png'></img>
+                {editorImage && 
+                <img src={editorImage}></img>
+                }
                 {handleLocation()==="profile"
                 ?<div>스크랩</div>
                 :
@@ -31,7 +33,7 @@ const TopSection = ({title, editor,date, tags}) => {
             </EditorWrapper>
             <Tags>
                 <div>{tags}</div>
-            </Tags>
+        </Tags>
     </Top>
   )
 }
