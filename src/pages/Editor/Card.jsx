@@ -48,7 +48,7 @@ const Content=styled(ColContainer)`
     display: flex;
     align-items: flex-start;
     height:245px;
-    top:117%;
+    top:749px;
     position: absolute;
     width:34.3%;
     z-index: 1;

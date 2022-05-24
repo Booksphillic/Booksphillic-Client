@@ -22,7 +22,6 @@ const WriteReview = ({id}) => {
     const [clickEmoji, setClickEmoji]=useState("");
     console.log(clickEmoji);
     const[click, setClick]=useState(Array(4).fill(false));
-    const [clickEmoji, setClickEmoji] = useState("");
     const handleClick=(id)=>{
         setClick(click.map((element, index)=>{
             return index===id 
@@ -133,7 +132,7 @@ const WriteReview = ({id}) => {
                                 'Content-Type': 'application/json',
                             }),
                             body : JSON.stringify({
-                                userId : 3, 
+                                userId : localStorage.getItem('userId'),
                                 content : content,
                                 urls : json.data,
                                 emoticon : clickEmoji

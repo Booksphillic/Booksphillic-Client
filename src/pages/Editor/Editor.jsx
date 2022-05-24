@@ -2,7 +2,7 @@ import { ContentPasteGoOutlined } from '@mui/icons-material'
 import axios from 'axios'
 import React, { useEffect, useState} from 'react'
 import styled from 'styled-components'
-import { ColContainer, Container } from '../../components/Container'
+import { ColContainer, Container,RowContainer } from '../../components/Container'
 import Header from '../../components/Header'
 import Card from './Card'
 const Editor = () => {
@@ -26,7 +26,11 @@ const Editor = () => {
             <Name>에디터 {editor.editorName}</Name>
             <Info>{editor.description}</Info>
         </Top>
-        <Count>{editor.postCount} Articles</Count>
+        <RowContainer style={{margin:"150px 0 0 15%"}}>
+        <Num>{editor.postCount}</Num>
+        <Count> Articles</Count>
+        </RowContainer>
+        
         <Content>
             {
                 posts.map((post)=>(
@@ -66,13 +70,21 @@ const Info=styled.div`
     color:#000000;
 `
 const Content=styled.div`
-    margin: 156px 15%;
+    margin: 6px 15%;
     display:grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 10px 2%;
 `
+const Num=styled.div`
+    font-weight: 400;
+font-size: 16px;
+color: #616161;
+margin-right: 1%;
+`
 const Count=styled.div`
     
-
+    font-weight: 400;
+font-size: 14px;
+color: #616161;
 `
