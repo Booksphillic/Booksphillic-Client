@@ -14,29 +14,21 @@ const ApplyPickup_1 = () => {
         <ApplyContainer>
         <ColContainer>
             <TitleWrapper>
-                <Num>04</Num>
+                <Num>03</Num>
                 <Title>책방 선택</Title>
             </TitleWrapper>
             <ApplyContentContainer>
                 <Subtitle>원하는 책방을 선택하세요</Subtitle>
-                <Chips>
-                    {dataLists.map((list) => (
-                            <Chip label={list} size="medium" variant="outlined" ></Chip>
-                    ))}
-                </Chips>
                 <SubText>
                     <div>10개의 추천 책방이 있습니다.</div>
                 </SubText>
-                <StoreContainer>
                 <Stores>
                 {products.map((data)=>{
-                    return(
-                        <Card title={data}></Card>
+                    return( 
+                            <Card title={data}></Card>
                 )})}
                    
-                </Stores>
-                </StoreContainer>
-               
+            </Stores>
             </ApplyContentContainer>
            
         </ColContainer>
@@ -65,22 +57,19 @@ const SubText=styled(Flex)`
     margin-bottom: 15px;
     justify-content: flex-end;
 `
-const Stores=styled.div`
-    //display: grid;
-    //grid-template-columns: 1fr 1fr 1fr;
-    //grid-template-rows: 1fr 1fr 1fr;
-    
-    //grid-auto-flow: dense; /* [2] */
-    //grid-template-columns: repeat(auto-fit, 30%); /* [1] */
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    //width: 90%;
-    min-width: 500px;
-    border:1px dotted #FF00FF;
-    //height: 500px;
-    gap: 21px 21px;
-   
+const Stores=styled(RowContainer)`
+    height:500px;
+    white-space: nowrap;
+    overflow: auto;
+    gap: 3%;
+    align-items: flex-start;
+`
+const CardContainer=styled(ColContainer)`
+    justify-content: center;
+`
+const Icon=styled.img`
+    width:40px;
+    height:40px;
 `
 const TitleWrapper=styled(RowContainer)`
     gap: 0px 20px;

@@ -8,6 +8,10 @@ export const Box=styled.div`
     display: flex;
     justify-content: center;
     align-content: center;
+    &.click{
+        border-color:#FFFA88;
+        background-color: white;
+    }
 `
 export const LongBox=styled(Box)`
     width: 100%;

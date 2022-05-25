@@ -84,7 +84,6 @@ const CardContainer=styled(ColContainer)`
     display: grid;
     grid-template-rows: 2fr 1fr 1fr;
     height: 700px;
-    width : 100%;
 `
 const BigImg=styled.img`
     height:347px;

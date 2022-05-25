@@ -23,7 +23,7 @@ export const CenterContainer=styled(Flex)`
 `
 export const ApplyContentContainer=styled(ColContainer)`
 	margin-left: 38px;
-	width: 50vw;
+	width: 60vw;
 `
 export const MyPageContainer=styled(ColContainer)`
 	margin: 47px 27% 151px 27%;
