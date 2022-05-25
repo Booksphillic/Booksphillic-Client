@@ -31,7 +31,7 @@ const ApplyPickup_1 = () => {
             </TitleWrapper>
             <ApplyContentContainer>
                 <Subtitle>원하는 픽업일자를 입력하세요</Subtitle>
-                <InputWrapper  placeholder="yyyy.mm.dd"/>
+                <Input type="date"></Input>
             </ApplyContentContainer>
             <TitleWrapper>
                 <Num>02</Num>
@@ -62,6 +62,11 @@ const ApplyContainer=styled(RowContainer)`
     padding: 82px 40px 82px 99px;
     display: grid;
     grid-template-columns: 3fr 2fr;
+`
+const Input=styled.input`
+ border: 1px solid #616161;
+    height: 60px;
+    width:70%;
 `
 const TitleWrapper=styled(RowContainer)`
     gap: 0px 20px;

@@ -102,12 +102,12 @@ const Content = () => {
             <AccordionContainer>
                 <Accordion></Accordion>
             </AccordionContainer>
-           <MoreContent>
+         
+        </CenterContainer>
+        <MoreContent>
                 <TopTitle>더 많은 책방의 이야기가 궁금하다면?</TopTitle>
                 <RoundBtn>콘텐츠 보러가기</RoundBtn>
            </MoreContent>
-        </CenterContainer>
-
         <Footer></Footer>
   </Background>
     </>
@@ -201,9 +201,13 @@ const RoundBtnContainer=styled(Flex)`
 `
 const AccordionContainer=styled.div`
     margin-top: 254px;
+    
 `
 const MoreContent=styled(ColContainer)`
-    margin: 150px 0 150px 0;
     align-items: center;
+    padding: 150px 0 150px 0;
+    width: 100vw;
     gap: 40px;
+    background-color: white;
+    height: 430px;
 `

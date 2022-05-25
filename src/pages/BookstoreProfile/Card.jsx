@@ -22,7 +22,9 @@ const Card = ({title, id,subtitle, img, scraped }) => {
   return (
     <Link to={`/profileContent/${id}`} >
     <CardContainer>
+
         <Img src={img}></Img>
+
       <ContentContainer>
           <Left>
               <Title>{title}</Title>
@@ -44,6 +46,7 @@ const Card = ({title, id,subtitle, img, scraped }) => {
         </Right>
       </ContentContainer>
     </CardContainer>
+
     </Link>
 
   )

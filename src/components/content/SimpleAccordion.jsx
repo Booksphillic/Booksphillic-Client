@@ -5,12 +5,14 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BookstoreProfile from './BookstoreProfile';
+import Comment from './Comment';
 export default function SimpleAccordion() {
+ 
   return (
     <div>
       <Accordion square={true} style={{margin:"0 0.1% 0 0.1%"}}>
         <AccordionSummary
-          style={{padding:"0 2% 0 2%", height:"113px"}}
+          style={{padding:"0 10%", height:"113px"}}
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
@@ -25,7 +27,7 @@ export default function SimpleAccordion() {
       </Accordion>
       <Accordion square={true} style={{margin:"0 0.1% 0 0.1%"}}>
         <AccordionSummary
-         style={{padding:"0 2% 0 2%", height:"114px"}}
+         style={{padding:"0 10%", height:"114px"}}
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
           id="panel2a-header"
@@ -34,8 +36,8 @@ export default function SimpleAccordion() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
+           <Comment/>
+        
           </Typography>
         </AccordionDetails>
       </Accordion>
