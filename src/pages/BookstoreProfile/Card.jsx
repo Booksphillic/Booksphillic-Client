@@ -1,34 +1,54 @@
 import { BottomNavigation } from '@mui/material';
-import React from 'react'
+import React, { useState } from 'react'
 import styled from "styled-components";
 import { ColContainer, RowContainer } from '../../components/Container';
 import { Link } from 'react-router-dom';
+import {scrap} from '../../services/ApiService';
+
 const Card = ({title, id,subtitle, img, scraped }) => {
+  const [isScraped, setIsScraped] = useState(scraped);
+
+  const onClickScrapButton = async ()=> {
+    const res = await scrap(id);
+    console.log(res.data);
+    if(res.code=== 1000) {
+        if(res.data === true) {
+            setIsScraped(true);
+        }
+        else setIsScraped(false);
+    }
+  }
+
   return (
     <Link to={`/profileContent/${id}`} >
     <CardContainer>
-       <Img src={img}></Img>
+
+        <Img src={img}></Img>
+
       <ContentContainer>
-        <Left>
-            <Title>{title}</Title>
-            <RowContainer>
-                <Bottom>송파</Bottom>
-                <Bottom>ㅣ</Bottom>
-                <Bottom>{subtitle}</Bottom>
-            </RowContainer>
-        </Left>
+          <Left>
+              <Title>{title}</Title>
+              <RowContainer>
+                  <Bottom>송파</Bottom>
+                  <Bottom>ㅣ</Bottom>
+                  <Bottom>{subtitle}</Bottom>
+              </RowContainer>
+          </Left>
         <Right>
-            <ColContainer> 
+            <ColContainer onClick={(e)=> {
+              e.preventDefault();
+              onClickScrapButton();}}> 
             {
-              scraped===true ? <img src='../img/scraped.png'></img> : <img src='../img/unscraped.png'></img>
+              isScraped===true ? <img src='../img/scraped.png'></img> : <img src='../img/unscraped.png'></img>
             }
             <ScrapTitle>스크랩</ScrapTitle>
             </ColContainer>
         </Right>
       </ContentContainer>
-      
     </CardContainer>
-   </Link>
+
+    </Link>
+
   )
 } 
 

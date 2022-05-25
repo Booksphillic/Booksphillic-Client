@@ -1,17 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import styled from "styled-components";
 import { RowContainer, ColContainer } from './Container';
 import Flex from './Flex';
+import {scrap} from '../services/ApiService';
 
 const TopSection = ({title, editor, editorImage, date,id, tags, scraped}) => {
+    const [isScraped, setIsScraped] = useState(scraped);
     const location=useLocation();
     const handleLocation=()=>{
         if (location.pathname.includes("profile")){
             return "profile";
         }
     }
+
+    const onClickScrapButton = async ()=> {
+        const res = await scrap(id);
+        console.log(res.data);
+        if(res.code=== 1000) {
+            if(res.data === true) {
+                setIsScraped(true);
+            }
+            else setIsScraped(false);
+        }
+    }
     
+    useEffect( ()=>{},[scraped]);
+
   return ( 
     <Top>
         <TopTitle style={{width: "67%"}}> {title}</TopTitle>
@@ -22,9 +37,9 @@ const TopSection = ({title, editor, editorImage, date,id, tags, scraped}) => {
                 }
                 {handleLocation()==="profile"
                 ?
-                    <ColContainer> 
+                    <ColContainer onClick={()=>onClickScrapButton()}> 
                     {
-                    scraped===true ? <img src='../img/scraped.png'></img> : <img src='../img/unscraped.png'></img>
+                    isScraped===true ? <img src='../img/scraped.png'></img> : <img src='../img/unscraped.png'></img>
                     }
                     <div>스크랩</div>
                     </ColContainer>   
