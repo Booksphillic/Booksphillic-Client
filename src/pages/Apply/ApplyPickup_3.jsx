@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { ColContainer, RowContainer,Container, ApplyContentContainer } from '../../components/Container'
 import styled from "styled-components";
 import Chip from '@mui/material/Chip';
@@ -6,11 +6,21 @@ import { Link } from 'react-router-dom';
 import { BlackBtn } from '../../components/Buttons';
 import InputWrapper from '../../components/apply/Input';
 import {Background} from '../../components/apply/Background';
-var dataLists=["#술이 있는", "#독립출판", "#전시", "#여행서점", "#동화서점", "#좌석"];
-const handleDelete=()=>{
+var dataLists=["#술이 있는", "#독립출판", "#전시", "#여행서점", "#동화서점", "#좌석"];  
 
-}
+
 const ApplyPickup_1 = () => {
+    const [chip, setChip]=useState("");
+    const [chips, setChips]=useState([]);
+    const AddChip=()=>{
+        console.log(chip)
+        setChips([...chips, chip]);
+        console.log(chips);
+    }
+    const handleDelete=(e, value)=>{
+        e.preventDefault();
+        setChips(chips.filter((chip)=> chip!==value));
+    } 
   return (
       <Background>
         <ApplyContainer>
@@ -22,21 +32,23 @@ const ApplyPickup_1 = () => {
             <ApplyContentContainer>
             <Subtitle style={{marginBottom:"20px"}}>책방 사장님이 취향에 맞는 도서를 선별합니다.</Subtitle>
             <RowContainer>
-                <InputWrapper placeholder=""/>
-                <BlackBtn style={{marginLeft:"10px"}}>추가하기</BlackBtn>
+           
+                <Input type="text"  value={chip} onChange={e=>setChip(e.target.value)}></Input>
+           
+                <BlackBtn style={{marginLeft:"10px"}} onClick={AddChip}>추가하기</BlackBtn>
             </RowContainer>
-            <Chips style={{margin:"10px 0px 10px 0px"}}>
-                {dataLists.map((list) => (
-                        <Chip label={list} size="medium" style={{backgroundColor:'#FFFA88'}} onDelete={handleDelete}></Chip>
+            <Chips style={{margin:"20px 0px 10px 0px"}}>
+                {chips.map((list) => (
+                        <Chip label={list} size="medium" style={{backgroundColor:'#FFFA88', padding:"3px 1%", marginRight:"12px"}} onDelete={(e)=>handleDelete(e, list)}></Chip>
                 ))}
             </Chips>
             <hr></hr>
             <Subtitle>이런 태그는 어떠세요?</Subtitle>
-            <Chips>
+            <GridChips>
                 {dataLists.map((list) => (
                         <Chip label={list} size="medium" variant="outlined" ></Chip>
                 ))}
-            </Chips>
+            </GridChips>
             </ApplyContentContainer>
             <TitleWrapper>
                 <Num>06</Num>
@@ -97,12 +109,15 @@ const Subtitle=styled.div`
     color: #616161;
     margin-bottom: 10px;
 `
+const Chips=styled.div`
+    white-space: pre-line;
+width: 100%;
 
-const Chips=styled(RowContainer)`
+`
+const GridChips=styled(RowContainer)`
     gap: 17px 12px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    
 `
 const Col2=styled.div`
     position: relative;
@@ -112,4 +127,12 @@ const Input06=styled.input`
     border-bottom: 1px solid #616161;
     margin-top: 20px;
     width: 360px;
+`
+const Input=styled.input`
+border: 1px solid #616161;
+height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    width: 70%;
 `
