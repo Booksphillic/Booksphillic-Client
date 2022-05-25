@@ -39,7 +39,7 @@ const Home = () => {
   const PostContent = (content) => 
     <div style={{
       height: '100%', marginTop: '128px',
-      fontSize: '20px', fontFamily: 'Noto Sans KR',
+      fontSize: '20px', fontFamily: 'Noto Sans KR', fontWeight: 500,
       lineHeight: '35px', width: '308px'
     }}>{content}</div>
 
@@ -98,7 +98,7 @@ const Home = () => {
               {PostContent('컨텐츠 경쟁시대에 이르렀다. 컨텐츠의 원조, 책에 진심인 사람들과 책으로 둘러쌓인 공간에서 오감으로 책을 느껴보는 시간을 가져보자.')}
             </BookstoreContent>
           <MoreBtn>
-            <div>더 많은 컨텐츠 <br/>보러가기</div>
+            <div style={{marginRight: '12px'}}>더 많은 컨텐츠 <br/>보러가기</div>
             <img src='../img/arrow.png'></img>
           </MoreBtn>
           </ContentWrapper>
@@ -222,6 +222,12 @@ const MoreBtn=styled(RowContainer)`
   position: absolute;
   bottom: 10px;
   right: 10px;
+  font-family: Noto Sans KR;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 37px;
+  text-align: left;
+
 `
 const BookStoreProfile=styled(ColContainer)`
   
