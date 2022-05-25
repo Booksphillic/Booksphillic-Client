@@ -129,7 +129,7 @@ const Home = () => {
                   <div style={addressStyle}>책과 술, 문화모임이 있는 쉼의 공간</div>
                 </Bottom1>
                 <Bottom2 onClick={() => onClickScrap(3)}>
-                  <img src='../img/scrap.png' height="48px" width="60%" style={{margin: "auto"}}></img>
+                  <img src='../img/scraped.png' height="48px" width="60%" style={{margin: "auto"}}></img>
                   <div style={{textAlign: 'center', lineHeight: '30px', fontWeight: 400, fonSize: '16px'}}>스크랩</div>
                 </Bottom2>
               </ProfileBottom>
@@ -146,7 +146,7 @@ const Home = () => {
                   <div style={addressStyle}>HOWS 발견의 공간</div>
                 </Bottom1>
                 <Bottom2 onClick={() => onClickScrap(4)}>
-                  <img src='../img/scrap.png' height="48px" width="60%" style={{margin: "auto"}}></img>
+                  <img src='../img/scraped.png' height="48px" width="60%" style={{margin: "auto"}}></img>
                   <div style={{textAlign: 'center', lineHeight: '30px', fontWeight: 400, fonSize: '16px'}}>스크랩</div>
                 </Bottom2>
               </ProfileBottom>

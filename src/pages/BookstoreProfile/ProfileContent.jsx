@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom';
 import Img from './Img';
 const ProfileContent = () => {
     const [content, setContent]=useState([]);
+    const [collections, setCollections] = useState([]);
     let {id}=useParams();
     useEffect(()=>{
         axios.get('/api/bookstore',{params: {storeId:id, userId:localStorage.getItem('userId') }} )
@@ -21,12 +22,17 @@ const ProfileContent = () => {
             console.log(res.data.data)
             setContent(res.data.data)
         })
+        axios.get(`/api/bookstore/${id}/reviewList`)
+        .then( (res) => {
+            console.log("리뷰 데이터", res.data.data);
+            setCollections(res.data.data);
+        })
     },[useParams()])
 
   return ( 
     <Background>
       <Header/>
-      <TopSection name={content.name} scraped={content.scraped} tags={content.tags}/>
+      <TopSection name={content.name} scraped={content.scraped} tags={content.tags} id={id}/>
       <ImgContainer>
       <Img title={content.name} content={content.description} imgs={Array.isArray(content.internalImgUrls) && content.internalImgUrls} img={content.profileImgUrl}></Img>
       </ImgContainer>
@@ -69,7 +75,7 @@ const ProfileContent = () => {
                 </RowContainer>
            </Info>
           </InfoContainer>
-          <Review id={content.storeId}/>
+          <Review collection={collections}/>
       </CenterContainer>
 
        <AccordionContainer>
