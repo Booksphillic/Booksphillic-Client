@@ -60,3 +60,9 @@ export async function scrap(storeId) {
     const data = {userId: userId};
     return await call(`/api/user/${storeId}/scrap`, "POST", data);
 }
+
+export async function homeBookstoreData(storeId) {
+    const userId = localStorage.getItem('userId');
+    // const data = {storeId : storeId, userId : userId};
+    return await call(`/api/bookstore/homeData?storeId=${storeId}&userId=${userId}`, "GET");
+}
