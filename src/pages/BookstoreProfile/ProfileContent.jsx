@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom';
 import Img from './Img';
 const ProfileContent = () => {
     const [content, setContent]=useState([]);
+    const [collections, setCollections]=useState([]);
     let {id}=useParams();
     useEffect(()=>{
         axios.get('/api/bookstore',{params: {storeId:id}} )
@@ -21,6 +22,10 @@ const ProfileContent = () => {
             console.log(res.data.data)
             setContent(res.data.data)
         })
+        axios.get(`/api/bookstore/${id}/reviewList`)
+        .then((res)=>{
+          console.log(res.data.data);
+         setCollections(res.data.data);})
     },[useParams()])
 
   return (
@@ -69,7 +74,7 @@ const ProfileContent = () => {
                 </RowContainer>
            </Info>
           </InfoContainer>
-          <Review id={content.storeId}/>
+          <Review collection={collections}/>
       </CenterContainer>
 
        <AccordionContainer>

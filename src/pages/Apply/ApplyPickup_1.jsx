@@ -7,7 +7,7 @@ import InputWrapper  from '../../components/apply/Input';
 import {Background} from '../../components/apply/Background';
 import { useState } from 'react';
 import { ClassNames } from '@emotion/react';
-
+import DropDown from './DropDown';
 var dataLists=["#술이 있는", "#독립출판", "#전시", "#여행서점", "#동화서점", "#좌석"];
 
 
@@ -17,6 +17,9 @@ const ApplyPickup_1 = () => {
         setClick(click.map((element, index)=>{
             return index===id ? !element : element;
         }))
+    }
+    const handleChange=(e)=>{
+        console.log(e.target.value);//선택한 값
     }
   return (
       <Background>
@@ -36,35 +39,9 @@ const ApplyPickup_1 = () => {
             </TitleWrapper>
             <ApplyContentContainer>
                 <Subtitle>픽업할 장소 혹은 책방의 이름을 입력하세요</Subtitle>
-                <InputWrapper  placeholder="서울특별시 송파구"/>
+                <DropDown handleChange={handleChange}></DropDown>
             </ApplyContentContainer>
-          
-            <TitleWrapper>
-                <Num>03</Num>
-            <Title>책방 유형</Title>
-            </TitleWrapper>
-            <ApplyContentContainer>
-                <Subtitle>선택한 키워드에 맞는 책방을 추천해드립니다.</Subtitle>
-                <Chips>
-                    {dataLists.map((value, index) => (        
-                            <Chip 
-                            className={`${
-                                click[index] ? 'blue' : 'red'
-                            }`}
-                            style={ 
-                                click[index] ? {backgroundColor:'#FFFA88'} : {}
-                            }
-                            key={index}
-                            label={value}  
-                            size="medium" 
-                            //style= {{backgroundColor:'red'}}
-                            onClick={()=>{
-                                handleClick(index)
-                            }
-                            } ></Chip>
-                    ))}
-                </Chips>
-            </ApplyContentContainer>
+
         </ColContainer>
         <Col2>
         <Link to="/apply2">
