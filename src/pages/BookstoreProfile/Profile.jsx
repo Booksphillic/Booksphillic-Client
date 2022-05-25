@@ -29,7 +29,7 @@ const Profile = () => {
     axios.get('api/bookstore/list', {params: {district:e.target.value, userId : localStorage.getItem('userId')}})
     .then(
       (res)=>{
-        console.log(res.data.data)
+        console.log("Profile-책방 리스트",res.data.data)
         setDummy(res.data.data)
       }
     )
