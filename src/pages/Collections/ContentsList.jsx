@@ -8,6 +8,8 @@ import BookstoreCard from './BookstoreCard';
 import Event from './Event';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import {HeaderTitle} from '../Collections/HeaderTitle';
+
 const ContentsList = () => {
   const [week, setWeek]=useState([]);
   const [other, setOther]=useState([]);
@@ -27,14 +29,7 @@ const ContentsList = () => {
   return (
     <Background>
         <Header/>
-        <HeaderTitle>
-          <div style={{fontFamily: "NIXGONFONTS", width: '333px', height: '52px', fontSize: '65px', marginBottom: '40px'}}>
-            동네 컬렉션
-          </div>
-          <div style={{fontFamily: "NIXGONFONTS", fontSize: '35px'}}>
-            동네 책방의 이야기에 끌리다
-          </div>
-        </HeaderTitle>
+        <HeaderTitle/>
 
         <CenterContainer>
             <Blocks>
@@ -78,13 +73,7 @@ background-image: url('../img/background/background_list.jpg');
 background-attachment: local;
 background-size: 100% 6544px;
 `
-const HeaderTitle=styled.div`
-  height: 144px;
-  margin: 144px 0 113px 10%;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 52px;
-`
+
 const Blocks=styled(RowContainer)`
   margin-left:2%;
   margin-top: 168px;
