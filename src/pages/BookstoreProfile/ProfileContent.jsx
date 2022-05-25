@@ -114,6 +114,7 @@ margin-bottom: 315px;
 `
 const Map=styled.div`
   padding: 16px;
+  width: 680px;
 `
 const Info=styled(ColContainer)`
    margin-left: 5%;
