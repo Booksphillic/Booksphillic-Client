@@ -3,7 +3,7 @@ import { ColContainer, RowContainer,Container, ApplyContentContainer } from '../
 import styled from "styled-components";
 import { Chip } from '@mui/material';
 import { Link } from 'react-router-dom';
-import InputWrapper  from '../../components/apply/Input';
+import DateInputWrapper  from '../../components/apply/DateInput';
 import {Background} from '../../components/apply/Background';
 import { useState } from 'react';
 import { ClassNames } from '@emotion/react';
@@ -31,7 +31,7 @@ const ApplyPickup_1 = () => {
             </TitleWrapper>
             <ApplyContentContainer>
                 <Subtitle>원하는 픽업일자를 입력하세요</Subtitle>
-                <InputWrapper  placeholder="yyyy.mm.dd"/>
+                <DateInputWrapper  placeholder="yyyy.mm.dd"/>
             </ApplyContentContainer>
             <TitleWrapper>
                 <Num>02</Num>
@@ -47,11 +47,11 @@ const ApplyPickup_1 = () => {
         <Link to="/apply2">
         <img src='../img/arrow2.png' style={{position:'absolute', bottom: '0px', right:'0px'}}></img>
         </Link>
-           
+
         </Col2>
         </ApplyContainer>
       </Background>
-   
+
   )
 }
 
