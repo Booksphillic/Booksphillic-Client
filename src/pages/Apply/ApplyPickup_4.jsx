@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { ColContainer, RowContainer,Container, ApplyContentContainer } from '../../components/Container'
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
@@ -7,6 +7,10 @@ import {Box, LongBox} from '../../components/apply/Boxs';
 import {Background} from '../../components/apply/Background';
 var dataLists=["#술이 있는", "#독립출판", "#전시", "#여행서점", "#동화서점", "#좌석"];
 const ApplyPickup_4 = () => {
+    const [click, setClick]=useState([false, false, false, false, false]);
+    const handleClick=(i)=>{
+        setClick([...click.slice(0,i), !click[i], ...click.slice(i+1) ])
+    }
   return (
       <Background>
         <ApplyContainer>
@@ -29,12 +33,50 @@ const ApplyPickup_4 = () => {
                 결제 수단
             </Sub>
             <Grid>
-                <Box><img src='../img/apply/kakaopay.png'/></Box>
-                <Box><img src='../img/apply/naverpay.png'/></Box>
-                <Box><img src='../img/apply/payco.png'/></Box>
-                <Box><img src='../img/apply/phone.png'/></Box>
+                <Box onClick={()=>handleClick(0)} className={click[0] ? "click" :""}>
+                    <RowContainer>
+                        {
+                            click[0]
+                            ? <img src='../img/apply/kakaopay.png' style={{marginRight: "10px"}}/>
+                            : <img src='../img/apply/kakaopaygray.png' style={{marginRight: "10px"}}/>
+                        }
+                   
+                    <Text style={click[0] ? {color:"black"} :{}} >
+                        카카오페이
+                    </Text>
+                    </RowContainer>
+                </Box>
+                <Box onClick={()=>handleClick(1)} className={click[1] ? "click" :""}>
+                    <RowContainer>
+                        
+                            
+                            <img src='../img/apply/naverpay.png' style={{marginRight: "10px"}}/>
+            
+                    
+                    <Text style={click[1] ? {color:"black"} :{}}>네이버페이</Text>
+                    </RowContainer>
+                </Box>
+                <Box onClick={()=>handleClick(2)} className={click[2] ? "click" :""}>
+                    <RowContainer>
+                    <img src='../img/apply/payco.png'style={{marginRight: "10px"}}/>
+                    <Text className={click[2] ? "click" :""}>페이코</Text>
+                    </RowContainer>
+                </Box>
+               
+                <Box onClick={()=>handleClick(3)} className={click[3] ? "click" :""}>
+                    <RowContainer>
+                    <img src='../img/apply/phone.png'/>
+                    <Text className={click[3] ? "click" :""}>핸드폰결제</Text>
+                    </RowContainer>
+                </Box>
+               
             </Grid>
-            <LongBox style={{marginTop:"5px"}}><img src='../img/apply/cardpay.png'/></LongBox>
+            <LongBox style={{marginTop:"5px"}}  onClick={()=>handleClick(4)} className={click[4] ? "click" :""}>
+                <RowContainer>
+                <img src='../img/apply/cardpay.png'style={{marginRight: "10px"}}/>
+                <Text className={click[4] ? "click" :""}>신용카드</Text>
+                </RowContainer>
+            </LongBox>
             <br/>
             <hr></hr>
             <Sub>안내 사항</Sub>
@@ -65,6 +107,12 @@ const ApplyContainer=styled(RowContainer)`
 `
 const Col1=styled(ColContainer)`
 
+`
+const Text=styled.div`
+font-weight:500;
+ font-size:20px;
+ color:#9E9E9E;
+ 
 `
 const CostBox=styled(LongBox)`
     display: flex;
