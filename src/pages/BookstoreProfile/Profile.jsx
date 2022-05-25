@@ -17,16 +17,16 @@ const Profile = () => {
   const offset=(page-1)*limit;
   const [category, setCategory]=useState(1);
   useEffect(()=>{
-    axios.get('api/bookstore/list')
+    axios.get('api/bookstore/list', {params : {userId : localStorage.getItem('userId')}})
     .then((res)=>{
-      console.log(res.data.data)
+      console.log("/list 데이터", res.data.data)
       setDummy(res.data.data)
     })
   }, [useParams()])
 
   const handleChange=(e)=>{
     console.log(e.target.value);
-    axios.get('api/bookstore/list', {params: {district:e.target.value}})
+    axios.get('api/bookstore/list', {params: {district:e.target.value, userId : localStorage.getItem('userId')}})
     .then(
       (res)=>{
         console.log(res.data.data)
@@ -62,14 +62,14 @@ const Profile = () => {
               : <WeeklyImg src='../img/profile/sample3.png'></WeeklyImg>
             )
           }
-          
+           
         </Weekly>
         <Content>
         <DropDown handelChange={handleChange}/>
         
         <Collection>
           {dummy.slice(offset, offset+limit).map((dum)=>(
-            <Card title={dum.name} id={dum.storeId} subtitle={dum.subtitle} img={dum.profileImgUrl}/>
+            <Card title={dum.name} id={dum.storeId} subtitle={dum.subtitle} img={dum.profileImgUrl} scraped = {dum.scraped}/>
           ))}
         </Collection>
         <Pagination

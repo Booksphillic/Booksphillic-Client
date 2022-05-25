@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { RowContainer, ColContainer } from './Container';
 import Flex from './Flex';
 
-const TopSection = ({title, editor, editorImage, date,id, tags}) => {
+const TopSection = ({title, editor, editorImage, date,id, tags, scraped}) => {
     const location=useLocation();
     const handleLocation=()=>{
         if (location.pathname.includes("profile")){
@@ -12,7 +12,7 @@ const TopSection = ({title, editor, editorImage, date,id, tags}) => {
         }
     }
     
-  return (
+  return ( 
     <Top>
         <TopTitle style={{width: "67%"}}> {title}</TopTitle>
             <EditorWrapper>
@@ -21,7 +21,13 @@ const TopSection = ({title, editor, editorImage, date,id, tags}) => {
                 <img src={editorImage}></img>
                 }
                 {handleLocation()==="profile"
-                ?<div>스크랩</div>
+                ?
+                    <ColContainer> 
+                    {
+                    scraped===true ? <img src='../img/scraped.png'></img> : <img src='../img/unscraped.png'></img>
+                    }
+                    <div>스크랩</div>
+                    </ColContainer>   
                 :
                 <>
                 <div>에디터 {editor}</div>
@@ -30,9 +36,10 @@ const TopSection = ({title, editor, editorImage, date,id, tags}) => {
             }
                 
             </Editor>
+            
             </EditorWrapper>
             <Tags>
-                <div>{tags}</div>
+                {tags && tags.map( (value) => (' #' + value))}
         </Tags>
     </Top>
   )
@@ -59,7 +66,11 @@ const Editor=styled(ColContainer)`
     color: #616161;
 `
 const Tags=styled(Flex)`
-    width: 22%;
+    width: 18%;
     justify-content: center;
     padding: 0px 20px 0px 20px;
+`
+
+const CardContainer=styled(ColContainer)`
+  height: 366px;
 `

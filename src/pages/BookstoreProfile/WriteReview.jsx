@@ -45,7 +45,7 @@ const WriteReview = ({id}) => {
            reader.readAsDataURL(e.target.files[0]);
            setImg([...img, e.target.files[0]]);
         files.append('files',e.target.files[0])
-       }
+       } 
 
        reader.onloadend=()=>{
            const previewImgUrl=reader.result;

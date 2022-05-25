@@ -16,17 +16,17 @@ const ProfileContent = () => {
     const [content, setContent]=useState([]);
     let {id}=useParams();
     useEffect(()=>{
-        axios.get('/api/bookstore',{params: {storeId:id}} )
+        axios.get('/api/bookstore',{params: {storeId:id, userId:localStorage.getItem('userId') }} )
         .then((res)=>{
             console.log(res.data.data)
             setContent(res.data.data)
         })
     },[useParams()])
 
-  return (
+  return ( 
     <Background>
       <Header/>
-      <TopSection id={content.storeId}/>
+      <TopSection name={content.name} scraped={content.scraped} tags={content.tags}/>
       <ImgContainer>
       <Img title={content.name} content={content.description} imgs={Array.isArray(content.internalImgUrls) && content.internalImgUrls} img={content.profileImgUrl}></Img>
       </ImgContainer>
@@ -43,11 +43,11 @@ const ProfileContent = () => {
                 </RowContainer>
                 <RowContainer style={{gap:"5%" , marginBottom:"25px"}}>
                     <Icon src='../img/icons/call.png'></Icon>
-                    <InfoText>{content.website}</InfoText>
+                    <InfoText>{content.contact}</InfoText>
                 </RowContainer>
                 <RowContainer style={{gap:"5%" , marginBottom:"25px"}}>
                     <Icon src='../img/icons/link.png'></Icon>
-                    <InfoText>인스타 링크</InfoText>
+                    <InfoText>{content.website}</InfoText>
                 </RowContainer>
                 <RowContainer style={{gap:"5%" , marginBottom:"25px",alignItems:"flex-start"}}>
                     <Icon src='../img/icons/time.png'></Icon>
@@ -65,7 +65,7 @@ const ProfileContent = () => {
                 </RowContainer>
                 <RowContainer style={{gap:"5%" , marginBottom:"25px"}}>
                     <Icon src='../img/icons/notice.png'></Icon>
-                    <InfoText>공지사항</InfoText>
+                    <InfoText>{content.notice}</InfoText>
                 </RowContainer>
            </Info>
           </InfoContainer>
