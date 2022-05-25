@@ -1,9 +1,18 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { MyPageContentContainer, RowContainer } from '../../components/Container'
 import styled from "styled-components";
 import { BorderGrayBtn } from '../../components/Buttons';
+import axios from 'axios';
 
 const EditProfile = () => {
+    const[profile, setProfile]=useState({});
+    useEffect(()=>{
+        //일케 하면 난 안됨(로그인부터 뭔가 잘못됨 난,,, -새별)
+        /*axios.get("api/user/profile", {params: {userId:localStorage.getItem('userId') }})
+        .then(res=>{
+           setProfile(res.data.data);
+        })*/
+    },[])
   return (
     <MyPageContentContainer>
         <Top>
@@ -15,13 +24,13 @@ const EditProfile = () => {
         </Top>
         <Content>
             <Title>이름</Title>
-            <Input placeholder='박서연'></Input>
+            <Input placeholder={profile.username}></Input>
             <Title>이메일(아이디)</Title>
-            <Input placeholder='sy0809'></Input>
+            <Input placeholder={profile.email}></Input>
             <Title>비밀번호</Title>
             <Input placeholder='******'></Input>
             <Title>휴대폰번호</Title>
-            <Input placeholder='010-7550-8760'></Input>
+            <Input placeholder={profile.phoneNumber}></Input>
         </Content>
         <RowContainer style={{marginTop:"40px"}}>
         <Delete>*북스필릭 회원탈퇴를 원하신다면</Delete>
