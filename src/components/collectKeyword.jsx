@@ -1,17 +1,10 @@
 import React from 'react'
 import { keywordList } from './keywordList'
 
-const collectKeyword = ({district}) => {
-  const index=0;
-    const keyword=(district)=>{
-        switch(district){
-            case "GANGNAM":
-                index=0;
-        }
+export function collectKeyword({district}){
+  return keywordList.map((keyword)=>{    
+    if(keyword.district === district) {
+      return keyword.value;
     }
-  return (
-    <div>collectKeyword</div>
-  )
+  })[0];
 }
-
-export default collectKeyword
