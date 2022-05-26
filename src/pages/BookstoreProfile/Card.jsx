@@ -10,8 +10,11 @@ const Card = ({title, id,subtitle, img, scraped }) => {
 
   const onClickScrapButton = async ()=> {
     const res = await scrap(id);
-    console.log(res.data);
-    if(res.code=== 1000) {
+    if(res.code === 0) {
+      window.location.href = '/login';
+      alert("로그인 후 이용 가능합니다.");
+    }
+    else if(res.code=== 1000) {
         if(res.data === true) {
             setIsScraped(true);
         }

@@ -14,17 +14,22 @@ const ContentsList = () => {
   const [week, setWeek]=useState([]);
   const [other, setOther]=useState([]);
   useEffect(()=>{
-    //이주의 동네를 송파로 가정
-    axios.get('/api/board?include=SONGPA&size=6')
-    .then((res)=>{
-      console.log(res.data.data);
-      setWeek(res.data.data);
+    try {
+      //이주의 동네를 송파로 가정
+      axios.get('/api/board?include=SONGPA&size=6')
+      .then((res)=>{
+        console.log(res.data.data);
+        setWeek(res.data.data);
+      })
+      axios.get('/api/board?exclude=SONGPA&size=6')
+      .then((res)=>{
+        console.log(res.data);
+        setOther(res.data.data);
     })
-    axios.get('/api/board?exclude=SONGPA&size=6')
-    .then((res)=>{
-      console.log(res.data);
-      setOther(res.data.data);
-    })
+    } catch(err) {
+      console.log(err);
+    }
+
   }, [])
   return (
     <Background>
