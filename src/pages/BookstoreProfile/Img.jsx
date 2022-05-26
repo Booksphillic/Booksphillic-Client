@@ -27,7 +27,7 @@ const Container=styled(RowContainer)`
 `
 const Text=styled(ColContainer)`
     height: 280px;
-    margin:63px 40% 136px 8%;
+    margin:63px 31% 136px 8%;
 `
 const Title=styled.div`
 font-weight: 700;

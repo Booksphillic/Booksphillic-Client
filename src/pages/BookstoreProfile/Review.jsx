@@ -47,7 +47,7 @@ const Review = ({collection}) => {
               </RowContainer>
               <hr style={{margin: "15px 0"}}/>
             </ContentContainer>
-                </CardContainer>
+            </CardContainer>
             )
           })}
         </ReviewContainer>
@@ -67,12 +67,12 @@ const Review = ({collection}) => {
 
 export default Review
 const ReviewContainer=styled(RowContainer)`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     height:714px;
-    width: 50%;
-    margin: 20px 2%;
-    gap:0 22%;
+    width: 95%;
+    margin: 30px 2% 0 2%; 
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10%;
 `
 const PaginationWrapper=styled.div`
     width: 100%;
@@ -84,13 +84,16 @@ const CardContainer=styled(ColContainer)`
     display: grid;
     grid-template-rows: 2fr 1fr 1fr;
     height: 700px;
+    width:100%;
 `
 const BigImg=styled.img`
     height:347px;
     margin-bottom: 15px;
+    width:100%;
 `
 const SmallImg=styled.img`
     height: 170px;
+    width:50%;
 `
 const ContentContainer=styled.div`
     height: 150px;

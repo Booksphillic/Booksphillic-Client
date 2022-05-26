@@ -1,41 +1,46 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { RoundBtn } from '../Buttons'
 import { ColContainer, Container, RowContainer } from '../Container'
 import Location from '../Location'
-const BookstoreProfile = () => {
+const BookstoreProfile = ({store}) => {
+    const [post, setPost]=useState({});
+    const [profile, setProfile]=useState({});
+    //console.log(store);
+   
   return (
     <ProfileContainer>
         <Col1>
             <InfoContainer>
                 <RowContainer  style={{gap:"5%", marginBottom:"25px"}}>
                     <Icon src='../img/icons/location.png'></Icon>
-                    <InfoText>주소</InfoText>
+                    <InfoText>{store.address}</InfoText>
                 </RowContainer>
                 <RowContainer  style={{gap:"5%", marginBottom:"25px"}}>
                     <Icon src='../img/icons/call.png'></Icon>
-                    <InfoText></InfoText>
+                    <InfoText>{store.contact}</InfoText>
                 </RowContainer>
                 <RowContainer  style={{gap:"5%", marginBottom:"25px"}}>
                     <Icon src='../img/icons/link.png'></Icon>
-                    <InfoText>인스타 링크</InfoText>
+                    <InfoText>{store.website}</InfoText>
                 </RowContainer>
                 <RowContainer  style={{gap:"5%", marginBottom:"25px", alignItems:"start"}}>
                     <Icon src='../img/icons/time.png'></Icon>
                     <ColContainer>
-                    <InfoText><div>월</div> </InfoText>  
-                    <InfoText><div>화</div> </InfoText>
-                    <InfoText><div>수</div>  </InfoText>
-                    <InfoText><div>목</div>  </InfoText>
-                    <InfoText><div>금</div> </InfoText>
-                    <InfoText><div>토</div> </InfoText>
-                    <InfoText><div>일</div>  </InfoText> 
+                    <InfoText><div>월</div>{store.operatingHours.mon}</InfoText>  
+                    <InfoText><div>화</div>{store.operatingHours.tue}</InfoText>
+                    <InfoText><div>수</div> {store.operatingHours.wed}</InfoText>
+                    <InfoText><div>목</div> {store.operatingHours.thu}</InfoText>
+                    <InfoText><div>금</div>{store.operatingHours.fri}</InfoText>
+                    <InfoText><div>토</div>{store.operatingHours.sat}</InfoText>
+                    <InfoText><div>일</div> {store.operatingHours.sun}</InfoText> 
                     </ColContainer>
                 </RowContainer>
-                <RowContainer>
+                <RowContainer style={{marginTop:"20px"}}>
                     <Btn>책방 프로필 보러가기</Btn>
                     <ColContainer>
-                        <img src='../img/scrap.png'></img>
+                        <img src='../img/unscraped.png'></img>
                         <InfoText>스크랩</InfoText>
                     </ColContainer>
                 </RowContainer>
@@ -46,9 +51,6 @@ const BookstoreProfile = () => {
             <Map>
             <Location/>
             </Map>
-           
-            
-              
             </Box>
         </Col2>
     </ProfileContainer>
@@ -68,20 +70,23 @@ const Icon=styled.img`
     height: 25px;
     display: flex;
 `
-const InfoText=styled.div`
+const InfoText=styled(RowContainer)`
     font-weight: 400;
 font-size: 16px;
 color: #616161;
+gap:20px;
 `
 const InfoContainer=styled(ColContainer)`   
     height: 100%;
    align-content: flex-start;
 `
 const Col2=styled.div`
-
 width: 50%;
 `
 const Btn=styled(RoundBtn)`
+font-weight: 700;
+font-size: 20px;
+margin-right: 7%;
 `
 const Box=styled.div`
     width:100%;

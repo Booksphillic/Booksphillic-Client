@@ -65,12 +65,12 @@ const Profile = () => {
               <div>송파, 하우스북스</div>
             </Title>
             <Title onClick={(e)=>{setCategory(2);}} className={category===2? "focused":""}>
-              <Sub>차, 책, 전시가 만나다</Sub>
-              <div>송파, 하우스북스</div>
+              <Sub>책과 술, 문화모임이 있는 쉼의 공간</Sub>
+              <div>송파, 동네책방 주책</div>
             </Title>
             <Title onClick={(e)=>{setCategory(3); console.log(category);}} className={category===3? "focused":""}>
-              <Sub>차, 책, 전시가 만나다</Sub>
-              <div>송파, 하우스북스</div>
+              <Sub>작지만 다채로운 공간</Sub>
+              <div>송파, 무엇보다 책방</div>
             </Title>
           </WeeklyTitle>
           {
