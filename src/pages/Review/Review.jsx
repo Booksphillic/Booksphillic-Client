@@ -29,7 +29,6 @@ const Review = () => {
                 <Menu>
                     <Tab onClick={(e)=>setTab(1)} className={tab===1? "focused":""}>미스터리북 리뷰</Tab>
                     <Tab onClick={(e)=>setTab(2)} className={tab===2? "focused":""}>내가 쓴 리뷰</Tab>
-                    
                 </Menu>
                 <Content>
                   {handleContent()}

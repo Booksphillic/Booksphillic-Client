@@ -47,7 +47,8 @@ const Reply=styled(RowContainer)`
 `
 const Img=styled.img`
     margin-right: 15px;
-    
+    width: 6%;
+    height: 55px;
 `
 const Content=styled.div`
     font-weight: 500;

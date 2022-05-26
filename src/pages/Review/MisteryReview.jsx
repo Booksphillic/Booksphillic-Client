@@ -1,36 +1,40 @@
 import React , {useState} from 'react'
 import styled from 'styled-components'
 import Pagination from '../../components/Pagination';
-import { ColContainer, MyPageContentContainer } from '../../components/Container';
-import SimpleAccordion from './Accordion';
+import { ColContainer, MyPageContentContainer,RowContainer} from '../../components/Container';
 import WriteReview from './WriteReview';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { BorderGrayBtn } from '../../components/Buttons';
 const MisteryReview = () => {
   const [limit, setLimit]=useState(2);
   const [page, setPage]=useState(1);
   const offset=(page-1)*limit;
-const dummy=[{title:'무엇보다 책방'}, {title:'리스본 서점'}, {title:'동네책방 주책'}]
+  const dummy=[{title:'무엇보다 책방'}, {title:'리스본 서점'}, {title:'동네책방 주책'}]
 
   return (
-    <MyPageContentContainer>
+  
+    <MisteryReviewContainer>
     {dummy.slice(offset, offset+limit).map((d)=>(
         <Box>
-           {/* <ColContainer>
-                <Date>2022.05,07</Date>
-                <Title>{d.title}</Title>
-    </ColContainer>*/}
-        <Accordion square={true} style={{boxShadow:"none"}} disableGutters={true} >
+        <Accordion square={true} style={{boxShadow:"none", width:"100%"}} disableGutters={true} >
         <AccordionSummary
           style={{height:"113px", borderBottom: "1px solid #BDBDBD", width:"100%"}}
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon/>}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography style={{}}>{d.title}</Typography>
+        <RowContainer style={{display:'flex',justifyContent:"space-between", width:"100%"}}>
+          <ColContainer>
+                  <Date>2022.05,07</Date>
+                  <Title>{d.title}</Title>
+          </ColContainer>
+          <BorderGrayBtn style={{marginRight:"1%"}}>
+            도서 픽업 완료
+          </BorderGrayBtn>
+        </RowContainer>
         </AccordionSummary>
         <AccordionDetails style={{padding: "20px 0"}}>
           <WriteReview></WriteReview>
@@ -39,21 +43,26 @@ const dummy=[{title:'무엇보다 책방'}, {title:'리스본 서점'}, {title:'
     </Box>
     
         ))}
-        <PaginationWrapper>
-        <Pagination
-        total={dummy.length}
-          limit={limit}
-          page={page}
-          setPage={setPage}
-      />
-        </PaginationWrapper>
-    </MyPageContentContainer>
+         <PaginationWrapper>
+      <Pagination
+      total={dummy.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+    />
+      </PaginationWrapper>
+      
+    </MisteryReviewContainer>
   )
 }
 
 export default MisteryReview
+const MisteryReviewContainer=styled(ColContainer)`
+  width:100%;
+  padding: 20px 10%;
+`
 const Box=styled.div`
-    height: 130px;
+    min-height: 130px;
     display: flex;
     justify-content: space-between;
     //border-bottom: 1px solid #BDBDBD;

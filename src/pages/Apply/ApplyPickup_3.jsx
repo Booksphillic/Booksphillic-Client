@@ -14,7 +14,12 @@ const ApplyPickup_3 = () => {
     const [chips, setChips]=useState([]);
     const location = useLocation();
     const {date, store} = location.state;
-
+    const[click, setClick]=useState(Array(dataLists.length).fill(false));
+    const handleClick=(id)=>{
+        setClick(click.map((element, index)=>{
+            return index===id ? !element : element;
+        }))
+    }
 
     const AddChip=()=>{
         console.log(chip)
