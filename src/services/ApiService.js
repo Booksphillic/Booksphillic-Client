@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://haul0215.synology.me:8080';
+const API_BASE_URL = 'http://localhost:8080';
 
 export function checkToken() {
     if(!localStorage.getItem('userId')) {
@@ -135,4 +135,15 @@ export async function getBookstoreList() {
     // if(!checkToken()) return {code : 0};
     const userId = localStorage.getItem('userId');
     return await call(`/api/bookstore/list?userId=${userId}`, "GET");
+}
+
+export async function getMyPickupList() {
+    if(!checkToken()) return {code :0};
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/pick-up/${userId}`, "GET");
+}
+
+export async function getMyReviews() {
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/user/getReview?userId=${userId}`, "GET");
 }

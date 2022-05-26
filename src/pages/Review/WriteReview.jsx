@@ -1,21 +1,25 @@
-import React,{useState} from 'react'
+import React,{useState, useRef} from 'react'
 import styled from 'styled-components'
 import { ColContainer, RowContainer } from '../../components/Container'
 import {RoundBtn, BorderGrayBtn} from '../../components/Buttons'
 import { Avatar, Chip } from '@mui/material'
 
-const emoji=[
-  {src:"../img/emoji/happy.png",
-  name:"추천해요"},
-  {src:"../img/emoji/smile.png",
-  name:"좋아요"},
-  {src:"../img/emoji/heart.png",
-  name:"맘에 들어요"},
-  {src:"../img/emoji/wink.png",
-  name:"짱이에요"},
-  ]
+
+var files = new FormData();
+
   
-const WriteReview = () => {
+const WriteReview = ({pickupId, setTab}) => {
+  const emoji=[
+    {src:"../img/emoji/happy.png",
+    name:"추천해요"},
+    {src:"../img/emoji/smile.png",
+    name:"좋아요"},
+    {src:"../img/emoji/heart.png",
+    name:"맘에 들어요"},
+    {src:"../img/emoji/wink.png",
+    name:"짱이에요"},
+    ]
+
   const [clickEmoji, setClickEmoji]=useState("");
   console.log(clickEmoji);
   const[click, setClick]=useState(Array(4).fill(false));
@@ -28,25 +32,63 @@ const WriteReview = () => {
           : element
       }))
   }
+
+  const [img, setImg]=useState([]);
+
+  const [content, setContent] = useState("");
+
+  const imageInput = useRef();
+  const insertImg=(e)=>{
+      let reader=new FileReader();
+
+      if (e.target.files[0]){
+          reader.readAsDataURL(e.target.files[0]);
+          setImg([...img, e.target.files[0]]);
+       files.append('files',e.target.files[0])
+      } 
+
+      reader.onloadend=()=>{
+
+      }
+  }
+
+
   return (
     <ColContainer style={{background:"white", width: "100%"}}>
       <ImgContainer>
         <div style={{margin:"24px 0"}}>도서/책방 사진</div>
           <RowContainer style={{marginBottom:"24px"}}>
             <SubTitle>메인사진</SubTitle>
-            <Input></Input>
+            <Input                 
+                type="file"
+                id="files"
+                ref={imageInput}
+                accept='image/jpg, image/jpeg, image/png'
+                onChange={(e)=>{insertImg(e)}}></Input>          
           </RowContainer>
+
           <RowContainer  style={{marginBottom:"24px"}}>
             <SubTitle>사진1</SubTitle>
-            <Input></Input>
+            <Input                 
+                type="file"
+                id="files"
+                ref={imageInput}
+                accept='image/jpg, image/jpeg, image/png'
+                onChange={(e)=>{insertImg(e)}}></Input>
           </RowContainer>
+
           <RowContainer style={{marginBottom:"24px"}}>
             <SubTitle>사진2</SubTitle>
-            <Input></Input>
+            <Input                 
+                type="file"
+                id="files"
+                ref={imageInput}
+                accept='image/jpg, image/jpeg, image/png'
+                onChange={(e)=>{insertImg(e)}}></Input>          
           </RowContainer>
-          <BtnContainer>
+          {/* <BtnContainer>
           <BorderGrayBtn style={{height:"35px"}}>사진 추가하기</BorderGrayBtn>
-          </BtnContainer>
+          </BtnContainer> */}
          <hr/>
       </ImgContainer>  
       <WriteContainer>
@@ -70,9 +112,43 @@ const WriteReview = () => {
                     </Chip>
                 ))}
         </RowContainer>
-          <Textarea placeholder='미스터리북 구매 소감을 작성해주세요.(한글 기준 최소 5자 이상)'></Textarea>
+          <Textarea placeholder='미스터리북 구매 소감을 작성해주세요.(한글 기준 최소 5자 이상)'
+                  maxLength={100} onChange={(event)=>setContent(event.target.value)}></Textarea>
           <BtnContainer>
-          <RoundBtn>리뷰 업로드</RoundBtn>
+          <RoundBtn
+            onClick={ () => {
+              console.log("files", files);
+              fetch('/api/pick-up/review/images', {
+                  method : 'POST',
+                  body : files
+              }).then((res) => {
+                  res.json().then((json) => {
+                      // console.log(json.data)
+                      // console.log("이모지", clickEmoji)
+                      fetch(`/api/pick-up/${pickupId}/review`, {
+                          method : 'POST',
+                          headers: new Headers({
+                              'Content-Type': 'application/json',
+                          }),
+                          body : JSON.stringify({
+                              userId : localStorage.getItem('userId'),
+                              content : content,
+                              urls : json.data,
+                              emoticon : clickEmoji
+                          })
+                      }).then((res) => {
+                          res.json().then((json)=> {
+                            if(json.code === 1000) {
+                              console.log(json.data);
+                              alert("리뷰 업로드 성공!");
+                              setTab(2);
+                            }
+                          })
+                      })
+                  })
+              })
+          }}
+          >리뷰 업로드</RoundBtn>
           </BtnContainer>
           <hr style={{marginTop:"44px"}}/>
       </WriteContainer>

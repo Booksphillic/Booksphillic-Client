@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -7,12 +7,17 @@ import MyReview from './MyReview';
 import { ColContainer, RowContainer, Container } from '../../components/Container';
 const Review = () => {
     const [tab, setTab]=useState(1);
+
+    useEffect( ()=>{
+        handleContent();
+    },[tab]);
+
     const handleContent=()=>{
         switch (tab) {
             case 1:
-               return <MisteryReview/>
+               return <MisteryReview setTab={setTab}/>
              case 2:
-                return <MyReview/>
+                return <MyReview tab={tab}/>
             default:
                 console.log("err");
         }

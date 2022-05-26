@@ -45,6 +45,7 @@ const UserMyPage = () => {
     const getData = async()=> {
         try {
             const res = await userInfo();
+            console.log("처음 code", res.code);
             if(res.code === 0) {
                 window.location.href = '/login';
                 alert("로그인 후 이용 가능합니다.");
@@ -53,10 +54,11 @@ const UserMyPage = () => {
                 console.log("유저 정보", res.data);
                 setProfile(res.data);
             }
-            else if (res.code === 2203) {
-                <Link to="/login"/>
+            else if (res.code === 2203 || res.code === 2206) {
+                alert("로그인 후 사용 가능합니다.");
+                window.location.href = '/login';
             }
-            else   alert("데이터베이스 오류입니다.");
+            else alert("데이터베이스 오류입니다.");
 
             const phillicInfo = await getPhillic();
             if(phillicInfo.code === 1000) {
@@ -146,7 +148,8 @@ const Top=styled.div`
 const ProfileImg=styled.img`
     margin-bottom: 24px;
     border-radius: 100%;
-    height: 70px;
+    height: 90px;
+    width : 90px;
     width:11%;
     border: 100%;
 `
