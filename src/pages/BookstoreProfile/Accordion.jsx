@@ -10,7 +10,7 @@ import { borderBottom } from '@mui/system';
 export default function SimpleAccordion({id}) {
   return (
     <div>
-      <Accordion square={true} style={{padding:"0 10% 0 10%"}} disableGutters={true} >
+      <Accordion square={true} style={{padding:"0 10% 0 10%", borderTop:"1px solid black"}} disableGutters={true} >
         <AccordionSummary
           style={{height:"113px"}}
           expandIcon={<ExpandMoreIcon />}

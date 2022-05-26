@@ -6,7 +6,8 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BookstoreProfile from './BookstoreProfile';
 import Comment from './Comment';
-export default function SimpleAccordion({id}) {
+export default function SimpleAccordion({id, profile}) {
+  console.log(profile);
   return (
     <div>
       <Accordion square={true} style={{margin:"0 0.1% 0 0.1%"}}>
@@ -20,7 +21,7 @@ export default function SimpleAccordion({id}) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <BookstoreProfile/>
+            {profile ?<BookstoreProfile store={profile}/> : null}
           </Typography>
         </AccordionDetails>
       </Accordion>

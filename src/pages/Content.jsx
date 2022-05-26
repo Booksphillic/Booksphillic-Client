@@ -10,19 +10,23 @@ import TopSection from '../components/TopSection';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
+import { getBookstoreProfile } from '../services/ApiService';
 
 const Content = () => {
     const [content, setContent]=useState([]);
 
     let {id}=useParams();
-    useEffect(() => {
-      axios.get(`/api/board/${id}`)
-      .then((res)=>{
-          console.log(res.data.data);
-          setContent(res.data.data);
-      })
-    }, [])
+    const getContent = async() => {
+        const res = await getBookstoreProfile(id);
+        if(res.code === 1000) {
+            console.log(res.data);
+            setContent(res.data);
+        }
+    }
     
+    useEffect(()=>{
+        getContent();
+      }, [useParams()]);
   return (
     <>
     <Background>
@@ -38,8 +42,6 @@ const Content = () => {
                     <Paragraph>
                         <ParagraphTiTle>송리단길의 <br/>작은서점</ParagraphTiTle>
                        <ParagraphContent>{content.content[0]} </ParagraphContent>
-                        
-                       
                     </Paragraph>
                 </ContentContainer>
                 <ContentContainer>
@@ -66,11 +68,9 @@ const Content = () => {
                    Array.isArray(content.bookstoreImages) &&
                 <ImgWrapper>
                <div></div>
-               
-              
                     <img src={content.bookstoreImages[0]} width="32%" height="470px"></img>
-                        <img src={content.bookstoreImages[1]} width="32%" height="470px"></img>
-                        <img src={content.bookstoreImages[2]} width="32%" height="470px"></img>
+                    <img src={content.bookstoreImages[1]} width="32%" height="470px"></img>
+                    <img src={content.bookstoreImages[2]} width="32%" height="470px"></img>
                 </ImgWrapper>
 }
             </ImgContainer>
@@ -82,7 +82,7 @@ const Content = () => {
                 </Col1>
                 <Col2>
                 <img src='../img/content/sample_book.png' style={{transform: "rotate(15deg)", height:"250px", width:"80%" }} ></img>
-                <img src='../img/content/sample_book.png' style={{transform: "rotate(-15deg)", height:"250px", width:"80%"}}></img>
+                <img src='../img/collection/recommend.png' style={{transform: "rotate(-15deg)", height:"250px", width:"100%"}}></img>
                 </Col2>
                 <Col3>
                 <Review>
@@ -90,8 +90,8 @@ const Content = () => {
                 <ParagraphContent>각기 다른 매력의 동네책방을 담아놓은 여행에세이</ParagraphContent>
                 </Review>
                 <Review>
-                <div style={{fontSize: "24px", fontWeight:"700"}}>퇴근 후 동네책방</div>
-                <ParagraphContent>각기 다른 매력의 동네책방을 담아놓은 여행에세이</ParagraphContent>
+                <div style={{fontSize: "24px", fontWeight:"700"}}>숱한 사람들 속을 헤집고 나왔어도</div>
+                <ParagraphContent>민낯의 문장들이 어우러져 읽히는 가랑비의 단상집</ParagraphContent>
                 </Review>
                 <RoundBtnContainer>
                     <RoundBtn>미스터리북 신청하기</RoundBtn>
@@ -99,8 +99,9 @@ const Content = () => {
                 </Col3>
             </Recommend>
             <AccordionContainer>
-                <Accordion id={id}></Accordion>
+                <Accordion id={id} profile={content.bookstore}></Accordion>
             </AccordionContainer>
+           
          
         </CenterContainer>
         <MoreContent>

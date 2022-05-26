@@ -27,8 +27,8 @@ const Profile = () => {
       //   alert("로그인 후 이용 가능합니다.");
       // }
       if(res.code === 1000) {
-        console.log("/list 데이터", res.data.data)
-        setDummy(res.data.data)      
+        console.log("/list 데이터", res.data)
+        setDummy(res.data)      
       }
       else alert("데이터베이스 오류입니다.");
       
@@ -48,8 +48,8 @@ const Profile = () => {
     //   alert("로그인 후 이용 가능합니다.");
     // }
     if(res.code === 1000) {
-      console.log("Profile-책방 리스트",res.data.data)
-      setDummy(res.data.data)
+      console.log("Profile-책방 리스트",res.data)
+      setDummy(res.data)
     }
     else alert("데이터베이스 오류입니다.");
   }
@@ -65,12 +65,12 @@ const Profile = () => {
               <div>송파, 하우스북스</div>
             </Title>
             <Title onClick={(e)=>{setCategory(2);}} className={category===2? "focused":""}>
-              <Sub>차, 책, 전시가 만나다</Sub>
-              <div>송파, 하우스북스</div>
+              <Sub>책과 술, 문화모임이 있는 쉼의 공간</Sub>
+              <div>송파, 동네책방 주책</div>
             </Title>
             <Title onClick={(e)=>{setCategory(3); console.log(category);}} className={category===3? "focused":""}>
-              <Sub>차, 책, 전시가 만나다</Sub>
-              <div>송파, 하우스북스</div>
+              <Sub>작지만 다채로운 공간</Sub>
+              <div>송파, 무엇보다 책방</div>
             </Title>
           </WeeklyTitle>
           {
