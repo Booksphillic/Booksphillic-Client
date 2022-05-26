@@ -25,7 +25,7 @@ const ApplyPickup_5 = () => {
         try{
             const res = await applyPickUp(data);
             if(res.code === 1000) { //성공
-                console.log('성공'); 
+                console.log('성공');
             }
             else { //실패
                 console.log('실패'); 
@@ -84,7 +84,9 @@ const ApplyPickup_5 = () => {
               <LongUnderlineBox style={{marginBottom:"34px"}}>{requirement}</LongUnderlineBox>
               <BtnContainer>
                   <Link to="/userPage">
-                    <RoundBtn>확인</RoundBtn>
+                    <Link to='/userPage'>
+                    <RoundBtn onClick={()=>alert('미스터리북 신청이 완료되었습니다!')}>확인</RoundBtn>
+                    </Link>
                   </Link>
               </BtnContainer>
               </ApplyContainer>
