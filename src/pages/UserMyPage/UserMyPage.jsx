@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from "styled-components";
 import { CenterContainer, ColContainer, MyPageContainer, RowContainer } from '../../components/Container';
 import Header from '../../components/Header';
@@ -7,8 +7,13 @@ import Footer from '../../components/Footer';
 import Apply from './Apply';
 import EditProfile from './EditProfile';
 import Scrap from './Scrap';
+import axios from 'axios';
+
 const UserMyPage = () => {
+
     const [tab, setTab]=useState(1);
+    const [profile, setProfile]=useState({});
+    const [user, setUser]=useState({});
     const handleContent=()=>{
         switch (tab) {
             case 1:
@@ -21,6 +26,18 @@ const UserMyPage = () => {
                 console.log("err");
         }
     }
+    useEffect(()=>{
+        //임시로 유저아이디 줌
+        axios.get("/api/user/pickupReviewCount?userId=1")
+        .then((res)=>{
+            console.log(res.data.data);
+            setProfile(res.data.data);
+        })
+        axios.get("api/user/profile?userId=1")
+        .then((res)=>{
+            setUser(res.data.data);
+        })
+    },[])
   return (
 
     <Background>
@@ -29,14 +46,14 @@ const UserMyPage = () => {
             <Top>마이페이지</Top>
             <Profile>
                 <img></img>
-                <Title>안녕하세요 '이름' 님</Title>
+                <Title>안녕하세요 {user.username}님</Title>
                 <Id>id</Id>
             </Profile>
             <hr style={{margin: "42px 5% 0 5%", color:"#BDBDBD"}}/>
             <Degree>
                 <ColContainer>
                     <SubTitle>나의 필릭지수</SubTitle>
-                    <Percent>80%</Percent>
+                    <Percent>{profile.phillic}</Percent>
                 </ColContainer>
                 <RowContainer style={{gap:"30px"}}>
                     <Col>
@@ -45,11 +62,11 @@ const UserMyPage = () => {
                     </Col>
                     <ColContainer>
                         <RowContainer>
-                            <Num>3</Num>
+                            <Num>{profile.pickupCount}</Num>
                             <Id>건</Id>
                         </RowContainer>
                         <RowContainer>
-                            <Num>3</Num>
+                            <Num>{profile.reviewCount}</Num>
                             <Id>건</Id>
                         </RowContainer>
                     </ColContainer>

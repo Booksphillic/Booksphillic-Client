@@ -66,6 +66,11 @@ const ApplyContainer=styled(RowContainer)`
     display: grid;
     grid-template-columns: 3fr 2fr;
 `
+const Input=styled.input`
+ border: 1px solid #616161;
+    height: 60px;
+    width:70%;
+`
 const TitleWrapper=styled(RowContainer)`
     gap: 0px 20px;
     margin-top: 77px;

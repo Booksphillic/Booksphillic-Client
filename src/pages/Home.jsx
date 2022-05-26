@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Header from '../components/Header';
 import styled from "styled-components";
 import { CenterContainer, ColContainer, RowContainer,Container } from '../components/Container';
@@ -7,25 +7,54 @@ import { Col } from 'react-bootstrap';
 import styledEngine from '@mui/styled-engine';
 import IntroMistery from '../components/main/IntroMistery';
 import Footer from '../components/Footer';
-import {scrap} from '../services/ApiService';
+import {homeBookstoreData, scrap} from '../services/ApiService';
 import { EditNotifications } from '@mui/icons-material';
-
+import { Link } from 'react-router-dom';
 
 const Home = () => {
+  const [store3, setStore3] = useState({});
+  const [store4, setStore4] = useState({});
 
-  // 스크랩 아이콘 색깔 바꿔주기!!!!!!!
+  // const [scraped3, setScraped3] = useState(); //storeId가 3인 서점 스크랩 유무
+  // const [scraped4, setScraped4] = useState(false) //storeId가 4인 서점 스크랩 유무
+
+  useEffect(async()=>{
+    try{
+      const res = await homeBookstoreData(3);
+      if(res.code === 1000) {
+        console.log("3 스크랩 유무", res.data);
+        setStore3(res.data);
+      }
+    
+    const res2 = await homeBookstoreData(4);
+      if(res2.code === 1000) {
+        console.log("4 스크랩 유무", res2.data);
+        setStore4(res2.data);
+      }
+    } catch(err) {
+      console.log(err);
+    }
+  },[]);
+
   const onClickScrap = async (storeId) => {
     console.log(storeId);
     const res = await scrap(storeId);
+    console.log(res.data);
     // 성공
     if(res.code === 1000) {
-      
+      if(storeId === 3) {
+        setStore3({...store3, scraped : res.data});
+      }
+      else {
+        setStore4({...store4, scraped : res.data});      }
     }
     // 실패
     else {
-
+      alert("스크랩에 실패하였습니다.")
     }
   }
+
+
 
   const PostType = (type) => 
     <div style={{
@@ -97,10 +126,13 @@ const Home = () => {
               </div>
               {PostContent('컨텐츠 경쟁시대에 이르렀다. 컨텐츠의 원조, 책에 진심인 사람들과 책으로 둘러쌓인 공간에서 오감으로 책을 느껴보는 시간을 가져보자.')}
             </BookstoreContent>
-          <MoreBtn>
-            <div style={{marginRight: '12px'}}>더 많은 컨텐츠 <br/>보러가기</div>
-            <img src='../img/arrow.png'></img>
-          </MoreBtn>
+
+            <Link to="/collction">
+              <MoreBtn>
+              <div style={{marginRight: '12px'}}>더 많은 컨텐츠 <br/>보러가기</div>
+              <img src='../img/arrow.png'></img>
+            </MoreBtn>   
+            </Link>
           </ContentWrapper>
           <BestReview/>
           <BookStoreProfile>
@@ -120,40 +152,46 @@ const Home = () => {
           <ProfileContent>
             <ProfileCard>
               <div style={{height:"490px"}}>
-                <div style={profileStyle}>동네책방 주책
-: 주택가에 위치한 작은 책방. 조용하게 커피 한 잔 마시며 독립출간물을 접할 수 있는 공간입니다.</div>  
+                <div style={profileStyle}>{store3.name}
+: {store3.description}</div>  
               </div>
               <ProfileBottom>
                 <Bottom1>
-                  <div style={boldStyle}>동네책방 주책</div> {/* 3 번 서점 */}
-                  <div style={addressStyle}>책과 술, 문화모임이 있는 쉼의 공간</div>
+                  <div style={boldStyle}>{store3.name}</div> {/* 3 번 서점 */}
+                  <div style={addressStyle}>{store3.subtitle}</div>
                 </Bottom1>
-                <Bottom2 onClick={() => onClickScrap(3)}>
-                  <img src='../img/scraped.png' height="48px" width="60%" style={{margin: "auto"}}></img>
-                  <div style={{textAlign: 'center', lineHeight: '30px', fontWeight: 400, fonSize: '16px'}}>스크랩</div>
+
+                <Bottom2 onClick={() =>  onClickScrap(3)}>
+                  {
+                    store3.scraped===true ? 
+                      <img src='../img/scraped.png' height="48px" width="60%" style={{margin: "auto"}}></img>
+                    : <img src='../img/unscraped.png' height="48px" width="60%" style={{margin: "auto"}}></img>
+                  }                  <div style={{textAlign: 'center', lineHeight: '30px', fontWeight: 400, fonSize: '16px'}}>스크랩</div>
                 </Bottom2>
               </ProfileBottom>
             </ProfileCard>
             <ProfileCard>
               <div style={{height:"490px"}}> 
-                <div style={profileStyle}>하우스북스
-  : 스페셜 티, 커피와 서점, 갤러리를 즐길 수 있는 복합문화공간에 자리잡은 책방입니다.</div>
+                <div style={profileStyle}>{store4.name}
+  : {store4.description}</div>
               </div>
               
               <ProfileBottom>
                 <Bottom1>
-                  <div style={boldStyle}>하우스북스</div> {/* 4 번 서점 */}
-                  <div style={addressStyle}>HOWS 발견의 공간</div>
+                  <div style={boldStyle}>{store4.name}</div> {/* 4 번 서점 */}
+                  <div style={addressStyle}>{store4.subtitle}</div>
                 </Bottom1>
                 <Bottom2 onClick={() => onClickScrap(4)}>
-                  <img src='../img/scrap.png' height="48px" width="60%" style={{margin: "auto"}}></img>
+                  {
+                    store4.scraped===true ? 
+                      <img src='../img/scraped.png' height="48px" width="60%" style={{margin: "auto"}}></img>
+                    : <img src='../img/unscraped.png' height="48px" width="60%" style={{margin: "auto"}}></img>
+                  }
                   <div style={{textAlign: 'center', lineHeight: '30px', fontWeight: 400, fonSize: '16px'}}>스크랩</div>
                 </Bottom2>
               </ProfileBottom>
             </ProfileCard>
           </ProfileContent>
-         
-      
           <ProfileEnd>
             <img src='../img/moreBookstore.png'></img>
           </ProfileEnd>

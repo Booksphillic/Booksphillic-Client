@@ -64,3 +64,9 @@ export async function scrap(storeId) {
 export async function getStoreByDistrict(district) {
     return await call(`/api/pick-up/list?district=${district}&size=200`);
 }
+
+export async function homeBookstoreData(storeId) {
+    const userId = localStorage.getItem('userId');
+    // const data = {storeId : storeId, userId : userId};
+    return await call(`/api/bookstore/homeData?storeId=${storeId}&userId=${userId}`, "GET");
+}
