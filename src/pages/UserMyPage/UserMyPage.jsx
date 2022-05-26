@@ -10,6 +10,7 @@ import Scrap from './Scrap';
 import { getPhillic, userInfo } from '../../services/ApiService';
 
 const UserMyPage = () => {
+
     const [tab, setTab]=useState(1);
     const [profile, setProfile] = useState({
         profileImgUrl : '',
@@ -55,9 +56,7 @@ const UserMyPage = () => {
             console.log(err);
         }
     },[]);
-
-
-
+  
   return (
 
     <Background>

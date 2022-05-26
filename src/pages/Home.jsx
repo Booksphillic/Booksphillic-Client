@@ -9,7 +9,7 @@ import IntroMistery from '../components/main/IntroMistery';
 import Footer from '../components/Footer';
 import {homeBookstoreData, scrap} from '../services/ApiService';
 import { EditNotifications } from '@mui/icons-material';
-
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [store3, setStore3] = useState({});
@@ -126,10 +126,13 @@ const Home = () => {
               </div>
               {PostContent('컨텐츠 경쟁시대에 이르렀다. 컨텐츠의 원조, 책에 진심인 사람들과 책으로 둘러쌓인 공간에서 오감으로 책을 느껴보는 시간을 가져보자.')}
             </BookstoreContent>
-          <MoreBtn>
-            <div style={{marginRight: '12px'}}>더 많은 컨텐츠 <br/>보러가기</div>
-            <img src='../img/arrow.png'></img>
-          </MoreBtn>
+
+            <Link to="/collction">
+              <MoreBtn>
+              <div style={{marginRight: '12px'}}>더 많은 컨텐츠 <br/>보러가기</div>
+              <img src='../img/arrow.png'></img>
+            </MoreBtn>   
+            </Link>
           </ContentWrapper>
           <BestReview/>
           <BookStoreProfile>
@@ -157,6 +160,7 @@ const Home = () => {
                   <div style={boldStyle}>{store3.name}</div> {/* 3 번 서점 */}
                   <div style={addressStyle}>{store3.subtitle}</div>
                 </Bottom1>
+
                 <Bottom2 onClick={() =>  onClickScrap(3)}>
                   {
                     store3.scraped===true ? 
@@ -188,8 +192,6 @@ const Home = () => {
               </ProfileBottom>
             </ProfileCard>
           </ProfileContent>
-         
-      
           <ProfileEnd>
             <img src='../img/moreBookstore.png'></img>
           </ProfileEnd>
