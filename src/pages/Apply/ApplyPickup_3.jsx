@@ -5,7 +5,7 @@ import Chip from '@mui/material/Chip';
 import {Link, useLocation} from 'react-router-dom';
 import { BlackBtn } from '../../components/Buttons';
 import {Background} from '../../components/apply/Background';
-var dataLists=["#에세이", "#판타지", "#추리소설", "#과학", "#로맨스", "#취미"];
+var dataLists=["술이 있는", "독립출판", "전시", "여행서점", "동화서점", "좌석"];
 
 const ApplyPickup_3 = () => {
     const [chip, setChip]=useState("");
@@ -64,7 +64,7 @@ const ApplyPickup_3 = () => {
             </RowContainer>
             <Chips style={{margin:"20px 0px 10px 0px"}}>
                 {chips.map((list, i) => (
-                        <Chip key={i} label={list} size="medium"
+                        <Chip key={i} label={'#'+list} size="medium"
                               style={{backgroundColor:'#FFFA88', padding:"3px 1%", marginRight:"12px"}}
                               onDelete={(e)=>handleDelete(e, list)}></Chip>
                 ))}
@@ -81,7 +81,7 @@ const ApplyPickup_3 = () => {
                             click[index] ? {backgroundColor:'#FFFA88'} : {}
                         }
                         key={index}
-                        label={value}  
+                        label={'#'+value}  
                         size="medium" 
                         onClick={()=>{
                             handleClick(index)

@@ -27,7 +27,7 @@ const Header = () => {
 
           {/* 검색 버튼 */}
           <Link to="/search">
-            <img src='../img/search.png' className='pointer'></img>
+            <img src='../img/search.svg' className='pointer'></img>
           </Link>
           
 
@@ -38,7 +38,7 @@ const Header = () => {
                 window.location.href = '/login';
               }
               else window.location.href = '/userPage';
-            }} src='../img/mypage.png'
+            }} src='../img/mypage.svg'
             className='pointer'
           ></img>
           
