@@ -1,5 +1,11 @@
 const API_BASE_URL = 'http://haul0215.synology.me:8080';
 
+export function checkToken() {
+    if(!localStorage.getItem('userId')) {
+        return false;
+    }
+    return true;
+}
 
 export function call(api, method, request) {
     let headers = new Headers({
@@ -56,6 +62,7 @@ export async function signin(email, password) {
 }
 
 export async function scrap(storeId) {
+    if(!checkToken()) return {code : 0};
     const userId = localStorage.getItem('userId');
     const data = {userId: userId};
     return await call(`/api/user/${storeId}/scrap`, "POST", data);
@@ -66,12 +73,27 @@ export async function getStoreByDistrict(district) {
 }
 
 export async function homeBookstoreData(storeId) {
+    if(!checkToken()) return {code : 0};
+
     const userId = localStorage.getItem('userId');
     // const data = {storeId : storeId, userId : userId};
     return await call(`/api/bookstore/homeData?storeId=${storeId}&userId=${userId}`, "GET");
 }
 
+export async function applyPickUp(data) {
+    const userId = localStorage.getItem('userId');
+    const body = {
+        userId: userId,
+        storeId: data.storeId,
+        bookGenre: data.tags,
+        pickupDate: data.date,
+        requirements: data.requirement
+    };
+    return await call(`/api/pick-up/apply`, "POST", body);
+}
+
 export async function userInfo() {
+    if(!checkToken()) return {code : 0};
     const userId = localStorage.getItem('userId');
     return await call(`/api/user/profile?userId=${userId}`, "GET");
 }
@@ -82,13 +104,35 @@ export async function getPhillic() {
 }
 
 export async function getScrap() {
+    if(!checkToken()) return {code : 0};
     const userId = localStorage.getItem('userId');
     return await call(`/api/user/scrapList?userId=${userId}`, "GET");
 }
 
-
-
 export async function deleteProfileImage() {
     const userId = localStorage.getItem('userId');
     return await call(`/api/user/profileImage?userId=${userId}`, "PATCH");
+}
+
+export async function postComment(boardId, comment) {
+    if(!checkToken()) return {code : 0};
+    const userId = localStorage.getItem('userId');
+    const data = {userId : userId, comment : comment};
+    return await call(`/api/board/${boardId}/comment`, "POST", data);
+}
+
+export async function getComment(boardId) {
+    return await call(`/api/board/${boardId}/comment`, "GET");
+}
+
+export async function getBookstoreListByDistrict(district) {
+    if(!checkToken()) return {code : 0};
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/bookstore/list?district=${district}&userId=${userId}', "GET"`);
+}
+
+export async function getBookstoreList() {
+    // if(!checkToken()) return {code : 0};
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/bookstore/list?userId=${userId}', "GET"`);
 }

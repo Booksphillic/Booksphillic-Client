@@ -8,6 +8,7 @@ import Apply from './Apply';
 import EditProfile from './EditProfile';
 import Scrap from './Scrap';
 import { getPhillic, userInfo } from '../../services/ApiService';
+import { Link } from 'react-router-dom';
 
 const UserMyPage = () => {
 
@@ -37,14 +38,21 @@ const UserMyPage = () => {
         }
     }
 
-    useEffect( async()=> {
+    const getData = async()=> {
         try {
             const res = await userInfo();
-            if(res.code === 1000) {
+            if(res.code === 0) {
+                window.location.href = '/login';
+                alert("로그인 후 이용 가능합니다.");
+            }
+            else if(res.code === 1000) {
                 console.log("유저 정보", res.data);
                 setProfile(res.data);
             }
-            else alert("데이터베이스 오류입니다.");
+            else if (res.code === 2203) {
+                <Link to="/login"/>
+            }
+            else   alert("데이터베이스 오류입니다.");
 
             const phillicInfo = await getPhillic();
             if(phillicInfo.code === 1000) {
@@ -55,7 +63,9 @@ const UserMyPage = () => {
         } catch(err) {
             console.log(err);
         }
-    },[]);
+    }
+
+    useEffect( () => {getData()} ,[]);
   
   return (
 

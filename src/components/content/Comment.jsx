@@ -1,33 +1,69 @@
-import React from 'react'
+import React, {useEffect, useParams,useState} from 'react'
 import styled from 'styled-components'
 import { ColContainer, RowContainer } from '../Container'
 import { BorderGrayBtn } from '../Buttons'
-const Comment = () => {
-    const contentlist=[1,2,3];
-  return (
+import { postComment, getComment } from '../../services/ApiService';
+
+const Comment = ({id}) => {
+    const [newComment, setNewComment] = useState("");
+    const [commentList, setCommentList] = useState([]);
+
+    const onClickPostButton = async() => {
+        console.log("댓글 내용", newComment);
+        const res = await postComment(id, newComment);
+        if(res.code === 0) {
+            window.location.href = '/login';
+            alert("로그인 후 이용 가능합니다.");
+        }
+        else if(res.code === 1000) {
+            console.log(res.data);
+        }
+        else alert("데이터베이스 오류입니다.");
+    }
+
+    const getCommentList = async() => {
+        const res = await getComment(id);
+        if(res.code === 0) {
+            window.location.href = '/login';
+            alert("로그인 후 이용 가능합니다.");
+        }
+        else if(res.code === 1000) {
+            console.log(res.data);
+            setCommentList(res.data);
+        }
+    }
+
+    useEffect( ()=> {
+        getCommentList();   
+    },[newComment]);
+    
+    return (
       <CommentContainer>
         <CommentList>
             {
-                contentlist.map((list)=>(
-                    <Reply>
-                    <Img src='../img/mypage/profile.png'></Img>
+                commentList.map((list)=>(
+                    <Reply>{
+                        list.userProfileImgUrl == null ?
+                        <Img src='../img/mypage/profile.png'></Img>
+                        : <Img src={list.userProfileImgUrl}></Img>
+                        }
                     <ColContainer>
                     <RowContainer style={{fontWeight:"400", fontSize:"16px", color:"#BDBDBD"}}>
-                        <div>아이디</div>
+                        <div>{list.username}</div>
                         <div>ㅣ</div>
-                        <div>날짜</div>
+                        <div>{(list.createdAt).slice(0,10)}</div>
                     </RowContainer>
                     <Content>
-                        댓글 내용
+                        {list.content}
                     </Content>
                     </ColContainer>
                 </Reply>
                 ))
             }
         </CommentList>
-        <Textarea placeholder='에디터의 글에 댓글을 남겨보세요.'></Textarea>
+        <Textarea placeholder='에디터의 글에 댓글을 남겨보세요.' value={newComment} onChange={(e)=>setNewComment(e.target.value)}></Textarea>
         <BtnContainer>
-            <BorderGrayBtn>댓글 남기기</BorderGrayBtn>
+            <BorderGrayBtn onClick={()=>onClickPostButton()}>댓글 남기기</BorderGrayBtn>
         </BtnContainer>
       </CommentContainer>
        
@@ -47,8 +83,8 @@ const Reply=styled(RowContainer)`
 `
 const Img=styled.img`
     margin-right: 15px;
-    width: 6%;
-    height: 55px;
+    width : 6%;
+    height : 55px;
 `
 const Content=styled.div`
     font-weight: 500;

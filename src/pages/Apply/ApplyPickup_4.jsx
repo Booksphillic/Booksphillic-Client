@@ -1,17 +1,21 @@
 import React,{useState} from 'react'
-import { ColContainer, RowContainer,Container, ApplyContentContainer } from '../../components/Container'
+import {useLocation} from 'react-router-dom';
+import { ColContainer, RowContainer, ApplyContentContainer } from '../../components/Container'
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
-import InputWrapper from '../../components/apply/Input';
 import {Box, LongBox} from '../../components/apply/Boxs';
 import {Background} from '../../components/apply/Background';
-var dataLists=["#술이 있는", "#독립출판", "#전시", "#여행서점", "#동화서점", "#좌석"];
+
 const ApplyPickup_4 = () => {
     const [click, setClick]=useState([false, false, false, false, false]);
     const handleClick=(i)=>{
         setClick([...click.slice(0,i), !click[i], ...click.slice(i+1) ])
     }
-  return (
+
+    const location = useLocation();
+    const {date, store, tagList, requirement} = location.state;
+
+    return (
       <Background>
         <ApplyContainer>
         <Col1>
@@ -86,7 +90,9 @@ const ApplyPickup_4 = () => {
             
         </Col1>
         <Col2>
-        <Link to="/apply5">
+        <Link to="/apply5" state={{
+            date: date, store: store, tagList: tagList, requirement: requirement
+        }}>
         <img src='../img/arrow2.png' style={{position:'absolute', bottom: '0px', right:'0px'}}></img>
         </Link>
             
