@@ -52,11 +52,43 @@ export async function signin(email, password) {
     catch(err) {
         console.error(err);
     }
-    
+
 }
 
 export async function scrap(storeId) {
     const userId = localStorage.getItem('userId');
     const data = {userId: userId};
     return await call(`/api/user/${storeId}/scrap`, "POST", data);
+}
+
+export async function getStoreByDistrict(district) {
+    return await call(`/api/pick-up/list?district=${district}&size=200`);
+}
+
+export async function homeBookstoreData(storeId) {
+    const userId = localStorage.getItem('userId');
+    // const data = {storeId : storeId, userId : userId};
+    return await call(`/api/bookstore/homeData?storeId=${storeId}&userId=${userId}`, "GET");
+}
+
+export async function userInfo() {
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/user/profile?userId=${userId}`, "GET");
+}
+
+export async function getPhillic() {
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/user/pickupReviewCount?userId=${userId}`, "GET");
+}
+
+export async function getScrap() {
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/user/scrapList?userId=${userId}`, "GET");
+}
+
+
+
+export async function deleteProfileImage() {
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/user/profileImage?userId=${userId}`, "PATCH");
 }

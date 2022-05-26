@@ -1,27 +1,22 @@
 import React from 'react'
-import { ColContainer, RowContainer,Container, ApplyContentContainer } from '../../components/Container'
+import { ColContainer, RowContainer, ApplyContentContainer } from '../../components/Container'
 import styled from "styled-components";
-import { Chip } from '@mui/material';
 import { Link } from 'react-router-dom';
-import InputWrapper  from '../../components/apply/Input';
+import "react-datepicker/dist/react-datepicker.css";
 import {Background} from '../../components/apply/Background';
 import { useState } from 'react';
-import { ClassNames } from '@emotion/react';
 import DropDown from './DropDown';
-var dataLists=["#술이 있는", "#독립출판", "#전시", "#여행서점", "#동화서점", "#좌석"];
-
+import DatePicker from "react-datepicker";
 
 const ApplyPickup_1 = () => {
-    const[click, setClick]=useState(Array(dataLists.length).fill(false));
-    const handleClick=(id)=>{
-        setClick(click.map((element, index)=>{
-            return index===id ? !element : element;
-        }))
-    }
+    const [date, setDate] = useState();
+    const [district, setDistrict] = useState();
+
     const handleChange=(e)=>{
-        console.log(e.target.value);//선택한 값
+        setDistrict(e.target.value);
+        console.log(date, district);
     }
-  return (
+    return (
       <Background>
         <ApplyContainer>
         <ColContainer>
@@ -31,7 +26,15 @@ const ApplyPickup_1 = () => {
             </TitleWrapper>
             <ApplyContentContainer>
                 <Subtitle>원하는 픽업일자를 입력하세요</Subtitle>
-                <Input type="date"></Input>
+                <DateWrapper>
+                    <DatePicker
+                        minDate={new Date()}
+                        selected={date}
+                        onChange={(date) => setDate(date)}
+                        dateFormat="yyyy.MM.dd"
+                        placeholderText='yyyy.mm.dd'
+                    />
+                </DateWrapper>
             </ApplyContentContainer>
             <TitleWrapper>
                 <Num>02</Num>
@@ -44,14 +47,14 @@ const ApplyPickup_1 = () => {
 
         </ColContainer>
         <Col2>
-        <Link to="/apply2">
-        <img src='../img/arrow2.png' style={{position:'absolute', bottom: '0px', right:'0px'}}></img>
+        <Link to="/apply2" state={{date, district}}>
+            <img src='../img/arrow2.png' style={{position:'absolute', bottom: '0px', right:'0px'}}></img>
         </Link>
-           
+
         </Col2>
         </ApplyContainer>
       </Background>
-   
+
   )
 }
 
@@ -79,6 +82,16 @@ const Title=styled.div`
     font-size: 30px;
     line-height: 52px;
 `
+
+const DateWrapper=styled.div`
+  border: 1px solid #616161;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  width: ${( props ) => props.width || "70%"};
+  justify-content: space-between;
+`
 const Num=styled.div`
     font-family: 'Noto Sans KR';
     font-style: normal;
@@ -95,11 +108,7 @@ const Subtitle=styled.div`
     color: #616161;
     margin-bottom: 20px;
 `
-const Chips=styled(RowContainer)`
-    gap: 17px 12px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-`
+
 const Col2=styled.div`
     position: relative;
     height: 100%;

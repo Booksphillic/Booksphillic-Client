@@ -1,25 +1,82 @@
-import React, {useEffect, useState} from 'react'
-import { MyPageContentContainer, RowContainer } from '../../components/Container'
+import React, {useState, useRef, useEffect} from 'react';
+import { MyPageContentContainer, RowContainer } from '../../components/Container';
 import styled from "styled-components";
 import { BorderGrayBtn } from '../../components/Buttons';
-import axios from 'axios';
+import { userInfo, deleteProfileImage } from '../../services/ApiService';
 
-const EditProfile = () => {
-    const[profile, setProfile]=useState({});
-    useEffect(()=>{
-        //일케 하면 난 안됨(로그인부터 뭔가 잘못됨 난,,, -새별)
-        /*axios.get("api/user/profile", {params: {userId:localStorage.getItem('userId') }})
-        .then(res=>{
-           setProfile(res.data.data);
-        })*/
-    },[])
+
+const EditProfile = (profile) => {
+    var file = new FormData();
+    const initialImage = '../img/mypage/profile.png';
+    const [profileImage, setProfileImage] = useState('../img/mypage/profile.png');
+
+    useEffect( ()=>{
+        console.log("회원 정보", profile);
+        if(profile.profileImgUrl) {
+            setProfileImage(profile.profileImageUrl);
+        }
+    },[profileImage]);
+
+    const imageInput = useRef();
+    const insertImg=(e)=>{
+        let reader=new FileReader();
+        
+        if (e.target.files[0]){
+            reader.readAsDataURL(e.target.files[0]);
+            file.append('file',e.target.files[0])
+        } 
+        
+        reader.onload=()=>{
+            changeProfileImage();
+        }
+
+    }
+
+    const changeProfileImage = async () => {
+        console.log("file", file);
+        const userId = localStorage.getItem('userId');
+        fetch(`/api/user/profileImage?userId=${userId}`, {
+            method : 'POST',
+            body : file
+        }).then((res) => {
+            res.json().then((json) => {
+                console.log("업로드된 이미지", json.data);
+                setProfileImage(json.data);
+            })
+        })
+    }
+
+    const onClickDelete = async () => {
+        const res = await deleteProfileImage();
+        console.log(res);
+        if(res.code === 1000) {
+            console.log("이미지 삭제 완료");
+            setProfileImage(initialImage);
+        }
+    }
+
   return (
     <MyPageContentContainer>
         <Top>
-            <Img src='../img/mypage/profile.png'></Img>
+            <Img src={profileImage}></Img>
             <Btns>
-                <BorderGrayBtn style={{height:"30px"}}>수정</BorderGrayBtn>
-                <BorderGrayBtn style={{height:"30px"}}>삭제</BorderGrayBtn>
+                <BorderGrayBtn style={{height:"30px"}}        
+                    onClick={() => {
+                        imageInput.current.click();
+                    }}
+                >수정</BorderGrayBtn>
+                <form encType='multipart/form-data'>
+                    <input 
+                            type="file"
+                            id="files"
+                            ref={imageInput}
+                            style={{ display: 'none' }}
+                            accept='image/jpg, image/jpeg, image/png'
+                            onChange={(e)=>{insertImg(e)}}
+                            ></input>
+                </form>
+                
+                <BorderGrayBtn style={{height:"30px"}} onClick={()=>onClickDelete()}>삭제</BorderGrayBtn>
             </Btns>
         </Top>
         <Content>

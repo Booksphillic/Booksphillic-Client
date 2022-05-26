@@ -1,14 +1,49 @@
-import React from 'react'
-import { ColContainer, RowContainer,Container, ApplyContentContainer } from '../../components/Container'
+import React, {useEffect, useState} from 'react'
+import { ColContainer, RowContainer, ApplyContentContainer } from '../../components/Container'
 import styled from "styled-components";
-import Chip from '@mui/material/Chip';
 import Card from '../../components/apply/Card';
 import Flex from '../../components/Flex';
 import { Link } from 'react-router-dom';
 import {Background} from '../../components/apply/Background';
-var dataLists=["#송파", "#독립출판", "#전시"]
-var products=["card1", "card2", "card3", "card4"];
-const ApplyPickup_1 = () => {
+import {useLocation} from 'react-router-dom';
+import {getStoreByDistrict} from '../../services/ApiService';
+
+
+const ApplyPickup_2 = () => {
+    const location = useLocation();
+
+    // 지역구 책방 목록
+    const [storeList, setStoreList] = useState([]);
+
+    // 선택한 책방
+    const [checkedStore, setCheckedStore] = useState();
+
+    // 픽업 날짜, 지역구
+    const {date, district} = location.state;
+
+    const handleClick = (storeId) => {
+        console.log(storeId);
+        setCheckedStore(storeId);
+    }
+
+    useEffect(async () => {
+        try{
+            // 특정 지역구의 책방 정보 가져오기
+            const res = await getStoreByDistrict(district);
+            if(res.code !== 1000) {
+                alert('요청 실패');
+                console.log(res);
+            } else {
+                // alert('요청 성공');
+                setStoreList(res.data);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+
+  },[]);
+
+
   return (
       <Background>
         <ApplyContainer>
@@ -20,31 +55,45 @@ const ApplyPickup_1 = () => {
             <ApplyContentContainer>
                 <Subtitle>원하는 책방을 선택하세요</Subtitle>
                 <SubText>
-                    <div>10개의 추천 책방이 있습니다.</div>
+                    <div>{storeList.length}개의 추천 책방이 있습니다.</div>
                 </SubText>
                 <Stores>
-                {products.map((data)=>{
-                    return( 
-                            <Card title={data}></Card>
-                )})}
-                   
+                {
+                    storeList.map(store => (
+                        <div style={StoreStyle} key={store.storeId}>
+                            <label htmlFor={store.storeId}  onClick={() => handleClick(store.storeId)}>
+                                <Card data={store}></Card>
+                                <div style={{display:"flex", justifyContent:"center", marginTop:"10px"}}>
+                                    {
+                                        checkedStore === store.storeId ?
+                                            <Check src='../img/icons/yellowCheck.png' /> :
+                                            <Check src='../img/icons/check.png' />
+
+                                    }
+                                </div>
+                            </label>
+                        </div>
+                    ))
+                }
             </Stores>
             </ApplyContentContainer>
-           
+
         </ColContainer>
         <Col2>
-        <Link to="/apply3">
-        <img src='../img/arrow2.png' style={{position:'absolute', bottom: '0px', right:'0px'}}></img>
+
+        {/*  픽업 날짜, 선택한 책방 넘김  */}
+        <Link to="/apply3" state={{date:date, store:checkedStore}}>
+            <img src='../img/arrow2.png' style={{position:'absolute', bottom: '0px', right:'0px'}}></img>
         </Link>
-            
+
         </Col2>
         </ApplyContainer>
       </Background>
-   
+
   )
 }
 
-export default ApplyPickup_1
+export default ApplyPickup_2
 
 const ApplyContainer=styled(RowContainer)`
     margin-top: 29px;
@@ -64,8 +113,15 @@ const Stores=styled(RowContainer)`
     gap: 3%;
     align-items: flex-start;
 `
-const CardContainer=styled(ColContainer)`
-    justify-content: center;
+
+const StoreStyle = {
+    display: "flex",
+    flexDirection: "column"
+}
+
+const Check=styled.img`
+  max-width:40px;
+  height: 40px;
 `
 const Icon=styled.img`
     width:40px;
@@ -98,16 +154,7 @@ const Subtitle=styled.div`
     color: #616161;
 `
 
-const Chips=styled(RowContainer)`
-    gap: 17px 12px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-`
 const Col2=styled.div`
     position: relative;
     height: 100%;
-`
-const StoreContainer=styled.div`
-    width: 100%;
-    height: 490px;
 `

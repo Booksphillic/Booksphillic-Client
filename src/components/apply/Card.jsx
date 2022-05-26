@@ -2,19 +2,20 @@ import React, {useState} from 'react'
 import { ColContainer, RowContainer } from '../Container'
 import styled from 'styled-components'
 
-const Card = ({title}) => {
-    const [click, setClick]=useState(false);
-    const handleClick=()=>{
-      setClick(!click);
-    }
+const Card = ({data}) => {
+
   return (
-    <ColContainer onClick={handleClick}>
     <CardContainer>
         <Col1>
-          <Img src='../img/bookstore1.png'></Img>
+          <Img src={data.profileImgUrl}></Img>
           <Content>
-          <Title>무엇보다 책방</Title>
-          <Tags>#무엇보다 책방 #파동이 닿는 곳, 송파 #송리단길 #아담한 #조용한 #편안한 #독립출판 #전시 #좌석</Tags>
+          <Title>{data.name}</Title>
+          <Tags>
+              태그 목록 (아직 추가 안함)
+              {/*{data.tagList.map(t => {*/}
+              {/*    return <span>{t}</span>;*/}
+              {/*})}*/}
+          </Tags>
           </Content>
         </Col1>
         <Col2>
@@ -32,25 +33,20 @@ const Card = ({title}) => {
                 </RowContainer>
                 <RowContainer style={{gap:"5%" , marginBottom:"25px",alignItems:"flex-start"}}>
                     <Icon src='../img/icons/time.png'></Icon>
-                    {  
+                    {
                     <ColContainer>
-                    <InfoText><div>월</div> {} </InfoText>  
-                    <InfoText><div>화</div> {} </InfoText>
+                    <InfoText><div>월</div></InfoText>
+                    <InfoText><div>화</div></InfoText>
                     <InfoText><div>수</div> </InfoText>
                     <InfoText><div>목</div>  </InfoText>
                     <InfoText><div>금</div>  </InfoText>
                     <InfoText><div>토</div>  </InfoText>
-                    <InfoText><div>일</div>  </InfoText> 
+                    <InfoText><div>일</div>  </InfoText>
                     </ColContainer>
                     }
                 </RowContainer>
         </Col2>
     </CardContainer>
-    <div style={{display:"flex", justifyContent:"center", marginTop:"10px"}}>
-    <Check src={click ? '../img/icons/yellowCheck.png':'../img/icons/check.png'}></Check>
-    </div>
-
-    </ColContainer>
   )
 }
 
@@ -96,8 +92,4 @@ font-size: 14px;
 color: #9E9E9E;
 
 `
-const Check=styled.img`
-  max-width:40px;
-  height: 40px;
-  
-`
+

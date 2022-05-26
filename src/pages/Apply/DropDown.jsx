@@ -14,18 +14,18 @@ const options=[
   {value:"DONGDAEMOON", name:"동대문구"},
   {value:"GONGJAK", name:"동작구"},
   {value:"MAPO", name:"마포구"},
-  {value:"1", name:"서대문구"},
-  {value:"2", name:"서초구"},
-  {value:"3", name:"성동구"},
-  {value:"4", name:"성북구"},
+  {value:"SEODEMUN", name:"서대문구"},
+  {value:"SEOCHO", name:"서초구"},
+  {value:"SEONGDONG", name:"성동구"},
+  {value:"SEONGBUK", name:"성북구"},
   {value:"SONGPA", name:"송파구"},
-  {value:"5", name:"양천구"},
-  {value:"6", name:"영등포구"},
-  {value:"7", name:"용산구"},
-  {value:"8", name:"은평구"},
-  {value:"9", name:"종로구"},
-  {value:"10", name:"중구"},
-  {value:"11", name:"중랑구"}
+  {value:"YANGCHEON", name:"양천구"},
+  {value:"YEONGDEUNGPO", name:"영등포구"},
+  {value:"YONGSAN", name:"용산구"},
+  {value:"EUNPYEONG", name:"은평구"},
+  {value:"JONGNO", name:"종로구"},
+  {value:"JUNGGU", name:"중구"},
+  {value:"JUNGNANG", name:"중랑구"}
 
 ]
 const DropDown = ({handleChange}) => {
@@ -34,7 +34,7 @@ const DropDown = ({handleChange}) => {
    <DropDownWrapper onChange={handleChange}>
    {
      options.map((opt)=>(
-       <option 
+       <option
        key={opt.value}
        value={opt.value}
        >
