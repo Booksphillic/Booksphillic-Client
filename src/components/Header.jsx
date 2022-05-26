@@ -34,7 +34,7 @@ const Header = () => {
           {/* 마이페이지 버튼 */}
            <img onClick={() => {
               if(localStorage.getItem('userId') === null) {
-                alert("로그인 후 이용가능합니다.");
+                // alert("로그인 후 이용가능합니다.");
                 window.location.href = '/login';
               }
               else window.location.href = '/userPage';
