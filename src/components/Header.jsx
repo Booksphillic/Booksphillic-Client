@@ -22,11 +22,19 @@ const Header = () => {
         </HeaderChildContainer>
         <HeaderChildContainer>
           <BorderWhiteBtn>
-            <Link to="/apply">미스터리북 신청하기</Link></BorderWhiteBtn>
-          <img src='../img/search.png' className='btn'></img>
-          <Link to="/userPage">
-          <img src='../img/mypage.png' className='btn'></img>
+            <Link to="/apply">미스터리북 신청하기</Link>
+          </BorderWhiteBtn>
+
+          {/* 검색 버튼 */}
+          <Link to="/search">
+            <img src='../img/search.png' className='pointer'></img>
           </Link>
+          
+
+          {/* 마이페이지 버튼 */}
+          <Link to="/userPage">
+            <img src='../img/mypage.png' className='pointer'></img>
+          </Link >
           
         </HeaderChildContainer>
       </HeaderContainer>

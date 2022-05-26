@@ -102,3 +102,7 @@ export async function deleteProfileImage() {
     const userId = localStorage.getItem('userId');
     return await call(`/api/user/profileImage?userId=${userId}`, "PATCH");
 }
+
+export async function searchByTag(name) {
+    return await call(`/api/tag?name=${name}`, "GET");
+}
