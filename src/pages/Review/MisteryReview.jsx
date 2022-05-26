@@ -31,9 +31,9 @@ const MisteryReview = () => {
                   <Date>2022.05,07</Date>
                   <Title>{d.title}</Title>
           </ColContainer>
-          <BorderGrayBtn style={{marginRight:"1%"}}>
+          <State style={{marginRight:"1%"}}>
             도서 픽업 완료
-          </BorderGrayBtn>
+          </State>
         </RowContainer>
         </AccordionSummary>
         <AccordionDetails style={{padding: "20px 0"}}>
@@ -80,4 +80,10 @@ color: #222222;
 `
 const PaginationWrapper=styled.div`
     margin-top: -50px;
+`
+const State=styled.div`
+  font-weight: 400;
+font-size: 16px;
+color: #616161;
+
 `

@@ -34,7 +34,14 @@ const MyReview = () => {
         </RowContainer>
         </AccordionSummary>
         <AccordionDetails style={{padding: "20px 0"}}>
-          <WriteReview></WriteReview>
+          <Imgs>
+            <Img></Img>
+          </Imgs>
+          <TextBox>
+            <div>이모티콘</div>
+            <div>글 내용</div>
+          </TextBox>
+            <hr/>
         </AccordionDetails>
       </Accordion>
     </Box>
@@ -54,7 +61,7 @@ const MyReview = () => {
 
 export default MyReview
 const Box=styled.div`
-    height: 130px;
+   min-height: 130px;
     display: flex;
     justify-content: space-between;
     //border-bottom: 1px solid #BDBDBD;
@@ -74,4 +81,19 @@ color: #222222;
 `
 const PaginationWrapper=styled.div`
     margin-top: -50px;
+`
+const Imgs=styled(RowContainer)`
+display:flex;
+  justify-content: center;
+  margin: 24px 0;
+`
+const Img=styled.img`
+  width: 30%;
+  height:115px;
+`
+const TextBox=styled(RowContainer)`
+  height:200px;
+  width: 100%;
+  background: #F5F5F5;;
+  margin-bottom: 24px;
 `

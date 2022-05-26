@@ -69,7 +69,7 @@ const Tab=styled.button`
    }
 `
 const Content=styled.div`
-    height:420px;
+    min-height:420px;
     background-color: white;
     margin-bottom: 100px;
 `

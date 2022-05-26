@@ -26,13 +26,13 @@ const Search = () => {
               ))}
           </Chips>
         </SearchContainer>
+       
         <Best>
             {Weekly.map((e)=>(
               <ColContainer>
               <img src='../img/bookstore1.png' style={{height:"204px", width:"273px"}}></img>
               <Title>{e.title}</Title>              
               </ColContainer>
-
             ))}
             {Monthly.map((e)=>(
               <ColContainer>
@@ -41,7 +41,9 @@ const Search = () => {
               </ColContainer>
 
             ))}
-        </Best>
+        </Best>        
+      
+
         <Footer/>
     </Background>
   )
@@ -54,8 +56,15 @@ const Background=styled.div`
   //background-size: cover;//반응형 성공!
   background-size: 100% 1725px;
 `
+
 const SearchContainer=styled(CenterContainer)`
     margin: 150px 15%;
+`
+const Title1=styled.div`
+  width:50%;
+`
+const Title2=styled.div`
+  width:50%;
 `
 const Chips=styled(RowContainer)`
   gap: 17px 12px;

@@ -9,8 +9,8 @@ const BookstoreCard = ({dum}) => {
     <Link to={`/content/${dum.postId}`} >
       <CardContainer>
         <Img src={dum.storeImgUrl}></Img>
-        <Title className={title[0].length<14 ? "" : "long"}>{title[0]}</Title>
-        <Title>:{title[1]}</Title>
+        <Title className={title[0].length<14 ? "" : "long"}>{title[0]}<br/>
+        :{title[1]}</Title>
         <Content>{ dum.content.length <80
         ?dum.content
         :dum.content.slice(0, 80)+"..."
@@ -29,7 +29,7 @@ const BookstoreCard = ({dum}) => {
 
 export default BookstoreCard
 const CardContainer=styled(ColContainer)`
-  height: 500px;
+  height: 540px;
   max-width: 348px;
 `
 const Img=styled.img`
@@ -41,10 +41,10 @@ const Img=styled.img`
 const Title=styled.div`
   font-weight: 700;
   font-size: 24px;
-  line-height: 26px;
+  line-height: 36px;
   color: #222222;
   max-width: 348px;
-  height: 60px;
+  height: 120px;
   display: -webkit-box;
   -webkit-line-clamp:2;
   overflow: hidden;
@@ -52,7 +52,7 @@ const Title=styled.div`
 `
 const Content=styled.div`
   margin-top:10px;
-  height: 200px;
+  height: 100px;
   font-weight: 400;
   font-size: 16px;
   line-height: 25px;

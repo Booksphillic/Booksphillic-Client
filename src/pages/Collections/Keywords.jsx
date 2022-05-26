@@ -20,8 +20,8 @@ const Keywords =()=> {
 
 export default Keywords
 const ScrollContainer=styled(ColContainer)`
-    margin: 80px 0 150px 0;
-    height: 286px;
+    margin: 50px 0 100px 0;
+    height: 330px;
     width: 100%;
     font-weight: 700;
 font-size: 36px;
