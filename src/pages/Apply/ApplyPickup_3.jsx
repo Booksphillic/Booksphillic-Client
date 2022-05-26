@@ -51,13 +51,12 @@ const ApplyPickup_3 = () => {
         <ApplyContainer>
         <Col1>
             <TitleWrapper>
-                <Num>05</Num>
+                <Num>04</Num>
                 <Title>도서 유형</Title>
             </TitleWrapper>
             <ApplyContentContainer>
             <Subtitle style={{marginBottom:"20px"}}>책방 사장님이 취향에 맞는 도서를 선별합니다.</Subtitle>
             <RowContainer>
-
                 <Input type="text"  value={chip} onChange={e=>setChip(e.target.value)} 
                         placeholder="원하는 책의 장르 혹은 테마를 입력하세요."></Input>
 
@@ -92,7 +91,7 @@ const ApplyPickup_3 = () => {
             </GridChips>
             </ApplyContentContainer>
             <TitleWrapper>
-                <Num>06</Num>
+                <Num>05</Num>
                 <Title>요청사항</Title>
             </TitleWrapper>
             <ApplyContentContainer>

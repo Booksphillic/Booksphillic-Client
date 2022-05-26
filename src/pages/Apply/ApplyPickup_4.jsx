@@ -20,7 +20,7 @@ const ApplyPickup_4 = () => {
         <ApplyContainer>
         <Col1>
             <TitleWrapper>
-                <Num>07</Num>
+                <Num>06</Num>
                 <Title>결제정보</Title>
             </TitleWrapper>
             <ApplyContentContainer>
