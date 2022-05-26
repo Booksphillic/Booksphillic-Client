@@ -27,8 +27,8 @@ const Profile = () => {
       //   alert("로그인 후 이용 가능합니다.");
       // }
       if(res.code === 1000) {
-        console.log("/list 데이터", res.data.data)
-        setDummy(res.data.data)      
+        console.log("/list 데이터", res.data)
+        setDummy(res.data)      
       }
       else alert("데이터베이스 오류입니다.");
       
@@ -48,8 +48,8 @@ const Profile = () => {
     //   alert("로그인 후 이용 가능합니다.");
     // }
     if(res.code === 1000) {
-      console.log("Profile-책방 리스트",res.data.data)
-      setDummy(res.data.data)
+      console.log("Profile-책방 리스트",res.data)
+      setDummy(res.data)
     }
     else alert("데이터베이스 오류입니다.");
   }
