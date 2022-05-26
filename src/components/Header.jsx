@@ -7,15 +7,27 @@ const Header = () => {
   return (
       <HeaderContainer>
         <HeaderChildContainer>
-          <Img src="../img/logo.png"></Img>
-          <Menu>동네컬렉션</Menu>
+          <Link to="/">
+          <Img src="../img/logo.png"></Img>          
+          </Link>
+
+          <Link to="/collection">
+            <Menu>동네컬렉션</Menu>
+          </Link>
+         
+          <Link to="/profile">
           <Menu>서점프로필</Menu>
+          </Link>
+          
         </HeaderChildContainer>
         <HeaderChildContainer>
           <BorderWhiteBtn>
             <Link to="/apply">미스터리북 신청하기</Link></BorderWhiteBtn>
           <img src='../img/search.png'></img>
+          <Link to="/userPage">
           <img src='../img/mypage.png'></img>
+          </Link>
+          
         </HeaderChildContainer>
       </HeaderContainer>
      
