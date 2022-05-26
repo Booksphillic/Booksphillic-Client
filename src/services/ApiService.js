@@ -147,3 +147,14 @@ export async function getBookstoreProfile(id){
     return await call(`/api/board/${id}`, "GET");
 }
 
+export async function getMyPickupList() {
+    if(!checkToken()) return {code :0};
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/pick-up/${userId}`, "GET");
+}
+
+export async function getMyReviews() {
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/user/getReview?userId=${userId}`, "GET");
+}
+
