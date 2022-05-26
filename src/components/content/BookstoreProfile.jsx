@@ -42,7 +42,8 @@ const BookstoreProfile = ({store}) => {
         <Col2>
         <Box>
             <Map>
-            <Location/>
+            <Location id={store.storeId}/>
+            
             </Map>
             </Box>
         </Col2>

@@ -2,24 +2,38 @@
 import React, { useEffect } from 'react'
 
 
-
-const Location=()=>{
+const map3=[37.4971574,127.144457];
+const map4=[37.5093906,127.079639];
+const Location=({id})=>{
 
   useEffect(()=>{
     var container = document.getElementById('map');
-    var options = {
-      center: new kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
-      level: 3
-    };
+    if (id===3){
+      var options = {
+        center: new kakao.maps.LatLng(map3[0], map3[1]),
+        level: 3
+      };
+    }else{
+      var options = {
+        center: new kakao.maps.LatLng(map4[0], map4[1]),
+        level: 3
+      };
+    }
 
     var map = new kakao.maps.Map(container, options);
-    var markerPosition  = new kakao.maps.LatLng(37.365264512305174, 127.10676860117488); 
+    if (id===3){
+      var markerPosition  = new kakao.maps.LatLng(map3[0], map3[1]); 
+    }
+    else {
+      var markerPosition  = new kakao.maps.LatLng(map4[0], map4[1]); 
+    }
+
     var marker = new kakao.maps.Marker({
       position: markerPosition
   });
   marker.setMap(map);
 
-    }, [])
+    }, [id])
 
 
     return (

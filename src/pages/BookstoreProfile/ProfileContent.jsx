@@ -32,14 +32,17 @@ const ProfileContent = () => {
   return ( 
     <Background>
       <Header/>
+      <CenterContainer>
       <TopSection title={content.name} scraped={content.scraped} tags={content.tags} id={id}/>
+      </CenterContainer>
+
       <ImgContainer>
       <Img title={content.subtitle} content={content.description} imgs={Array.isArray(content.internalImgUrls) && content.internalImgUrls} img={content.profileImgUrl}></Img>
       </ImgContainer>
       <CenterContainer>
           <InfoContainer>
            <Map>
-            <Location/>
+            <Location id={id} />
            </Map>
            <Info>
                 <Title>{content.name}</Title>
