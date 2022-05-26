@@ -38,11 +38,14 @@ const Card = ({title, id,subtitle, img, scraped }) => {
               </RowContainer>
           </Left>
         <Right>
-            <ColContainer onClick={(e)=> {
-              e.preventDefault();
-              onClickScrapButton();}}> 
+            <ColContainer 
+              onClick={(e)=> {
+                e.preventDefault();
+                onClickScrapButton();}}> 
             {
-              isScraped===true ? <img src='../img/scraped.png'></img> : <img src='../img/unscraped.png'></img>
+              isScraped===true ? 
+                <img src='../img/gray-scrapped.svg' width='40px' height='40px'></img> : 
+                <img src='../img/gray-unscrapped.svg' width='40px' height='40px'></img>
             }
             <ScrapTitle>스크랩</ScrapTitle>
             </ColContainer>
@@ -72,6 +75,10 @@ const Left=styled(ColContainer)`
 `
 const Right=styled(ColContainer)`
     width:15%;
+    align-items: flex-end;
+    justify-content: center;
+    margin-right: 4px;
+
 `
 const Title=styled.div`
   font-weight: 700;
