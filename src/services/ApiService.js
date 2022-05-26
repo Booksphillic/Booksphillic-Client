@@ -114,6 +114,10 @@ export async function deleteProfileImage() {
     return await call(`/api/user/profileImage?userId=${userId}`, "PATCH");
 }
 
+export async function searchByTag(name) {
+    return await call(`/api/tag?name=${name}`, "GET");
+}
+
 export async function postComment(boardId, comment) {
     if(!checkToken()) return {code : 0};
     const userId = localStorage.getItem('userId');
@@ -135,6 +139,7 @@ export async function getBookstoreList() {
     // if(!checkToken()) return {code : 0};
     const userId = localStorage.getItem('userId');
     return await call(`/api/bookstore/list?userId=${userId}`, "GET");
+
 }
 export async function getBookstoreProfile(id){
     return await call(`/api/board/${id}`, "GET");
