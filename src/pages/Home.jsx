@@ -186,8 +186,8 @@ const Home = () => {
                 <Bottom2 onClick={() =>  onClickScrap(3)}>
                   {
                     store3.scraped===true ? 
-                      <img src='../img/scraped.png' height="48px" width="60%" style={{margin: "auto"}}></img>
-                    : <img src='../img/unscraped.png' height="48px" width="60%" style={{margin: "auto"}}></img>
+                      <img src='../img/scrapped.svg' height="48px" width="60%" style={{margin: "auto"}}></img>
+                    : <img src='../img/unscrapped.svg' height="48px" width="60%" style={{margin: "auto"}}></img>
                   }                  <div style={{textAlign: 'center', lineHeight: '30px', fontWeight: 400, fonSize: '16px'}}>스크랩</div>
                 </Bottom2>
               </ProfileBottom>
@@ -206,8 +206,8 @@ const Home = () => {
                 <Bottom2 onClick={() => onClickScrap(4)}>
                   {
                     store4.scraped===true ? 
-                      <img src='../img/scraped.png' height="48px" width="60%" style={{margin: "auto"}}></img>
-                    : <img src='../img/unscraped.png' height="48px" width="60%" style={{margin: "auto"}}></img>
+                      <img src='../img/scrapped.svg' height="48px" width="60%" style={{margin: "auto"}}></img>
+                    : <img src='../img/unscrapped.svg' height="48px" width="60%" style={{margin: "auto"}}></img>
                   }
                   <div style={{textAlign: 'center', lineHeight: '30px', fontWeight: 400, fonSize: '16px'}}>스크랩</div>
                 </Bottom2>

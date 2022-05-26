@@ -12,6 +12,9 @@ export const BorderWhiteBtn = styled(Button)`
 	font-size: 16px;
     color: #FFFFFF;
 	padding: ${({ padding }) => (padding ? padding : "10px 20px")};
+	&:hover {
+		text-decoration: none;
+	}
 `;
 export const RoundBtn=styled(Button)`
 	background-color: #2A3143;
