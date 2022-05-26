@@ -45,7 +45,7 @@ const UserMyPage = () => {
         <MyPageContainer>
             <Top>마이페이지</Top>
             <Profile>
-                <img></img>
+                
                 <Title>안녕하세요 {user.username}님</Title>
                 <Id>id</Id>
             </Profile>

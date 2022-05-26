@@ -12,6 +12,12 @@ var dataLists=["#술이 있는", "#독립출판", "#전시", "#여행서점", "#
 const ApplyPickup_1 = () => {
     const [chip, setChip]=useState("");
     const [chips, setChips]=useState([]);
+    const[click, setClick]=useState(Array(dataLists.length).fill(false));
+    const handleClick=(id)=>{
+        setClick(click.map((element, index)=>{
+            return index===id ? !element : element;
+        }))
+    }
     const AddChip=()=>{
         console.log(chip)
         setChips([...chips, chip]);
@@ -45,9 +51,23 @@ const ApplyPickup_1 = () => {
             <hr></hr>
             <Subtitle>이런 태그는 어떠세요?</Subtitle>
             <GridChips>
-                {dataLists.map((list) => (
-                        <Chip label={list} size="medium" variant="outlined" ></Chip>
-                ))}
+            {dataLists.map((value, index) => (        
+                            <Chip 
+                            className={`${
+                                click[index] ? 'click' : ''
+                            }`}
+                            style={ 
+                                click[index] ? {backgroundColor:'#FFFA88'} : {}
+                            }
+                            key={index}
+                            label={value}  
+                            size="medium" 
+                            onClick={()=>{
+                                handleClick(index)
+                            }
+                            } ></Chip>
+                    ))}
+
             </GridChips>
             </ApplyContentContainer>
             <TitleWrapper>
