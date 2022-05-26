@@ -51,7 +51,7 @@ const SearchContent = () => {
         <Header/>
         <Top>
             <div style={{width:"70%"}}>
-            <Input value={tag}/>
+            <Input value={tag} disabled={true}/>
             </div>
         </Top>
         <SearchContainer>

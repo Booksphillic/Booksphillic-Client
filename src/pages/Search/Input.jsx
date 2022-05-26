@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import styled from"styled-components"
 import { ColContainer } from '../../components/Container'
-const Input = ({value, setSearchWord}) => {
+const Input = ({value, setSearchWord, disabled}) => {
   const [search, setSearch]=useState('');
   const onChangeSearch=(e)=>{
     e.preventDefault();
@@ -28,6 +28,7 @@ const Input = ({value, setSearchWord}) => {
           onChange={onChangeSearch}
           onKeyPress={onKeyPress}
           value={search}
+          disabled={disabled ? true : false}
         />
         <Link to='/searchContent' state={{tag: search}}>
           <Img src='../../img/search_gray.png' className='pointer'/>
