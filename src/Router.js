@@ -19,6 +19,7 @@ import SearchContent from './pages/Search/SearchContent';
 import OwnerPage from './pages/OwnerPage/OwnerPage';
 import Login from './pages/Login';
 import Editor from './pages/Editor/Editor';
+import Review from './pages/Review/Review';
 const Router = () => {
   return (
     
@@ -43,6 +44,7 @@ const Router = () => {
             <Route path='/ownerPage' element={<OwnerPage/>}/>
             <Route path='/login' element={<Login/>}></Route>
             <Route path='/editor' element={<Editor/>}></Route>
+            <Route path="/review" element={<Review/>}></Route>
     </Routes>
             
        
