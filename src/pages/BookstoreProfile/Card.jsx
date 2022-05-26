@@ -5,7 +5,7 @@ import { ColContainer, RowContainer } from '../../components/Container';
 import { Link } from 'react-router-dom';
 import {scrap} from '../../services/ApiService';
 
-const Card = ({title, id,subtitle, img, scraped }) => {
+const Card = ({title, id,subtitle, img, scraped, district }) => {
   const [isScraped, setIsScraped] = useState(scraped);
 
   const onClickScrapButton = async ()=> {
@@ -32,7 +32,7 @@ const Card = ({title, id,subtitle, img, scraped }) => {
           <Left>
               <Title>{title}</Title>
               <RowContainer>
-                  <Bottom>송파</Bottom>
+                  <Bottom>{district}</Bottom>
                   <Bottom>ㅣ</Bottom>
                   <Bottom>{subtitle}</Bottom>
               </RowContainer>
