@@ -82,3 +82,23 @@ export async function applyPickUp(data) {
     };
     return await call(`/api/pick-up/apply`, "POST", body);
 }
+
+export async function userInfo() {
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/user/profile?userId=${userId}`, "GET");
+}
+
+export async function getPhillic() {
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/user/pickupReviewCount?userId=${userId}`, "GET");
+}
+
+export async function getScrap() {
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/user/scrapList?userId=${userId}`, "GET");
+}
+
+export async function deleteProfileImage() {
+    const userId = localStorage.getItem('userId');
+    return await call(`/api/user/profileImage?userId=${userId}`, "PATCH");
+}

@@ -1,22 +1,42 @@
 
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import styled from "styled-components";
 import { ColContainer, MyPageContentContainer, RowContainer } from '../../components/Container';
 import Pagination from '../../components/Pagination';
+import { getScrap } from '../../services/ApiService';
+
 const Scrap = () => {
      const [limit, setLimit]=useState(3);
     const [page, setPage]=useState(1);
     const offset=(page-1)*limit;
-    const dummy=[{title:'무엇보다 책방'}, {title:'리스본 서점'}, {title:'동네책방 주책'}];
+    const [dummy, setDummy] = useState([{
+
+    }])
+
+    useEffect( async() => {
+        try {
+            const res = await getScrap();
+            if(res.code === 1000) {
+                console.log(res.data);
+                setDummy(res.data);
+                console.log("스크랩 내역", dummy);
+            }
+            else alert("데이터베이스 오류입니다.");
+        } catch(err) {
+            console.log(err);
+        }
+    },[]);
+
+
   return (
     <MyPageContentContainer>
         {dummy.slice(offset, offset+limit).map((dum)=>(
             <Box>
-                <Img src='../img/bookstore1.png'></Img>
+                <Img src={dum.profileImgUrl}></Img>
                 <Col>
-                    <Title>{dum.title}</Title>
-                    <Sub>부제목</Sub>
-                    <Tag>#파동이 닿는 곳,송파</Tag>
+                    <Title>{dum.bookstore}</Title>
+                    <Sub>{dum.subtitle}</Sub>
+                    <Tag>{dum.tags}</Tag>
                 </Col>
             </Box>
         ))}
