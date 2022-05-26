@@ -30,7 +30,7 @@ const AllList = () => {
   }
   const clickAll=()=>{
     //모든 동네 모아보기
-    axios.get(`/api/board?size=${limit}`)
+    axios.get(`/api/board`)
     .then((res)=>{
       console.log(res.data);
       console.log(res.data.data); 
@@ -43,7 +43,7 @@ const AllList = () => {
     {
       radio ==="1"
       ?
-      axios.get(`/api/board?size=${limit}`)
+      axios.get(`/api/board`)
       .then((res)=>{
         console.log(res.data.data);
         setAll(res.data.data);
@@ -108,7 +108,7 @@ const AllList = () => {
                   category==="1"                
                   ?
                   <Collection>
-                  { all.map((all)=>(
+                  { all.slice(offset, offset+limit).map((all)=>(
                     <BookstoreCard dum={all}/>
                   ))}
                   </Collection>
