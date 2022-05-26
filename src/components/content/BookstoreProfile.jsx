@@ -37,13 +37,6 @@ const BookstoreProfile = ({store}) => {
                     <InfoText><div>일</div> {store.operatingHours.sun}</InfoText> 
                     </ColContainer>
                 </RowContainer>
-                <RowContainer style={{marginTop:"20px"}}>
-                    <Btn>책방 프로필 보러가기</Btn>
-                    <ColContainer>
-                        <img src='../img/unscraped.png'></img>
-                        <InfoText>스크랩</InfoText>
-                    </ColContainer>
-                </RowContainer>
             </InfoContainer>
         </Col1>
         <Col2>
