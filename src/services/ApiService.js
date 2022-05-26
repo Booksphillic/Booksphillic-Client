@@ -134,5 +134,5 @@ export async function getBookstoreListByDistrict(district) {
 export async function getBookstoreList() {
     // if(!checkToken()) return {code : 0};
     const userId = localStorage.getItem('userId');
-    return await call(`/api/bookstore/list?userId=${userId}', "GET"`);
+    return await call(`/api/bookstore/list?userId=${userId}`, "GET");
 }
