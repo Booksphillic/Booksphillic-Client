@@ -20,7 +20,6 @@ const Content = () => {
       .then((res)=>{
           console.log(res.data.data);
           setContent(res.data.data);
-          console.log(content.title);
       })
     }, [])
     
@@ -100,7 +99,7 @@ const Content = () => {
                 </Col3>
             </Recommend>
             <AccordionContainer>
-                <Accordion></Accordion>
+                <Accordion id={id}></Accordion>
             </AccordionContainer>
          
         </CenterContainer>

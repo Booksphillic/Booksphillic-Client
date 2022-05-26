@@ -24,9 +24,13 @@ const Header = () => {
           <BorderWhiteBtn>
             <Link to="/apply">미스터리북 신청하기</Link></BorderWhiteBtn>
           <img src='../img/search.png'></img>
-          <Link to="/userPage">
-          <img src='../img/mypage.png'></img>
-          </Link>
+          <img onClick={()=>{
+            if(localStorage.getItem('userId') === null) {
+              alert("로그인 후 이용가능합니다.");
+              window.location.href = '/login';
+            }
+            else window.location.href = '/userPage';
+          }} src='../img/mypage.png'></img>
           
         </HeaderChildContainer>
       </HeaderContainer>
