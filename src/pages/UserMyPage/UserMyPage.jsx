@@ -25,12 +25,16 @@ const UserMyPage = () => {
         phillic: '0'
     })
 
+    useEffect( ()=>{
+        console.log("여기도 변경 적용!!", profile);
+    },[profile]);
+
     const handleContent=()=>{
         switch (tab) {
             case 1:
                return <Apply/>
              case 2:
-                return <EditProfile profile={profile}/>
+                return <EditProfile profile={profile} setProfile={setProfile}/>
              case 3:
                 return  <Scrap/>
             default:
