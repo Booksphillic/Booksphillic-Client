@@ -1,13 +1,56 @@
-import React from 'react'
+import React, {useEffect} from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import styled from "styled-components";
-import { ApplyContentContainer, Container, RowContainer } from '../../components/Container';
+import { ApplyContentContainer, RowContainer } from '../../components/Container';
 import { LongUnderlineBox } from '../../components/apply/Boxs';
 import { Chip } from '@mui/material';
 import { RoundBtn } from '../../components/Buttons';
 import Flex from '../../components/Flex';
 import {Background} from '../../components/apply/Background';
-var dataLists=["#술이 있는", "#독립출판", "#전시", "#여행서점", "#동화서점", "#좌석"];
+import {applyPickUp} from '../../services/ApiService';
+
+
 const ApplyPickup_5 = () => {
+    const location = useLocation();
+    const {date, store, tagList, requirement} = location.state;
+
+    const getDateString = () => {
+        const year = date.getFullYear();
+        const month = date.getMonth() > 9 ? date.getMonth()+1 : "0" + (date.getMonth()+1);
+        const date2 = date.getDate();
+        return `${year}-${month}-${date2}`;
+    }
+
+    const apply = async (data) => {
+        try{
+            const res = await applyPickUp(data);
+            if(res.code === 1000) { //성공
+                console.log('성공'); 
+            }
+            else { //실패
+                console.log('실패'); 
+                alert("요청 실패");
+                window.location.back();
+            }
+        } catch(err) {
+            console.error(err);
+            alert("요청 실패");
+            window.history.back();
+        }
+    }
+
+    // 픽업 신청 api 호출
+    useEffect(()=> {
+        const body = {
+            date, 
+            storeId: store.storeId, 
+            tags: tagList.toString(),
+            requirement
+        };
+        console.log(body);
+        apply(body);
+    }, []);
+
     return (
         <Background>
             <ApplyContainer>
@@ -15,28 +58,34 @@ const ApplyPickup_5 = () => {
               <Sub>
                   픽업 책방
               </Sub>
-              <LongUnderlineBox style={{marginBottom:"34px"}}>무엇보다 책방</LongUnderlineBox>
+              <LongUnderlineBox style={{marginBottom:"34px"}}>{store.name}</LongUnderlineBox>
               <Sub>
                   픽업 일자
               </Sub>
-              <LongUnderlineBox  style={{marginBottom:"34px"}}>2022-05-09</LongUnderlineBox>
+              <LongUnderlineBox  style={{marginBottom:"34px"}}>
+                  {getDateString()}
+              </LongUnderlineBox>
               <Sub>
                   도서 유형
               </Sub>
               <LongUnderlineBox  style={{marginBottom:"34px"}}>
                 <Chips>
-                {dataLists.map((list) => (
-                        <Chip label={list} size="medium" style={{backgroundColor:'#FFFA88'}}  ></Chip>
-                ))}
+                    {
+                        tagList.map(tag => (
+                            <Chip label={tag} size="medium" style={{backgroundColor:'#FFFA88'}}></Chip>
+                        ))
+                    }
                 </Chips>
                
               </LongUnderlineBox>
               <Sub>
                   추가 요청 사항
               </Sub>
-              <LongUnderlineBox style={{marginBottom:"34px"}} >동네서점 특별 에디션이면 좋겠어요</LongUnderlineBox>
+              <LongUnderlineBox style={{marginBottom:"34px"}}>{requirement}</LongUnderlineBox>
               <BtnContainer>
-              <RoundBtn>확인</RoundBtn>
+                  <Link to="/userPage">
+                    <RoundBtn>확인</RoundBtn>
+                  </Link>
               </BtnContainer>
               </ApplyContainer>
         </Background>
@@ -66,7 +115,7 @@ const Chips=styled(RowContainer)`
     gap: 17px 12px;
     display: grid;
     grid-template-columns: repeat(6, minmax(10%, auto));
-
+    width: 100%;
 `
 const BtnContainer=styled(Flex)`
     justify-content: end;

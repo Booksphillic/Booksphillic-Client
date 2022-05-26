@@ -23,9 +23,9 @@ const Header = () => {
         <HeaderChildContainer>
           <BorderWhiteBtn>
             <Link to="/apply">미스터리북 신청하기</Link></BorderWhiteBtn>
-          <img src='../img/search.png'></img>
+          <img src='../img/search.png' className='btn'></img>
           <Link to="/userPage">
-          <img src='../img/mypage.png'></img>
+          <img src='../img/mypage.png' className='btn'></img>
           </Link>
           
         </HeaderChildContainer>
@@ -47,6 +47,7 @@ const Img=styled.img`
 const Menu=styled.div`
   color: white;
   margin: 0px 20px;
+  cursor: pointer;
 `
 const HeaderChildContainer=styled(RowContainer)`
   gap: 0px 40px;
