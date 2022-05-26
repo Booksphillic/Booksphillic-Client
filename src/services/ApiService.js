@@ -70,3 +70,15 @@ export async function homeBookstoreData(storeId) {
     // const data = {storeId : storeId, userId : userId};
     return await call(`/api/bookstore/homeData?storeId=${storeId}&userId=${userId}`, "GET");
 }
+
+export async function applyPickUp(data) {
+    const userId = localStorage.getItem('userId');
+    const body = {
+        userId: userId,
+        storeId: data.storeId,
+        bookGenre: data.tags,
+        pickupDate: data.date,
+        requirements: data.requirement
+    };
+    return await call(`/api/pick-up/apply`, "POST", body);
+}
