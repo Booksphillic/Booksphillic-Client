@@ -11,7 +11,7 @@ import { getPhillic, userInfo } from '../../services/ApiService';
 import { Link } from 'react-router-dom';
 
 const UserMyPage = () => {
-
+    const initialImage = '../img/mypage/profile.png';
     const [tab, setTab]=useState(1);
     const [profile, setProfile] = useState({
         profileImgUrl : '',
@@ -78,8 +78,12 @@ const UserMyPage = () => {
         <MyPageContainer>
             <Top>마이페이지</Top>
             <Profile>
-
-                <img></img>
+            {
+                profile.profileImgUrl === null
+                ?
+                <ProfileImg src={initialImage}></ProfileImg>
+                :<ProfileImg src={profile.profileImgUrl}></ProfileImg>
+            }
                 <Title>안녕하세요 {profile.username} 님</Title>
                 <Id>{profile.email}</Id>
 
@@ -139,9 +143,16 @@ const Top=styled.div`
     font-weight: 700;
     font-size: 36px;
 `
+const ProfileImg=styled.img`
+    margin-bottom: 24px;
+    border-radius: 100%;
+    height: 70px;
+    width:11%;
+    border: 100%;
+`
 const Profile=styled(ColContainer)`
     display:flex;
-    margin-top: 110px;
+    margin-top: 10px;
     align-items: center;
 `
 const Title=styled.div`

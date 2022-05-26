@@ -9,6 +9,8 @@ import Event from './Event';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {HeaderTitle} from '../Collections/HeaderTitle';
+import Keywords from './Keywords';
+import Footer from '../../components/Footer';
 
 const ContentsList = () => {
   const [week, setWeek]=useState([]);
@@ -51,7 +53,7 @@ const ContentsList = () => {
             </Link>
            
             <Blocks>
-              <TitleBox style={{background:"#FFFFFF"}}>다른 동네 컬렉션</TitleBox>
+              <TitleBox style={{background:"#FFFFFF", display:"flex", alignItems:"center"}}>다른 동네 컬렉션</TitleBox>
             </Blocks>
             <Collection>
            {other.map((other)=>(
@@ -64,10 +66,15 @@ const ContentsList = () => {
            
             <Blocks>
 
-            <TitleBox style={{background:"#FFFFFF"}}>이번주 책방 이벤트</TitleBox>
+            <TitleBox style={{background:"#FFFFFF", display:"flex", alignItems:"center"}}>이번주 책방 이벤트</TitleBox>
             </Blocks>
             <Event></Event>
+            <Blocks>
+              <TitleBox style={{background:"#FFFFFF", display:"flex", alignItems:"center", marginTop:"-5px"}}>키워드로 보는 동네 컬렉션</TitleBox>
+            </Blocks>
         </CenterContainer>
+        <Keywords/>
+        <Footer/>
     </Background>
   )
 }
@@ -99,7 +106,7 @@ const Collection=styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap:107px 5%;
+  gap:77px 5%;
   margin:107px 9%;
 `
 const MoreContents=styled.div`
