@@ -32,7 +32,7 @@ const SearchContent = () => {
     const search = async (tag) => {
         try {
             const res = await searchByTag(tag);
-            setStoreList([...res.data.stores, ...storeList]);
+            setStoreList(res.data.stores);
             console.log(storeList);
             setPostList(res.data.posts);
             setLoading(false);
@@ -106,7 +106,7 @@ const Background=styled.div`
 `
 const Top=styled.div`
     background: #FFFA88;
-    height: 368px;
+    height: 416px;
     display: flex;
     align-items: center;
     justify-content: center;

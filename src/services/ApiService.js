@@ -139,7 +139,10 @@ export async function getBookstoreList() {
     // if(!checkToken()) return {code : 0};
     const userId = localStorage.getItem('userId');
     return await call(`/api/bookstore/list?userId=${userId}`, "GET");
+
+
 }
 export async function getBookstoreProfile(id){
     return await call(`/api/board/${id}`, "GET");
 }
+
