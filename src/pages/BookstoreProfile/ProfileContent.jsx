@@ -32,9 +32,9 @@ const ProfileContent = () => {
   return ( 
     <Background>
       <Header/>
-      <TopSection name={content.name} scraped={content.scraped} tags={content.tags} id={id}/>
+      <TopSection title={content.name} scraped={content.scraped} tags={content.tags} id={id}/>
       <ImgContainer>
-      <Img title={content.name} content={content.description} imgs={Array.isArray(content.internalImgUrls) && content.internalImgUrls} img={content.profileImgUrl}></Img>
+      <Img title={content.subtitle} content={content.description} imgs={Array.isArray(content.internalImgUrls) && content.internalImgUrls} img={content.profileImgUrl}></Img>
       </ImgContainer>
       <CenterContainer>
           <InfoContainer>

@@ -1,49 +1,98 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import { ColContainer, RowContainer } from '../../components/Container'
 import Header from '../../components/Header'
 import Input from './Input'
-import { useParams } from 'react-router-dom'
-import BookstoreCard from '../Collections/BookstoreCard'
+import { useLocation } from 'react-router-dom'
 import Footer from '../../components/Footer'
+import {searchByTag} from '../../services/ApiService'
+import SearchPostCard from './SearchPostCard';
+import SearchStoreCard from './SearchStoreCard';
+
 const SearchContent = () => {
-    const dummy=["1","1","1","1"];
-    const dummy2=["2","2","2","2"];
-    let {value}=useParams();
-    console.log(value)
+
+    const [loading, setLoading] = useState(true);
+
+    // 책방 프로필 리스트
+    const[storeList, setStoreList] = useState([{
+        storeId: '',
+        name: '',
+        description: '',
+        district: '',
+        profileImg: ''
+    }]);
+
+    // 동네 컬렉션 리스트
+    const[postList, setPostList] = useState([]);
+
+    const location = useLocation();
+    const {tag} = location.state; // 검색어
+
+    // 태그 검색 api 호출
+    const search = async (tag) => {
+        try {
+            const res = await searchByTag(tag);
+            setStoreList(res.data.stores);
+            console.log(storeList);
+            setPostList(res.data.posts);
+            setLoading(false);
+        } catch(err) {
+            console.error(err);
+        }
+    }
+
+    useEffect(() => {
+        search(tag);
+    }, [])
+
+
   return (
     <>
         <Header/>
         <Top>
             <div style={{width:"70%"}}>
-            <Input value={value}/>
+            <Input value={tag} disabled={true}/>
             </div>
         </Top>
         <SearchContainer>
             <ResultContainer>
                 <RowContainer>
-                    <Info>'{value}'</Info>
+                    <Info>'{tag}'</Info>
                     <Info2>검색결과</Info2>
                 </RowContainer>
+
                 <RowContainer style={{marginTop:"108px"}}>
-                <Title>동네 컬렉션</Title>
-                <Num>{dummy.length}개</Num>
+                    <Title>동네 컬렉션</Title>
+                    { loading === false && 
+                        <Num>{postList.length}개</Num>
+                    }
                 </RowContainer>
                
                <Collections>
-               {dummy.map((dum)=>(
-                  <BookstoreCard title={dum}/>
-                ))}
+                {
+                    loading === false && 
+                    postList.map((post)=>(
+                        <SearchPostCard post={post} key={post.postId} />
+                    ))
+                   
+                }
                </Collections>
+
                <hr style={{margin: "107px 0"}}/>
+
                <RowContainer>
-               <Title>책방 프로필</Title>
-                <Num>{dummy2.length}개</Num>
+                    <Title>책방 프로필</Title>
+                    { loading === false && 
+                        <Num>{storeList.length}개</Num> 
+                    }
                </RowContainer>
                <Collections>
-               {dummy2.map((dum)=>(
-                  <BookstoreCard title={dum}/>
-                ))}
+                    {
+                        loading === false && 
+                        storeList.map((store)=>(
+                            <SearchStoreCard store={store} key={store.storeId}/>
+                        ))
+                    }
                </Collections>
             </ResultContainer>
         </SearchContainer>
@@ -57,7 +106,7 @@ const Background=styled.div`
 `
 const Top=styled.div`
     background: #FFFA88;
-    height: 368px;
+    height: 416px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,9 +126,9 @@ const Info2=styled(Info)`
 `
 const Collections=styled(RowContainer)`
     display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap:107px 5%;
-  margin:17px 0 0 0;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:107px 5%;
+    margin:17px 0 0 0;
 `
 const Title=styled.div`
     font-weight: 700;

@@ -1,32 +1,41 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import styled from"styled-components"
 import { ColContainer } from '../../components/Container'
-const Input = ({value}) => {
+const Input = ({value, setSearchWord, disabled}) => {
   const [search, setSearch]=useState('');
   const onChangeSearch=(e)=>{
     e.preventDefault();
     setSearch(e.target.value);
+    setSearchWord(e.target.value);
   }
   const onKeyPress=(e)=>{
     if (e.key==='Enter'){
-      window.location.href=`/searchContent/${search}`;
+      // window.location.href=`/searchContent/${search}`;
      // document.location.href('');
-      console.log("enter")
+      console.log("enter");
     }
   }
+
+  useEffect(()=>{
+    setSearch(value);
+  }, [value])
+
   return (
       <ColContainer>
-    <InputWrapper placeholder='어떤 책방을 찾고 계신가요?'
-      onChange={onChangeSearch}
-      onKeyPress={onKeyPress}
-      value={value}
-    >
-    </InputWrapper>   
-      <Img src='../../img/search_gray.png'></Img>
+        <InputWrapper placeholder='어떤 책방을 찾고 계신가요?'
+          style={{paddingLeft: '50px', fontSize: '20px'}}
+          onChange={onChangeSearch}
+          onKeyPress={onKeyPress}
+          value={search}
+          disabled={disabled ? true : false}
+        />
+        <Link to='/searchContent' state={{tag: search}}>
+          <Img src='../../img/search_gray.png' className='pointer'/>
+        </Link>
+          
+        
       </ColContainer>
-   
-
   )
 
 }
@@ -43,5 +52,6 @@ const InputWrapper=styled.input`
 const Img=styled.img`
     position: absolute;
     right: 18%;
-    margin-top:30px;
+    top: 250px;
+    //margin-top:30px;
 `

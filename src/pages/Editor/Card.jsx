@@ -36,11 +36,13 @@ const CardContainer=styled(ColContainer)`
     width: 100%;
     display: column;
     height:460px;
+   
 `
 const Img=styled.img`
     height:400px;
     width:100%;
     z-index: 0;
+    
 `
 const Content=styled(ColContainer)`
     padding: 40px;

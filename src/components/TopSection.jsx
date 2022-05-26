@@ -35,8 +35,9 @@ const TopSection = ({title, editor, editorImage, date,id, tags, scraped}) => {
         <TopTitle style={{width: "67%"}}> {title}</TopTitle>
             <EditorWrapper>
             <Editor>
-                {editorImage && 
-                <img src={editorImage}></img>
+                {editorImage ?
+                <img style={{height:"90px"}} src={editorImage}></img>
+                : <img style={{height:"90px"}} src='../img/editorProfile.png'></img>
                 }
                 {handleLocation()==="profile"
                 ?
@@ -44,7 +45,7 @@ const TopSection = ({title, editor, editorImage, date,id, tags, scraped}) => {
                     {
                     isScraped===true ? <img src='../img/scraped.png'></img> : <img src='../img/unscraped.png'></img>
                     }
-                    <div>스크랩</div>
+                    <div style={{marginTop:"10px"}}>스크랩</div>
                     </ColContainer>   
                 :
                 <>
@@ -84,7 +85,7 @@ const Editor=styled(ColContainer)`
     color: #616161;
 `
 const Tags=styled(Flex)`
-    width: 18%;
+    width: 22%;
     justify-content: center;
     padding: 0px 20px 0px 20px;
 `
