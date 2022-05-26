@@ -22,15 +22,26 @@ const Header = () => {
         </HeaderChildContainer>
         <HeaderChildContainer>
           <BorderWhiteBtn>
-            <Link to="/apply">미스터리북 신청하기</Link></BorderWhiteBtn>
-          <img src='../img/search.png'></img>
-          <img onClick={()=>{
-            if(localStorage.getItem('userId') === null) {
-              alert("로그인 후 이용가능합니다.");
-              window.location.href = '/login';
-            }
-            else window.location.href = '/userPage';
-          }} src='../img/mypage.png'></img>
+            <Link to="/apply">미스터리북 신청하기</Link>
+          </BorderWhiteBtn>
+
+          {/* 검색 버튼 */}
+          <Link to="/search">
+            <img src='../img/search.png' className='pointer'></img>
+          </Link>
+          
+
+          {/* 마이페이지 버튼 */}
+           <img onClick={() => {
+              if(localStorage.getItem('userId') === null) {
+                alert("로그인 후 이용가능합니다.");
+                window.location.href = '/login';
+              }
+              else window.location.href = '/userPage';
+            }} src='../img/mypage.png'
+            className='pointer'
+          ></img>
+          
         </HeaderChildContainer>
       </HeaderContainer>
      

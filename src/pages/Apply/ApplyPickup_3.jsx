@@ -154,7 +154,7 @@ const Subtitle=styled.div`
 `
 const Chips=styled.div`
     white-space: pre-line;
-width: 100%;
+    width: 100%;
 
 `
 const GridChips=styled(RowContainer)`
@@ -172,8 +172,8 @@ const Input06=styled.input`
     width: 360px;
 `
 const Input=styled.input`
-border: 1px solid #616161;
-height: 50px;
+    border: 1px solid #616161;
+    height: 50px;
     display: flex;
     align-items: center;
     padding-left: 10px;
