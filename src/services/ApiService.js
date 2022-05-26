@@ -52,11 +52,15 @@ export async function signin(email, password) {
     catch(err) {
         console.error(err);
     }
-    
+
 }
 
 export async function scrap(storeId) {
     const userId = localStorage.getItem('userId');
     const data = {userId: userId};
     return await call(`/api/user/${storeId}/scrap`, "POST", data);
+}
+
+export async function getStoreByDistrict(district) {
+    return await call(`/api/pick-up/list?district=${district}&size=200`);
 }

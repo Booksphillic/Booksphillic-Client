@@ -2,9 +2,8 @@ import styled from "styled-components";
 import React, {useState} from 'react'
 import { RowContainer } from "../Container";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
-const DateInput = ({placeholder}) => {
+const DateInput = ({placeholder, getDate}) => {
   const [date, setDate] = useState();
 
   return (
