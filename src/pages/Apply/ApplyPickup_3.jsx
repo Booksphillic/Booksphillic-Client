@@ -5,7 +5,7 @@ import Chip from '@mui/material/Chip';
 import {Link, useLocation} from 'react-router-dom';
 import { BlackBtn } from '../../components/Buttons';
 import {Background} from '../../components/apply/Background';
-var dataLists=["#술이 있는", "#독립출판", "#전시", "#여행서점", "#동화서점", "#좌석"];
+var dataLists=["#에세이", "#판타지", "#추리소설", "#과학", "#로맨스", "#취미"];
 
 const ApplyPickup_3 = () => {
     const [chip, setChip]=useState("");
