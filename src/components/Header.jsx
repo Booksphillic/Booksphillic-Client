@@ -31,7 +31,6 @@ const Header = () => {
             }
             else window.location.href = '/userPage';
           }} src='../img/mypage.png'></img>
-          
         </HeaderChildContainer>
       </HeaderContainer>
      
@@ -51,6 +50,7 @@ const Img=styled.img`
 const Menu=styled.div`
   color: white;
   margin: 0px 20px;
+  cursor: pointer;
 `
 const HeaderChildContainer=styled(RowContainer)`
   gap: 0px 40px;

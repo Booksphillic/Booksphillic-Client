@@ -10,7 +10,6 @@ import {getStoreByDistrict} from '../../services/ApiService';
 
 
 const ApplyPickup_2 = () => {
-    const location = useLocation();
 
     // 지역구 책방 목록
     const [storeList, setStoreList] = useState([]);
@@ -19,14 +18,15 @@ const ApplyPickup_2 = () => {
     const [checkedStore, setCheckedStore] = useState();
 
     // 픽업 날짜, 지역구
+    const location = useLocation();
     const {date, district} = location.state;
 
-    const handleClick = (storeId) => {
-        console.log(storeId);
-        setCheckedStore(storeId);
+    const handleClick = (store) => {
+        console.log(store);
+        setCheckedStore(store);
     }
 
-    useEffect(async () => {
+    const getStoreList = async () => {
         try{
             // 특정 지역구의 책방 정보 가져오기
             const res = await getStoreByDistrict(district);
@@ -40,8 +40,11 @@ const ApplyPickup_2 = () => {
         } catch (err) {
             console.error(err);
         }
+    }
 
-  },[]);
+    useEffect(() => {
+        getStoreList();
+    },[]);
 
 
   return (
@@ -60,18 +63,16 @@ const ApplyPickup_2 = () => {
                 <Stores>
                 {
                     storeList.map(store => (
-                        <div style={StoreStyle} key={store.storeId}>
-                            <label htmlFor={store.storeId}  onClick={() => handleClick(store.storeId)}>
-                                <Card data={store}></Card>
-                                <div style={{display:"flex", justifyContent:"center", marginTop:"10px"}}>
-                                    {
-                                        checkedStore === store.storeId ?
-                                            <Check src='../img/icons/yellowCheck.png' /> :
-                                            <Check src='../img/icons/check.png' />
+                        <div style={StoreStyle} key={store.storeId} onClick={() => handleClick(store)}>
+                            <Card data={store}></Card>
+                            <div style={{display:"flex", justifyContent:"center", marginTop:"10px"}}>
+                                {
+                                    checkedStore && (checkedStore.storeId === store.storeId) ?
+                                        <Check src='../img/icons/yellowCheck.png' /> :
+                                        <Check src='../img/icons/check.png' />
 
-                                    }
-                                </div>
-                            </label>
+                                }
+                            </div>
                         </div>
                     ))
                 }

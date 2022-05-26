@@ -74,9 +74,11 @@ const UserMyPage = () => {
         <MyPageContainer>
             <Top>마이페이지</Top>
             <Profile>
+
                 <img></img>
                 <Title>안녕하세요 {profile.username} 님</Title>
                 <Id>{profile.email}</Id>
+
             </Profile>
             <hr style={{margin: "42px 5% 0 5%", color:"#BDBDBD"}}/>
             <Degree>
