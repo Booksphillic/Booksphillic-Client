@@ -3,8 +3,12 @@ import React from 'react'
 import styled from "styled-components";
 import { ColContainer, RowContainer } from '../../components/Container';
 import { Link } from 'react-router-dom';
+import {collectKeyword} from '../../components/collectKeyword';
+
 const BookstoreCard = ({dum}) => {
   const title=dum.title.split(":");
+  const keyword = collectKeyword(dum.district);
+
   return (
     <Link to={`/content/${dum.postId}`} >
       <CardContainer>
@@ -17,7 +21,7 @@ const BookstoreCard = ({dum}) => {
       }</Content>
         <hr style={{margin: '10px 0'}} />
         <BottomWrapper>
-        <Bottom>파동이 닿는 곳, 송파</Bottom>
+        <Bottom>{keyword && keyword}</Bottom>
         <Bottom>ㅣ</Bottom>
         <Bottom>{dum.category}</Bottom>
         </BottomWrapper>
@@ -30,10 +34,10 @@ const BookstoreCard = ({dum}) => {
 export default BookstoreCard
 const CardContainer=styled(ColContainer)`
   height: 540px;
-  max-width: 348px;
+  max-width: 358px;
 `
 const Img=styled.img`
-  max-width: 348px;
+  max-width: 358px;
   height: 240px;
   object-fit: cover;
   margin-bottom: 25px;
@@ -43,7 +47,7 @@ const Title=styled.div`
   font-size: 24px;
   line-height: 36px;
   color: #222222;
-  max-width: 348px;
+  max-width: 358px;
   height: 120px;
   display: -webkit-box;
   -webkit-line-clamp:2;
@@ -56,12 +60,12 @@ const Content=styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 25px;
-  max-width: 348px;
+  max-width: 358px;
   color: #9E9E9E;
 `
 const BottomWrapper=styled(RowContainer) `
 `
 const Bottom=styled.div`
-  font-size: 16px;
+  font-size: 14px;
   color: #616161;
 `

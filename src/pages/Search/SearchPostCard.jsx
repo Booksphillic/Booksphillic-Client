@@ -2,8 +2,11 @@ import React from 'react'
 import styled from "styled-components";
 import { ColContainer, RowContainer } from '../../components/Container';
 import { Link } from 'react-router-dom';
+import {collectKeyword} from '../../components/collectKeyword';
 
 const SearchPostCard = ({post}) => {
+  const keyword = collectKeyword(post.district);
+
   return (
     <Link to={`/content/${post.postId}`} >
       <CardContainer>
@@ -21,7 +24,7 @@ const SearchPostCard = ({post}) => {
         <hr style={{margin: '10px 0'}} />
         
         <BottomWrapper>
-            <Bottom>파동이 닿는 곳, 송파</Bottom>
+            <Bottom>{keyword && keyword}</Bottom>
             <Bottom>ㅣ</Bottom>
             <Bottom>{post.category}</Bottom>
         </BottomWrapper>

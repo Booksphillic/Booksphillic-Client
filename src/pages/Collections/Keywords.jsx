@@ -6,11 +6,11 @@ const Keywords =()=> {
   return (
     <ScrollContainer>
         {
-            keywordList.map((word)=>(
+            keywordList.map((keyword)=>(
                  (
-                     word.includes("송파")
-                     ?<KeyWord className='week'>{word}</KeyWord>
-                     :<KeyWord>{word}</KeyWord>
+                    keyword.value.includes("송파")
+                     ?<KeyWord className='week'>{keyword.value}</KeyWord>
+                     :<KeyWord>{keyword.value}</KeyWord>
                  )
             ))
         }

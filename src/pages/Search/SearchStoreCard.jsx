@@ -2,8 +2,11 @@ import React from 'react'
 import styled from "styled-components";
 import { ColContainer, RowContainer } from '../../components/Container';
 import { Link } from 'react-router-dom';
+import {collectKeyword} from '../../components/collectKeyword';
 
 const SearchStoreCard = ({store}) => {
+  const keyword = collectKeyword(store.district);
+
 
   return (
     <Link to={`/content/${store.storeId}`} >
@@ -22,7 +25,7 @@ const SearchStoreCard = ({store}) => {
         <hr style={{margin: '10px 0'}} />
 
         <BottomWrapper>
-          <Bottom>파동이 닿는 곳, 송파</Bottom>
+          <Bottom>{keyword && keyword}</Bottom>
         </BottomWrapper>
       </CardContainer>    
     </Link>

@@ -21,7 +21,7 @@ const AllList = () => {
   const radio=useParams().week;
   const clickWeek=()=>{
     //이 주의 동네만 모아보기
-    axios.get('/api/board?include=SONGPA')
+    axios.get('/api/board?include=SONGPA&size=100')
     .then((res)=>{
       console.log(res.data);
       console.log(res.data.data); 
@@ -30,7 +30,7 @@ const AllList = () => {
   }
   const clickAll=()=>{
     //모든 동네 모아보기
-    axios.get(`/api/board`)
+    axios.get(`/api/board?size=100`)
     .then((res)=>{
       console.log(res.data);
       console.log(res.data.data); 
@@ -43,7 +43,7 @@ const AllList = () => {
     {
       radio ==="1"
       ?
-      axios.get(`/api/board`)
+      axios.get(`/api/board?size=100`)
       .then((res)=>{
         console.log(res.data.data);
         setAll(res.data.data);
@@ -51,7 +51,7 @@ const AllList = () => {
         
       })
       :
-      axios.get('/api/board?include=SONGPA')
+      axios.get('/api/board?include=SONGPA&size=100')
       .then((res)=>{
         console.log(res.data.data);
         setWeek(res.data.data);
@@ -188,7 +188,7 @@ const Label=styled.label`
 const Collection=styled.div`
     display: grid;
     width: min-content;
-    grid-template-columns: repeat(3, 340px);
+    grid-template-columns: repeat(3, 360px);
     grid-template-rows: 540px 540px;
     gap:80px 30px;
     margin:30px auto;
