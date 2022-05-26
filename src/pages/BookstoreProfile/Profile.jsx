@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { CenterContainer, ColContainer, Container,RowContainer } from '../../components/Container';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { Category } from '@mui/icons-material';
+import { Category, SignalWifiConnectedNoInternet4TwoTone } from '@mui/icons-material';
 import DropDown from '../../components/DropDown';
 import Card from './Card';
 import Pagination from '../../components/Pagination';
@@ -11,6 +11,7 @@ import Select from '../../components/Select'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import {getBookstoreList, getBookstoreListByDistrict } from '../../services/ApiService';
+import { HeaderTitle } from './HeaderTitle';
 
 const Profile = () => {
   const [limit, setLimit]=useState(9);
@@ -22,6 +23,7 @@ const Profile = () => {
   const getAllData = async() => {
     try {
       const res = await getBookstoreList();
+      console.log("res.code",res.code);
       // if(res.code === 0) {
       //   window.location.href = '/login';
       //   alert("로그인 후 이용 가능합니다.");
@@ -29,6 +31,10 @@ const Profile = () => {
       if(res.code === 1000) {
         console.log("/list 데이터", res.data)
         setDummy(res.data)      
+      }
+      else if(res.code ===2203 || res.code===2206){
+        alert("오류!");
+        window.location.href("/login");
       }
       else alert("데이터베이스 오류입니다.");
       
@@ -47,6 +53,7 @@ const Profile = () => {
     //   window.location.href = '/login';
     //   alert("로그인 후 이용 가능합니다.");
     // }
+    console.log("res.code", res.code)
     if(res.code === 1000) {
       console.log("Profile-책방 리스트",res.data)
       setDummy(res.data)
@@ -57,6 +64,7 @@ const Profile = () => {
   return (
     <Background>
       <Header/>
+      <HeaderTitle/>
       <CenterContainer>
         <Weekly>
           <WeeklyTitle>
@@ -69,7 +77,7 @@ const Profile = () => {
               <div>송파, 동네책방 주책</div>
             </Title>
             <Title onClick={(e)=>{setCategory(3); console.log(category);}} className={category===3? "focused":""}>
-              <Sub>작지만 다채로운 공간</Sub>
+              <Sub>석촌호수 그 옆 작은 책의 공간</Sub>
               <div>송파, 무엇보다 책방</div>
             </Title>
           </WeeklyTitle>
@@ -85,11 +93,12 @@ const Profile = () => {
            
         </Weekly>
         <Content>
+        <Box>전체 프로필</Box>
         <DropDown handelChange={handleChange}/>
         
         <Collection>
           {dummy.slice(offset, offset+limit).map((dum)=>(
-            <Card title={dum.name} id={dum.storeId} subtitle={dum.subtitle} img={dum.profileImgUrl} scraped = {dum.scraped}/>
+            <Card title={dum.name} id={dum.storeId} subtitle={dum.subtitle} img={dum.profileImgUrl} scraped = {dum.scraped} district={dum.district}/>
           ))}
         </Collection>
         <Pagination
@@ -111,9 +120,10 @@ background-image: url('../img/background/background_profile.jpg');
 background-attachment: local;
 background-size: 100% 3803px;
 `
+
 const Weekly=styled(RowContainer)`
-  margin-top: 570px;
-  margin-bottom: 205px;
+  margin-top: 169px;
+  margin-bottom: 35px;
 `
 const WeeklyTitle=styled(ColContainer)`
   width:50%;
@@ -124,6 +134,12 @@ const WeeklyTitle=styled(ColContainer)`
 const WeeklyImg=styled.img`
   width:50%;
   height: 660px;
+`
+const Box=styled.div`
+font-weight: 700;
+font-size: 30px;
+margin-left: -2%;
+margin-bottom: 80px;
 `
 const Title=styled.div`
   font-weight: 700;

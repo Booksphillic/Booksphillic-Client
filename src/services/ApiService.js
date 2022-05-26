@@ -132,7 +132,8 @@ export async function getComment(boardId) {
 export async function getBookstoreListByDistrict(district) {
     if(!checkToken()) return {code : 0};
     const userId = localStorage.getItem('userId');
-    return await call(`/api/bookstore/list?district=${district}&userId=${userId}', "GET"`);
+    console.log("id : ", userId)
+    return await call(`/api/bookstore/list?district=${district}&userId=${userId}`, "GET");
 }
 
 export async function getBookstoreList() {
