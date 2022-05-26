@@ -51,5 +51,6 @@ const InputWrapper=styled.input`
 const Img=styled.img`
     position: absolute;
     right: 18%;
-    margin-top:30px;
+    top: 250px;
+    //margin-top:30px;
 `
