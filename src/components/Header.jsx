@@ -7,8 +7,8 @@ const Header = () => {
   return (
       <HeaderContainer>
         <HeaderChildContainer>
-          <Link to="/">
-          <Img src="../img/logo.png"></Img>          
+          <Link to="/" className='pointer'>
+          <Img src="../img/logo.svg"></Img>          
           </Link>
 
           <Link to="/collection">
@@ -22,7 +22,7 @@ const Header = () => {
         </HeaderChildContainer>
         <HeaderChildContainer>
           <BorderWhiteBtn>
-            <Link to="/apply">미스터리북 신청하기</Link>
+            <Link to="/apply" style={{color: '#FFFFFF'}}>미스터리북 신청하기</Link>
           </BorderWhiteBtn>
 
           {/* 검색 버튼 */}
