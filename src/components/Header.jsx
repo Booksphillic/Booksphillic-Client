@@ -32,9 +32,15 @@ const Header = () => {
           
 
           {/* 마이페이지 버튼 */}
-          <Link to="/userPage">
-            <img src='../img/mypage.png' className='pointer'></img>
-          </Link >
+           <img onClick={() => {
+              if(localStorage.getItem('userId') === null) {
+                alert("로그인 후 이용가능합니다.");
+                window.location.href = '/login';
+              }
+              else window.location.href = '/userPage';
+            }} src='../img/mypage.png'
+            className='pointer'
+          ></img>
           
         </HeaderChildContainer>
       </HeaderContainer>

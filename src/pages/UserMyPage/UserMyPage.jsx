@@ -8,9 +8,10 @@ import Apply from './Apply';
 import EditProfile from './EditProfile';
 import Scrap from './Scrap';
 import { getPhillic, userInfo } from '../../services/ApiService';
+import { Link } from 'react-router-dom';
 
 const UserMyPage = () => {
-
+    const initialImage = '../img/mypage/profile.png';
     const [tab, setTab]=useState(1);
     const [profile, setProfile] = useState({
         profileImgUrl : '',
@@ -24,12 +25,16 @@ const UserMyPage = () => {
         phillic: '0'
     })
 
+    useEffect( ()=>{
+        console.log("여기도 변경 적용!!", profile);
+    },[profile]);
+
     const handleContent=()=>{
         switch (tab) {
             case 1:
                return <Apply/>
              case 2:
-                return <EditProfile profile={profile}/>
+                return <EditProfile profile={profile} setProfile={setProfile}/>
              case 3:
                 return  <Scrap/>
             default:
@@ -37,14 +42,21 @@ const UserMyPage = () => {
         }
     }
 
-    useEffect( async()=> {
+    const getData = async()=> {
         try {
             const res = await userInfo();
-            if(res.code === 1000) {
+            if(res.code === 0) {
+                window.location.href = '/login';
+                alert("로그인 후 이용 가능합니다.");
+            }
+            else if(res.code === 1000) {
                 console.log("유저 정보", res.data);
                 setProfile(res.data);
             }
-            else alert("데이터베이스 오류입니다.");
+            else if (res.code === 2203) {
+                <Link to="/login"/>
+            }
+            else   alert("데이터베이스 오류입니다.");
 
             const phillicInfo = await getPhillic();
             if(phillicInfo.code === 1000) {
@@ -55,7 +67,9 @@ const UserMyPage = () => {
         } catch(err) {
             console.log(err);
         }
-    },[]);
+    }
+
+    useEffect( () => {getData()} ,[]);
   
   return (
 
@@ -64,8 +78,12 @@ const UserMyPage = () => {
         <MyPageContainer>
             <Top>마이페이지</Top>
             <Profile>
-
-                <img></img>
+            {
+                profile.profileImgUrl === null
+                ?
+                <ProfileImg src={initialImage}></ProfileImg>
+                :<ProfileImg src={profile.profileImgUrl}></ProfileImg>
+            }
                 <Title>안녕하세요 {profile.username} 님</Title>
                 <Id>{profile.email}</Id>
 
@@ -125,9 +143,16 @@ const Top=styled.div`
     font-weight: 700;
     font-size: 36px;
 `
+const ProfileImg=styled.img`
+    margin-bottom: 24px;
+    border-radius: 100%;
+    height: 70px;
+    width:11%;
+    border: 100%;
+`
 const Profile=styled(ColContainer)`
     display:flex;
-    margin-top: 110px;
+    margin-top: 10px;
     align-items: center;
 `
 const Title=styled.div`

@@ -6,17 +6,21 @@ import Pagination from '../../components/Pagination';
 import { getScrap } from '../../services/ApiService';
 
 const Scrap = () => {
-     const [limit, setLimit]=useState(3);
+    const [limit, setLimit]=useState(3);
     const [page, setPage]=useState(1);
     const offset=(page-1)*limit;
     const [dummy, setDummy] = useState([{
 
     }])
 
-    useEffect( async() => {
+    const getData = async() => {
         try {
             const res = await getScrap();
-            if(res.code === 1000) {
+            if(res.code === 0) {
+                window.location.href = '/login';
+                alert("로그인 후 이용 가능합니다.");
+            }
+            else if(res.code === 1000) {
                 console.log(res.data);
                 setDummy(res.data);
                 console.log("스크랩 내역", dummy);
@@ -25,7 +29,9 @@ const Scrap = () => {
         } catch(err) {
             console.log(err);
         }
-    },[]);
+    }
+
+    useEffect(()=>{getData()},[]);
 
 
   return (
@@ -55,7 +61,7 @@ const Scrap = () => {
 
 export default Scrap
 const Box=styled(RowContainer)`
-    gap:20%;
+    gap:5%;
     padding-top: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #BDBDBD;
@@ -68,19 +74,19 @@ const Col=styled(ColContainer)`
     width:40%;
 `
 const Title=styled.div`
-font-weight: 500;
-font-size: 20px;
-color: #222222;
+    font-weight: 500;
+    font-size: 20px;
+    color: #222222;
 `
 const Sub=styled.div`
     font-weight: 400;
-font-size: 14px;
-color: #BDBDBD;
+    font-size: 14px;
+    color: #BDBDBD;
 `
 const Tag=styled.div`
-font-weight: 400;
-font-size: 16px;
-color: #616161;
+    font-weight: 400;
+    font-size: 16px;
+    color: #616161;
 
 `
 const PaginationWrapper=styled.div`

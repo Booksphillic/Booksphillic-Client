@@ -79,7 +79,6 @@ const Search = () => {
             </Best>
           </div>
         </BestContainer>
-
         <Footer/>
     </Background>
   )
@@ -96,8 +95,15 @@ const SearchBackground=styled.div`
   background: #F5F5F5;
   padding-top: 150px;
 `
+
 const SearchContainer=styled(CenterContainer)`
     margin: 0 15%;
+`
+const Title1=styled.div`
+  width:50%;
+`
+const Title2=styled.div`
+  width:50%;
 `
 const Chips=styled(RowContainer)`
   gap: 17px 12px;

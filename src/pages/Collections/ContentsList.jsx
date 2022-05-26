@@ -9,22 +9,29 @@ import Event from './Event';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {HeaderTitle} from '../Collections/HeaderTitle';
+import Keywords from './Keywords';
+import Footer from '../../components/Footer';
 
 const ContentsList = () => {
   const [week, setWeek]=useState([]);
   const [other, setOther]=useState([]);
   useEffect(()=>{
-    //이주의 동네를 송파로 가정
-    axios.get('/api/board?include=SONGPA&size=6')
-    .then((res)=>{
-      console.log(res.data.data);
-      setWeek(res.data.data);
+    try {
+      //이주의 동네를 송파로 가정
+      axios.get('/api/board?include=SONGPA&size=6')
+      .then((res)=>{
+        console.log(res.data.data);
+        setWeek(res.data.data);
+      })
+      axios.get('/api/board?exclude=SONGPA&size=6')
+      .then((res)=>{
+        console.log(res.data);
+        setOther(res.data.data);
     })
-    axios.get('/api/board?exclude=SONGPA&size=6')
-    .then((res)=>{
-      console.log(res.data);
-      setOther(res.data.data);
-    })
+    } catch(err) {
+      console.log(err);
+    }
+
   }, [])
   return (
     <Background>
@@ -46,7 +53,7 @@ const ContentsList = () => {
             </Link>
            
             <Blocks>
-              <TitleBox style={{background:"#FFFFFF"}}>다른 동네 컬렉션</TitleBox>
+              <TitleBox style={{background:"#FFFFFF", display:"flex", alignItems:"center"}}>다른 동네 컬렉션</TitleBox>
             </Blocks>
             <Collection>
            {other.map((other)=>(
@@ -59,10 +66,15 @@ const ContentsList = () => {
            
             <Blocks>
 
-            <TitleBox style={{background:"#FFFFFF"}}>이번주 책방 이벤트</TitleBox>
+            <TitleBox style={{background:"#FFFFFF", display:"flex", alignItems:"center"}}>이번주 책방 이벤트</TitleBox>
             </Blocks>
             <Event></Event>
+            <Blocks>
+              <TitleBox style={{background:"#FFFFFF", display:"flex", alignItems:"center", marginTop:"-5px"}}>키워드로 보는 동네 컬렉션</TitleBox>
+            </Blocks>
         </CenterContainer>
+        <Keywords/>
+        <Footer/>
     </Background>
   )
 }
@@ -94,7 +106,7 @@ const Collection=styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap:107px 5%;
+  gap:77px 5%;
   margin:107px 9%;
 `
 const MoreContents=styled.div`

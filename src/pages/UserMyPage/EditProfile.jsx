@@ -5,17 +5,24 @@ import { BorderGrayBtn } from '../../components/Buttons';
 import { userInfo, deleteProfileImage } from '../../services/ApiService';
 
 
-const EditProfile = (profile) => {
+const EditProfile = ({profile, setProfile}) => {
     var file = new FormData();
     const initialImage = '../img/mypage/profile.png';
-    const [profileImage, setProfileImage] = useState('../img/mypage/profile.png');
+    // const [profileImage, setProfileImage] = useState(profile.profileImgUrl);
 
     useEffect( ()=>{
         console.log("회원 정보", profile);
-        if(profile.profileImgUrl) {
-            setProfileImage(profile.profileImageUrl);
-        }
-    },[profileImage]);
+        // if(profile.profileImgUrl) {
+        //     setProfileImage(profile.profileImageUrl);
+        // }
+    },[profile]);
+
+    // useEffect( ()=>{
+    //     console.log("회원 정보", profile);
+    //     if(profile.profileImgUrl) {
+    //         setProfileImage(profile.profileImageUrl);
+    //     }
+    // },[profileImage]);
 
     const imageInput = useRef();
     const insertImg=(e)=>{
@@ -41,7 +48,9 @@ const EditProfile = (profile) => {
         }).then((res) => {
             res.json().then((json) => {
                 console.log("업로드된 이미지", json.data);
-                setProfileImage(json.data);
+                setProfile({...profile, profileImgUrl : json.data})
+                // setProfileImage(json.data);
+                // profile.profileImgUrl = json.data;
             })
         })
     }
@@ -51,14 +60,21 @@ const EditProfile = (profile) => {
         console.log(res);
         if(res.code === 1000) {
             console.log("이미지 삭제 완료");
-            setProfileImage(initialImage);
+            // setProfileImage(null);
+            setProfile({...profile, profileImgUrl : null})
+            // profile.profileImgUrl = null;
         }
     }
 
   return (
     <MyPageContentContainer>
         <Top>
-            <Img src={profileImage}></Img>
+            {
+                profile.profileImgUrl === null
+                ?
+                <Img src={initialImage}></Img>
+                :<Img src={profile.profileImgUrl}></Img>
+            }
             <Btns>
                 <BorderGrayBtn style={{height:"30px"}}        
                     onClick={() => {

@@ -13,9 +13,7 @@ const ApplyPickup_3 = () => {
     const [requirement, setReq] = useState("");
     const location = useLocation();
     const {date, store} = location.state;
-
     const[click, setClick]=useState(Array(dataLists.length).fill(false));
-
     // 태그 클릭 핸들러
     const handleClick=(id)=>{
 
