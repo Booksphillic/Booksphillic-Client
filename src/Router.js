@@ -40,7 +40,7 @@ const Router = () => {
             <Route path="/profileContent/:id" element={<ProfileContent/>}></Route>
             <Route path='/misteryInfo' element={<MisteryInfo/>}></Route>
             <Route path="/search" element={<Search/>}></Route>
-            <Route path="/searchContent/:value" element={<SearchContent/>}></Route>
+            <Route path="/searchContent" element={<SearchContent/>}></Route>
             <Route path='/ownerPage' element={<OwnerPage/>}/>
             <Route path='/login' element={<Login/>}></Route>
             <Route path='/editor' element={<Editor/>}></Route>
