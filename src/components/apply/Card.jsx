@@ -3,7 +3,7 @@ import { ColContainer, RowContainer } from '../Container'
 import styled from 'styled-components'
 
 const Card = ({data}) => {
-
+console.log(data);
   return (
     <CardContainer>
         <Col1>
@@ -12,9 +12,9 @@ const Card = ({data}) => {
           <Title>{data.name}</Title>
           <Tags>
               태그 목록 (아직 추가 안함)
-              {/*{data.tagList.map(t => {*/}
-              {/*    return <span>{t}</span>;*/}
-              {/*})}*/}
+              {/*{data.tagList.map((t) => (
+                 <span>{t}</span>
+              ))}*/}
           </Tags>
           </Content>
         </Col1>
@@ -24,7 +24,6 @@ const Card = ({data}) => {
               <InfoText>
                 {data.address}
               </InfoText>
-
           </RowContainer>
           <RowContainer style={{gap:"5%" , marginBottom:"25px", alignItems: 'flex-start'}}>
               <Icon src='../img/icons/call.png'></Icon>
@@ -32,7 +31,7 @@ const Card = ({data}) => {
           </RowContainer>
           <RowContainer style={{gap:"5%" , marginBottom:"25px", alignItems: 'flex-start'}}>
               <Icon src='../img/icons/link.png'></Icon>
-              {/* <InfoText>{data.website}</InfoText> */}
+              <InfoText>{data.website}</InfoText> 
           </RowContainer>
           <RowContainer style={{gap:"5%" , marginBottom:"25px",alignItems:"flex-start"}}>
               <Icon src='../img/icons/time.png'></Icon>
@@ -100,5 +99,6 @@ const InfoText=styled(RowContainer)`
     color: #9E9E9E;
     flex-wrap: wrap;
     white-space: pre-line;
+    word-break: break-all;
 `
 
