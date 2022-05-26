@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from "styled-components";
 import { CenterContainer, ColContainer, MyPageContainer, RowContainer } from '../../components/Container';
 import Header from '../../components/Header';
@@ -7,20 +7,57 @@ import Footer from '../../components/Footer';
 import Apply from './Apply';
 import EditProfile from './EditProfile';
 import Scrap from './Scrap';
+import { getPhillic, userInfo } from '../../services/ApiService';
+
 const UserMyPage = () => {
     const [tab, setTab]=useState(1);
+    const [profile, setProfile] = useState({
+        profileImgUrl : '',
+        email : '',
+        username : '',
+        phoneNumber : ''
+    });
+    const [phillic, setPhillic] = useState({
+        pickupCount: '0',
+        reviewCount: '0',
+        phillic: '0'
+    })
+
     const handleContent=()=>{
         switch (tab) {
             case 1:
                return <Apply/>
              case 2:
-                return <EditProfile/>
+                return <EditProfile profile={profile}/>
              case 3:
                 return  <Scrap/>
             default:
                 console.log("err");
         }
     }
+
+    useEffect( async()=> {
+        try {
+            const res = await userInfo();
+            if(res.code === 1000) {
+                console.log("유저 정보", res.data);
+                setProfile(res.data);
+            }
+            else alert("데이터베이스 오류입니다.");
+
+            const phillicInfo = await getPhillic();
+            if(phillicInfo.code === 1000) {
+                setPhillic(phillicInfo.data);
+            }
+            else alert("데이터베이스 오류입니다.");
+
+        } catch(err) {
+            console.log(err);
+        }
+    },[]);
+
+
+
   return (
 
     <Background>
@@ -29,14 +66,14 @@ const UserMyPage = () => {
             <Top>마이페이지</Top>
             <Profile>
                 <img></img>
-                <Title>안녕하세요 '이름' 님</Title>
-                <Id>id</Id>
+                <Title>안녕하세요 {profile.username} 님</Title>
+                <Id>{profile.email}</Id>
             </Profile>
             <hr style={{margin: "42px 5% 0 5%", color:"#BDBDBD"}}/>
             <Degree>
                 <ColContainer>
                     <SubTitle>나의 필릭지수</SubTitle>
-                    <Percent>80%</Percent>
+                    <Percent>{phillic.phillic}</Percent>
                 </ColContainer>
                 <RowContainer style={{gap:"30px"}}>
                     <Col>
@@ -45,11 +82,11 @@ const UserMyPage = () => {
                     </Col>
                     <ColContainer>
                         <RowContainer>
-                            <Num>3</Num>
+                            <Num>{phillic.pickupCount}</Num>
                             <Id>건</Id>
                         </RowContainer>
                         <RowContainer>
-                            <Num>3</Num>
+                            <Num>{phillic.reviewCount}</Num>
                             <Id>건</Id>
                         </RowContainer>
                     </ColContainer>
@@ -62,7 +99,7 @@ const UserMyPage = () => {
                 <Menu>
                     <Tab onClick={(e)=>setTab(1)} className={tab===1? "focused":""}>미스터리북 신청</Tab>
                     <Tab onClick={(e)=>setTab(2)} className={tab===2? "focused":""}>프로필 설정</Tab>
-                    <Tab onClick={(e)=>setTab(3)} className={tab===3? "focused":""}>스크랩</Tab>
+                    <Tab onClick={(e)=> setTab(3)} className={tab===3? "focused":""}>스크랩</Tab>
                     <Tab onClick={(e)=>setTab(4)} className={tab===4? "focused":""}>문의</Tab>
                 </Menu>
                 <Content>
