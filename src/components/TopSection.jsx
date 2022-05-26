@@ -35,12 +35,10 @@ const TopSection = ({title, editor, editorImage, date,id, tags, scraped}) => {
         <TopTitle style={{width: "67%"}}> {title}</TopTitle>
             <EditorWrapper>
             <Editor>
-                {editorImage ?
-                <img style={{height:"90px"}} src={editorImage}></img>
-                : <img style={{height:"90px"}} src='../img/editorProfile.png'></img>
-                }
+                
                 {handleLocation()==="profile"
                 ?
+                    //스크랩 버튼만 보이게
                     <ColContainer onClick={()=>onClickScrapButton()}> 
                     {
                     isScraped===true ? <img src='../img/scraped.png'></img> : <img src='../img/unscraped.png'></img>
@@ -48,10 +46,15 @@ const TopSection = ({title, editor, editorImage, date,id, tags, scraped}) => {
                     <div style={{marginTop:"10px"}}>스크랩</div>
                     </ColContainer>   
                 :
+                //에디터 정보 보이게
                 <>
+                {editorImage ?
+                    <img style={{height:"90px"}} src={editorImage}></img>
+                    : <img style={{height:"90px"}} src='../img/editorProfile.png'></img>
+                }
                 <div>에디터 {editor}</div>
                 <div>{date}</div>
-                </>
+                </>     
             }
                 
             </Editor>
