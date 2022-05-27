@@ -33,7 +33,7 @@ const MisteryReview = ({storeId}) => {
    <MisteryReviewContainer>
        {reviews.map( (review) => (
             <ReviewCard>
-                <Img src={review.urls}></Img>
+                <Img src={review.url}></Img>
                 <Content>
                     <RowContainer style={{fontWeight: "400",fontSize: "16px",color:"#9E9E9E"}}>
                         <div>{review.username}님</div>
