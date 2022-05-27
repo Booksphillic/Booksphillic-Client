@@ -5,18 +5,20 @@ import { BorderGrayBtn } from '../Buttons'
 import { postComment, getComment } from '../../services/ApiService';
 
 const Comment = ({id}) => {
+    const [loading, setLoading] = useState(false); 
     const [newComment, setNewComment] = useState("");
     const [commentList, setCommentList] = useState([]);
 
     const onClickPostButton = async() => {
         console.log("댓글 내용", newComment);
         const res = await postComment(id, newComment);
-        if(res.code === 0) {
+        if(res.code === 0 || res.code === 2203 || res.code ===2206) {
             window.location.href = '/login';
             alert("로그인 후 이용 가능합니다.");
         }
         else if(res.code === 1000) {
             console.log(res.data);
+            setLoading(loading => !loading);
         }
         else alert("데이터베이스 오류입니다.");
     }
@@ -35,7 +37,7 @@ const Comment = ({id}) => {
 
     useEffect( ()=> {
         getCommentList();   
-    },[newComment]);
+    },[loading]);
     
     return (
       <CommentContainer>
