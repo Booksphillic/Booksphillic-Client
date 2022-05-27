@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 import { getBookstoreProfile } from '../services/ApiService';
-
+import { Link } from 'react-router-dom';
 const Content = () => {
     const [content, setContent]=useState([]);
 
@@ -94,7 +94,10 @@ const Content = () => {
                 <ParagraphContent>민낯의 문장들이 어우러져 읽히는 가랑비의 단상집</ParagraphContent>
                 </Review>
                 <RoundBtnContainer>
-                    <RoundBtn>미스터리북 신청하기</RoundBtn>
+                    <Link to="/apply">
+                    <RoundBtn>미스터리북 신청하기</RoundBtn> 
+                    </Link>
+                   
                 </RoundBtnContainer>
                 </Col3>
             </Recommend>
@@ -106,7 +109,10 @@ const Content = () => {
         </CenterContainer>
         <MoreContent>
                 <TopTitle>더 많은 책방의 이야기가 궁금하다면?</TopTitle>
+                <Link to ="/allCollection/1">
                 <RoundBtn>콘텐츠 보러가기</RoundBtn>
+                </Link>
+                
            </MoreContent>
         <Footer></Footer>
   </Background>

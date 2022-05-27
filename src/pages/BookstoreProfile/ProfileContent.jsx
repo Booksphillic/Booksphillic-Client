@@ -12,6 +12,8 @@ import Footer from '../../components/Footer';
 import axios from 'axios'
 import { useParams } from 'react-router-dom';
 import Img from './Img';
+import { Link } from 'react-router-dom';
+import MisteryReview from './MisteryReview';
 const ProfileContent = () => {
     const [loading, setLoading] = useState(false);
     const [content, setContent]=useState([]);
@@ -88,17 +90,20 @@ const ProfileContent = () => {
       </AccordionContainer>
       <BtnContainer>
         <div style={{fontSize:"36px", fontWeight:"700"}}>책방지기에게 도서 큐레이션을 받고 싶다면?</div>
-        <RoundBtn>미스터리북 신청하기</RoundBtn>
+        <Link to="/apply">
+        <RoundBtn>미스터리북 신청하기</RoundBtn> 
+        </Link>
+       
       </BtnContainer>
       <ReviewContainer>
-          {/*여기 그냥 이미지로 넣어도 될 듯??*/}
-          <img src='../img/profile/reviewsample.png'></img>
-          <img src='../img/profile/reviewsample.png'></img>
-          <img src='../img/profile/reviewsample.png'></img>
+          <MisteryReview></MisteryReview>
       </ReviewContainer>
-      <ReviewBtnContainer>
-          <img src='../img/profile/btn.png'></img>
+      <Link to="/review">
+      <ReviewBtnContainer>   
+          <div>미스터리북 리뷰 쓰고<br/>필릭지수 채우기</div>
+         <img src='../img/arrow.svg' style={{marginTop: "40px"}}></img>  
       </ReviewBtnContainer>
+      </Link>
       <Footer/>
     </Background>
   )
@@ -161,4 +166,8 @@ const ReviewBtnContainer=styled.div`
     justify-content: flex-end;
     margin-bottom: 150px;
     margin-right: 5%;
+    font-weight: 700;
+font-size: 24px;
+line-height: 37px;
+color: #222222;
 `
