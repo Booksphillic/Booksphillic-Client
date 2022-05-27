@@ -96,7 +96,7 @@ const ProfileContent = () => {
        
       </BtnContainer>
       <ReviewContainer>
-          <MisteryReview></MisteryReview>
+          <MisteryReview storeId={id}></MisteryReview>
       </ReviewContainer>
       <Link to="/review">
       <ReviewBtnContainer>   
