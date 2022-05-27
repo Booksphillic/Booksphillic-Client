@@ -44,16 +44,24 @@ const MisteryReview = ({setTab}) => {
           expandIcon={<ExpandMoreIcon/>}
           aria-controls="panel1a-content"
           id="panel1a-header"
-          //disable
+          disabled={ d.review===false ? "false" : ""}
         >
         <RowContainer style={{display:'flex',justifyContent:"space-between", width:"100%"}}>
           <ColContainer>
                   <Date>{(d.createdAt).substring(0,10)}</Date>
                   <Title>{d.bookstore}</Title>
           </ColContainer>
-          <State style={{marginRight:"1%"}}>
-            도서 픽업 완료
-          </State>
+          {
+            d.review===false
+            ?
+            <State style={{marginRight:"1%"}}>
+              리뷰 작성 완료
+            </State>
+            :
+            <State style={{marginRight:"1%"}}>
+              도서 픽업 완료
+            </State>
+          }
         </RowContainer>
         </AccordionSummary>
         <AccordionDetails style={{padding: "20px 0"}}>

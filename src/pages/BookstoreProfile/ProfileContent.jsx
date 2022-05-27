@@ -101,7 +101,7 @@ const ProfileContent = () => {
       <Link to="/review">
       <ReviewBtnContainer>   
           <div>미스터리북 리뷰 쓰고<br/>필릭지수 채우기</div>
-         <img src='../img/arrow.svg' style={{marginTop: "40px"}}></img>  
+         <img src='../img/arrow.svg' style={{marginTop: "35px", width:"6%", height:"40px"}}></img>  
       </ReviewBtnContainer>
       </Link>
       <Footer/>
@@ -163,10 +163,13 @@ const ReviewContainer=styled(RowContainer)`
 const ReviewBtnContainer=styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 150px;
+    //margin-bottom: 150px;
     margin-right: 5%;
     font-weight: 700;
 font-size: 24px;
 line-height: 37px;
 color: #222222;
+width: 100vw;
+height: 300px;
+background-color: white;
 `
