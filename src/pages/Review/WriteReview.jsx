@@ -21,7 +21,6 @@ const WriteReview = ({pickupId, setTab}) => {
     ]
 
   const [clickEmoji, setClickEmoji]=useState("");
-  console.log(clickEmoji);
   const[click, setClick]=useState(Array(4).fill(false));
   const handleClick=(id)=>{
       setClick(click.map((element, index)=>{
@@ -36,7 +35,7 @@ const WriteReview = ({pickupId, setTab}) => {
   const [img, setImg]=useState([]);
 
   const [content, setContent] = useState("");
-
+  const [fileName, setFileName]=useState([]);
   const imageInput = useRef();
   const insertImg=(e)=>{
       let reader=new FileReader();
@@ -44,14 +43,15 @@ const WriteReview = ({pickupId, setTab}) => {
       if (e.target.files[0]){
           reader.readAsDataURL(e.target.files[0]);
           setImg([...img, e.target.files[0]]);
+          setFileName([...fileName, e.target.files[0].name]);
        files.append('files',e.target.files[0])
       } 
 
       reader.onloadend=()=>{
 
       }
+    
   }
-
 
   return (
     <ColContainer style={{background:"white", width: "100%"}}>
@@ -59,39 +59,43 @@ const WriteReview = ({pickupId, setTab}) => {
         <div style={{margin:"24px 0"}}>도서/책방 사진</div>
           <RowContainer style={{marginBottom:"24px"}}>
             <SubTitle>메인사진</SubTitle>
-           
-          
+            <Label>
+              {fileName[0]}
             <Input                 
                 type="file"
                 id="files"
                 ref={imageInput}
                 accept='image/jpg, image/jpeg, image/png'
                 onChange={(e)=>{insertImg(e)}}></Input> 
-             
+            </Label>
+            
           </RowContainer>
 
           <RowContainer  style={{marginBottom:"24px"}}>
             <SubTitle>사진1</SubTitle>
-           
-            <Input                 
+           <Label>
+             {fileName[1]}
+           <Input                 
                 type="file"
                 id="files"
                 ref={imageInput}
                 accept='image/jpg, image/jpeg, image/png'
                 onChange={(e)=>{insertImg(e)}}
                 ></Input>
-           
+           </Label>
           </RowContainer>
 
           <RowContainer style={{marginBottom:"24px"}}>
             <SubTitle>사진2</SubTitle>
-           
-            <Input                 
+           <Label>
+             {fileName[2]}
+           <Input                 
                 type="file"
                 id="files"
                 ref={imageInput}
                 accept='image/jpg, image/jpeg, image/png'
                 onChange={(e)=>{insertImg(e)}}></Input> 
+           </Label>
           
           </RowContainer>
           {/* <BtnContainer>
@@ -183,7 +187,7 @@ height: 40px;
 background: #F5F5F5;
 width: 85%;
 color: #9E9E9E;
-
+display: none;
 `
 const BtnContainer=styled.div`
 display: flex;
@@ -199,5 +203,11 @@ const Textarea=styled.textarea`
   padding: 20px 3%;
   font-weight: 400;
 font-size: 14px;
+color: #9E9E9E;
+`
+const Label=styled.label`
+height: 40px;
+background: #F5F5F5;
+width: 85%;
 color: #9E9E9E;
 `

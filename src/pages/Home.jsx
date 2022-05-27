@@ -215,7 +215,11 @@ const Home = () => {
             </ProfileCard>
           </ProfileContent>
           <ProfileEnd>
-            <img src='../img/moreBookstore.png'></img>
+            <Link to="/profile">
+            <div>더 많은 책방 보러가기</div>
+            <img src='../img/arrow.png'></img>
+            </Link>
+          
           </ProfileEnd>
         </BookStoreProfile>
         <IntroMistery/>
@@ -317,4 +321,9 @@ const ProfileEnd=styled(RowContainer)`
   margin-top: 10px;
   width: 100%;
   justify-content: flex-end;
+  font-weight: 700;
+font-size: 24px;
+line-height: 37px;
+color: #222222;
+
 `

@@ -73,25 +73,6 @@ const WriteReview = ({id, loading, setLoading}) => {
   }
   return (
     <WriteReviewContainer>
-        
-    <StyledFileInput
-        onClick={() => {
-            imageInput.current.click();
-        }}
-    >
-        사진 등록
-    </StyledFileInput>
-        <form encType='multipart/form-data'>
-            
-        <input 
-                type="file"
-                id="files"
-                ref={imageInput}
-                style={{ display: 'none' }}
-                accept='image/jpg, image/jpeg, image/png'
-                onChange={(e)=>{insertImg(e)}}
-                ></input>
-        </form>
       {getPreviewImg()}
       <RowContainer style={{gap:"1%", marginTop:"20px"}}>
                 {emoji.map((emo, index) => (
@@ -116,6 +97,23 @@ const WriteReview = ({id, loading, setLoading}) => {
         maxLength={100} onChange={(event)=>setContent(event.target.value)}>
       </Textarea>
       <BtnContainer>
+      <StyledFileInput
+        onClick={() => {
+            imageInput.current.click();
+        }}
+    >
+        사진 추가하기
+    </StyledFileInput>
+        <form encType='multipart/form-data'>
+        <input 
+                type="file"
+                id="files"
+                ref={imageInput}
+                style={{ display: 'none' }}
+                accept='image/jpg, image/jpeg, image/png'
+                onChange={(e)=>{insertImg(e)}}
+                ></input>
+        </form>
       <BorderGrayBtn
             onClick={ () => {
                 console.log("files", files);
@@ -141,6 +139,8 @@ const WriteReview = ({id, loading, setLoading}) => {
                             res.json().then((json)=> {
                                 console.log(json.data);
                                 alert("리뷰가 등록되었습니다.");
+                                //window.scrollTo(0,0);
+                                
                                 setLoading(loading => !loading);
                             })
                         })
@@ -169,9 +169,10 @@ const ImgContainer=styled(RowContainer)`
 const Img=styled.img`
     height: 200px;
 `
-const StyledFileInput=styled(RoundBtn)`
-width:10%;
-margin-bottom: 20px;
+const StyledFileInput=styled(BorderGrayBtn)`
+width: 10%;
+text-align: center;
+margin-right: 3%;
 `
 const Textarea=styled.textarea`
     height: 170px;
