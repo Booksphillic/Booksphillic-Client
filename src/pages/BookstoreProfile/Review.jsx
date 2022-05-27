@@ -19,17 +19,16 @@ const Review = ({collection}) => {
     ]
     
   const [limit, setLimit]=useState(2);
-  const [page, setPage]=useState(2);
+  const [page, setPage]=useState(1);
   const offset = (page-1)*limit;
 
   useEffect( ()=> {}, [collection]);
 
   /* 이미지가 3장보다 적은 경우 처리해줘야함! */
   return (
-    
       <>
         <ReviewContainer>
-          {collection && collection.slice(0, limit).map(col=>{
+          {collection && collection.slice(offset, offset+limit).map(col=>{
             return(
             <CardContainer>
               <BigImg src={col.urls[0]}></BigImg>
@@ -53,10 +52,10 @@ const Review = ({collection}) => {
         </ReviewContainer>
         <PaginationWrapper>
         <Pagination
-            total={collection.length}
-            limit={limit}
-            page={page}
-            setPage={setPage}
+          total={collection.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
             review={1}
         />
         </PaginationWrapper>      

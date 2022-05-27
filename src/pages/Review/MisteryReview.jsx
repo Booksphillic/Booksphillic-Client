@@ -38,12 +38,13 @@ const MisteryReview = ({setTab}) => {
     <MisteryReviewContainer>
     {dummy.slice(offset, offset+limit).map((d)=>(
         <Box>
-        <Accordion square={true} style={{boxShadow:"none", width:"100%"}} disableGutters={true} >
+        <Accordion square={true} style={{boxShadow:"none", width:"100%"}} disableGutters={true}>
         <AccordionSummary
           style={{height:"113px", borderBottom: "1px solid #BDBDBD", width:"100%"}}
           expandIcon={<ExpandMoreIcon/>}
           aria-controls="panel1a-content"
           id="panel1a-header"
+          //disable
         >
         <RowContainer style={{display:'flex',justifyContent:"space-between", width:"100%"}}>
           <ColContainer>
@@ -60,7 +61,6 @@ const MisteryReview = ({setTab}) => {
         </AccordionDetails>
       </Accordion>
     </Box>
-    
         ))}
          <PaginationWrapper>
       <Pagination
