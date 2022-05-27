@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = 'http://haul0215.synology.me:8080';
 
 export function checkToken() {
     if(!localStorage.getItem('userId')) {
