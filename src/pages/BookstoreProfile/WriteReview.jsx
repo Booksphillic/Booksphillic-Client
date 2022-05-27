@@ -115,7 +115,7 @@ const WriteReview = ({id, loading, setLoading}) => {
                 ></input>
         </form>
       <BorderGrayBtn
-            onClick={ () => {
+            onClick={ (e) => {
                 console.log("files", files);
                 fetch('/api/bookstore/reviewImages', {
                     method : 'POST',
@@ -139,8 +139,6 @@ const WriteReview = ({id, loading, setLoading}) => {
                             res.json().then((json)=> {
                                 console.log(json.data);
                                 alert("리뷰가 등록되었습니다.");
-                                //window.scrollTo(0,0);
-                                
                                 setLoading(loading => !loading);
                             })
                         })
