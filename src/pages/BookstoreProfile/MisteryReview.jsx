@@ -2,7 +2,9 @@ import React,{useEffect, useState} from 'react'
 import axios from 'axios'
 import { ColContainer, RowContainer } from '../../components/Container'
 import styled from 'styled-components'
-const MisteryReview = () => {
+import {getPickupReviewByStore} from '../../services/ApiService';
+
+const MisteryReview = ({storeId}) => {
     const [reviews, setReviews]=useState([])
     const emoji=[
         {src:"../img/emoji/happy.png",
@@ -13,26 +15,39 @@ const MisteryReview = () => {
         name:"맘에 들어요"},
         {src:"../img/emoji/wink.png",
         name:"짱이에요"},
-        ]
-        
+    ]
+    
+    const getReviewDatas = async() => {
+        const res = await getPickupReviewByStore(storeId);
+        if(res.code === 1000) {
+            console.log("픽업 리뷰들", res.data);
+            setReviews(res.data);
+        }
+    }
+
+    useEffect( ()=> {
+        getReviewDatas();
+    },[]);
+
   return (
    <MisteryReviewContainer>
-       {/*일단 카드 하나만 해뒀는데 이거 map()으로 reviews돌려가면서 쓰면 될듯?*/}
-       <ReviewCard>
-            <Img src="../img/bookstore1.png"></Img>
-            <Content>
-                <RowContainer style={{fontWeight: "400",fontSize: "16px",color:"#9E9E9E"}}>
-                    <div>hyunseo6660님</div>
-                    <div>ㅣ</div>
-                    <div>2022.05.10</div>{/* date형식 바꾸는 법은 Content.jsx 36번째 줄 moment함수 참고 */}
-                </RowContainer> 
-                    <ContentContainer>
-                    <Emoji src={emoji[0].src}></Emoji> {/* './Review.jsx' 코드 참고해서 짜면 될듯 */}
-                        <Text>일러스트 그림이 그려진 요리책을 원했는데, 그림도 아기자기 하고 내용도 정말 마음에 들었습니다! 미스터리북 서비스 추천해요!</Text>
-                    </ContentContainer>
-            </Content>
-       </ReviewCard>
-       
+       {reviews.map( (review) => (
+            <ReviewCard>
+                <Img src={review.urls[0]}></Img>
+                <Content>
+                    <RowContainer style={{fontWeight: "400",fontSize: "16px",color:"#9E9E9E"}}>
+                        <div>{review.username}님</div>
+                        <div>ㅣ</div>
+                        <div>{review.createdAt.substring(0,10)}</div>{/* date형식 바꾸는 법은 Content.jsx 36번째 줄 moment함수 참고 */}
+                    </RowContainer> 
+                        <ContentContainer>
+                        <Emoji src={emoji[emoji.findIndex(v => v.name === review.emoticon)].src}></Emoji> {/* './Review.jsx' 코드 참고해서 짜면 될듯 */}
+                            <Text>일러스트 그림이 그려진 요리책을 원했는데, 그림도 아기자기 하고 내용도 정말 마음에 들었습니다! 미스터리북 서비스 추천해요!</Text>
+                        </ContentContainer>
+                </Content>
+        </ReviewCard>
+       ))
+       }
    </MisteryReviewContainer>
   )
 }

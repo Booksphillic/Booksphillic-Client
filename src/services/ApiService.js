@@ -158,3 +158,6 @@ export async function getMyReviews() {
     return await call(`/api/user/getReview?userId=${userId}`, "GET");
 }
 
+export async function getPickupReviewByStore(storeId) {
+    return await call(`/api/pick-up/${storeId}/reviewList`, "GET");
+}
