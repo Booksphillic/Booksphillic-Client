@@ -56,13 +56,13 @@ export default MisteryReview
 const MisteryReviewContainer=styled(RowContainer)`
 margin-top:50px;
 white-space: nowrap;
-    overflow: auto;
+overflow: auto;
 `
 const ReviewCard=styled(ColContainer)`
-min-width:400px;
-max-width:400px;
+min-width:30%;
+max-width:30%;
 height: 618px;
-margin-right: 2%;
+margin:0 2%;
 `
 const Img=styled.img`
     height:318px;
