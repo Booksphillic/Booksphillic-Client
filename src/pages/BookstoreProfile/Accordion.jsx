@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import WriteReview from './WriteReview';
 import { borderBottom } from '@mui/system';
+
 export default function SimpleAccordion({id, loading, setLoading}) {
   return (
     <div>

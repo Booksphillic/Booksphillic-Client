@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from "styled-components"
 import { useRef, useState } from 'react'
 import { ColContainer, RowContainer } from '../../components/Container'
@@ -71,6 +71,15 @@ const WriteReview = ({id, loading, setLoading}) => {
         )
     }
   }
+
+  const resetForm = () => {
+      setClickEmoji("");
+  }
+
+  useEffect( ()=>{
+
+  },[clickEmoji])
+
   return (
     <WriteReviewContainer>
       {getPreviewImg()}
@@ -115,7 +124,7 @@ const WriteReview = ({id, loading, setLoading}) => {
                 ></input>
         </form>
       <BorderGrayBtn
-            onClick={ () => {
+            onClick={ (e) => {
                 console.log("files", files);
                 fetch('/api/bookstore/reviewImages', {
                     method : 'POST',
@@ -140,8 +149,8 @@ const WriteReview = ({id, loading, setLoading}) => {
                                 console.log(json.data);
                                 alert("리뷰가 등록되었습니다.");
                                 //window.scrollTo(0,0);
-                                
                                 setLoading(loading => !loading);
+                                window.location.replace(window.location.href);
                             })
                         })
                     })
