@@ -24,14 +24,18 @@ const Header = () => {
           <BorderWhiteBtn>
             <Link to="/apply" style={{color: '#FFFFFF'}}>미스터리북 신청하기</Link>
           </BorderWhiteBtn>
-
-          {/* 검색 버튼 */}
-          <Link to="/search">
+{
+  localStorage.getItem('userId')
+        ?
+<>
+ {/* 검색 버튼 */}
+ <Link to="/search">
             <img src='../img/search.svg' className='pointer'></img>
           </Link>
           
 
           {/* 마이페이지 버튼 */}
+         
            <img onClick={() => {
               if(localStorage.getItem('userId') === null) {
                 // alert("로그인 후 이용가능합니다.");
@@ -41,6 +45,12 @@ const Header = () => {
             }} src='../img/mypage.svg'
             className='pointer'
           ></img>
+</>
+         
+        :<BorderWhiteBtn>
+          <Link to="/login" style={{color: '#FFFFFF'}}>로그인</Link>
+        </BorderWhiteBtn>
+}
           
         </HeaderChildContainer>
       </HeaderContainer>
