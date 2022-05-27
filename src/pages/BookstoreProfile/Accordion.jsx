@@ -24,9 +24,9 @@ export default function SimpleAccordion({id}) {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion square={true} disableGutters={true}>
+      <Accordion square={true} disableGutters={true} >
         <AccordionSummary
-         style={{padding:"0 10% 0 10%", height:"114px", borderTop:"1px solid #616161"}}
+         style={{padding:"0 10% 0 12%", height:"114px", borderTop:"1px solid #616161"}}
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
           id="panel2a-header"

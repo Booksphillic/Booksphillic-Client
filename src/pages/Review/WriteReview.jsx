@@ -59,32 +59,40 @@ const WriteReview = ({pickupId, setTab}) => {
         <div style={{margin:"24px 0"}}>도서/책방 사진</div>
           <RowContainer style={{marginBottom:"24px"}}>
             <SubTitle>메인사진</SubTitle>
+           
+          
             <Input                 
                 type="file"
                 id="files"
                 ref={imageInput}
                 accept='image/jpg, image/jpeg, image/png'
-                onChange={(e)=>{insertImg(e)}}></Input>          
+                onChange={(e)=>{insertImg(e)}}></Input> 
+             
           </RowContainer>
 
           <RowContainer  style={{marginBottom:"24px"}}>
             <SubTitle>사진1</SubTitle>
+           
             <Input                 
                 type="file"
                 id="files"
                 ref={imageInput}
                 accept='image/jpg, image/jpeg, image/png'
-                onChange={(e)=>{insertImg(e)}}></Input>
+                onChange={(e)=>{insertImg(e)}}
+                ></Input>
+           
           </RowContainer>
 
           <RowContainer style={{marginBottom:"24px"}}>
             <SubTitle>사진2</SubTitle>
+           
             <Input                 
                 type="file"
                 id="files"
                 ref={imageInput}
                 accept='image/jpg, image/jpeg, image/png'
-                onChange={(e)=>{insertImg(e)}}></Input>          
+                onChange={(e)=>{insertImg(e)}}></Input> 
+          
           </RowContainer>
           {/* <BtnContainer>
           <BorderGrayBtn style={{height:"35px"}}>사진 추가하기</BorderGrayBtn>
@@ -174,6 +182,8 @@ const Input=styled.input`
 height: 40px;
 background: #F5F5F5;
 width: 85%;
+color: #9E9E9E;
+
 `
 const BtnContainer=styled.div`
 display: flex;
@@ -186,5 +196,8 @@ const Textarea=styled.textarea`
   background: #F5F5F5;
   height: 200px;
   margin: 10px 0 44px 0;
-
+  padding: 20px 3%;
+  font-weight: 400;
+font-size: 14px;
+color: #9E9E9E;
 `

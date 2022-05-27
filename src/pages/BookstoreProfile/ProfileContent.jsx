@@ -155,10 +155,9 @@ const BtnContainer=styled(ColContainer)`
     gap:50px;
 `
 const ReviewContainer=styled(RowContainer)`
-    display: grid;
-    gap:2%;
-    grid-template-columns: 1fr 1fr 1fr;
+    width:100%;
     margin: 0 5% 50px 5% ;
+   
 `
 const ReviewBtnContainer=styled.div`
     display: flex;
