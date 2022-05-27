@@ -13,6 +13,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom';
 import Img from './Img';
 const ProfileContent = () => {
+    const [loading, setLoading] = useState(false);
     const [content, setContent]=useState([]);
     const [collections, setCollections] = useState([]);
     let {id}=useParams();
@@ -27,7 +28,8 @@ const ProfileContent = () => {
             console.log("리뷰 데이터", res.data.data);
             setCollections(res.data.data);
         })
-    },[useParams()])
+    },[useParams(), loading]);
+
 
   return ( 
     <Background>
@@ -82,7 +84,7 @@ const ProfileContent = () => {
       </CenterContainer>
 
        <AccordionContainer>
-            <Accordion id={id}/>
+            <Accordion id={id} loading={loading} setLoading={setLoading}/>
       </AccordionContainer>
       <BtnContainer>
         <div style={{fontSize:"36px", fontWeight:"700"}}>책방지기에게 도서 큐레이션을 받고 싶다면?</div>
