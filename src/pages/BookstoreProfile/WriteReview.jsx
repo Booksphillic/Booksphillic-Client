@@ -7,7 +7,7 @@ import { Avatar, Chip } from '@mui/material'
 
 var files = new FormData();
 
-const WriteReview = ({id}) => {
+const WriteReview = ({id, loading, setLoading}) => {
     const emoji=[
         {src:"../img/emoji/happy.png",
         name:"추천해요"},
@@ -140,6 +140,8 @@ const WriteReview = ({id}) => {
                         }).then((res) => {
                             res.json().then((json)=> {
                                 console.log(json.data);
+                                alert("리뷰가 등록되었습니다.");
+                                setLoading(loading => !loading);
                             })
                         })
                     })

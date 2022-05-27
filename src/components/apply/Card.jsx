@@ -11,10 +11,10 @@ console.log(data);
           <Content>
           <Title>{data.name}</Title>
           <Tags>
-              태그 목록 (아직 추가 안함)
-              {/*{data.tagList.map((t) => (
-                 <span>{t}</span>
-              ))}*/}
+              {/* 태그 목록 (아직 추가 안함) */}
+              {data.tags.map((tag) => (
+                 <span>#{tag}&nbsp;&nbsp;</span>
+              ))}
           </Tags>
           </Content>
         </Col1>
@@ -75,6 +75,9 @@ margin-bottom: 5px;
 const Tags=styled.div`
   white-space: pre-line;
   width:100%;
+  color: #BDBDBD;
+  font-weight: 400;
+  font-size: 14px;
 `
 
 const Col1=styled(ColContainer)`
