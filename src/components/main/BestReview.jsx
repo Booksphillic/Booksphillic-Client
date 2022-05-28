@@ -23,7 +23,13 @@ const BestReviewContainer=styled(ColContainer)`
 `
 const User=styled.div`
 margin-bottom: 20px;
+font-weight: 700;
+font-size: 20px;
 `
 const Content=styled.div`
   margin-top: 20px;
+  font-weight: 500;
+font-size: 20px;
+color: #222222;
+line-height: 35px;
 `
