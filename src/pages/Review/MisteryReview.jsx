@@ -44,7 +44,7 @@ const MisteryReview = ({setTab}) => {
           expandIcon={<ExpandMoreIcon/>}
           aria-controls="panel1a-content"
           id="panel1a-header"
-          disabled={ d.review===false ? "false" : ""}
+          disabled={ d.review===true ? "false" : ""}
         >
         <RowContainer style={{display:'flex',justifyContent:"space-between", width:"100%"}}>
           <ColContainer>
@@ -52,7 +52,7 @@ const MisteryReview = ({setTab}) => {
                   <Title>{d.bookstore}</Title>
           </ColContainer>
           {
-            d.review===false
+            d.review===true
             ?
             <State style={{marginRight:"1%"}}>
               리뷰 작성 완료

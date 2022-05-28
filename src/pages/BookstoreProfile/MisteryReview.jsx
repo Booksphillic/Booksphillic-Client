@@ -42,13 +42,13 @@ const MisteryReview = ({storeId}) => {
                     </RowContainer> 
                         <ContentContainer>
                         <Emoji src={emoji[emoji.findIndex(v => v.name === review.emoticon)].src}></Emoji> {/* './Review.jsx' 코드 참고해서 짜면 될듯 */}
-                            <Text>일러스트 그림이 그려진 요리책을 원했는데, 그림도 아기자기 하고 내용도 정말 마음에 들었습니다! 미스터리북 서비스 추천해요!</Text>
+                            <Text>{review.content}</Text>
                         </ContentContainer>
                 </Content>
-        </ReviewCard>
-       ))
-       }
-   </MisteryReviewContainer>
+            </ReviewCard>
+          ))
+    }
+    </MisteryReviewContainer>
   )
 }
 
