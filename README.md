@@ -1,70 +1,23 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 북스필릭
 
-## Available Scripts
+동네책방과 소비자를 연결하여 서점 소개, 책 추천, 이벤트 소개까지 한번에 제공하는 동네책방 올인원 플랫폼
 
-In the project directory, you can run:
 
-### `npm start`
+## 기술 스택
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 프론트엔드: Javascript, React, styled-component (recoil 적용하여 리팩토링 예정)
+- 백엔드: Java, Spring Boot, Spring Data JPA, Spring Security
+- DB: MySQL
+- 배포: AWS ec2, elastic beanstalk
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<img width="1349" alt="스크린샷 2022-06-27 오후 10 54 23" src="https://user-images.githubusercontent.com/70836275/181877155-a74b6db5-78ee-4fcc-b1ee-d910866dbfcf.png">
+<img width="1348" alt="스크린샷 2022-06-27 오후 10 55 19" src="https://user-images.githubusercontent.com/70836275/181877165-73053260-bc07-4ad3-a312-25d724dc3145.png">
+<img width="1350" alt="스크린샷 2022-06-27 오후 10 56 02" src="https://user-images.githubusercontent.com/70836275/181877167-de8fa0df-796e-4bdc-b8e5-e882a90034fb.png">
+<img width="1348" alt="스크린샷 2022-06-27 오후 10 55 42" src="https://user-images.githubusercontent.com/70836275/181877168-5ba9a45c-219b-48a2-8f4f-a0ff3bd5880b.png">
+<img width="1346" alt="스크린샷 2022-06-27 오후 10 54 49" src="https://user-images.githubusercontent.com/70836275/181877172-c1ee1821-f409-4717-ab9d-43fcfa658e76.png">
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 더 많은 정보는
+https://separated-haircut-61a.notion.site/0723b1f1f27e42cd91d9b1f3e8a1fca1
